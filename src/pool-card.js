@@ -3956,19 +3956,11 @@ class PoolCardEditor extends PoolEditorBase {
   }
 }
 
-class PoolMiniCardEditor extends PoolEditorBase {
+// The detailed view of the mini card draws the full card: its editor offers the full card's options (sections,
+// folded sections, ranges, filtration target), and the zoom button.
+class PoolMiniCardEditor extends PoolCardEditor {
   static get toggles() {
-    return [
-      ["show_title", true],
-      ["show_subtitle", true],
-      ["show_controls", true],
-      ["zoom", true],
-    ];
-  }
-
-  // The detailed view of the mini card draws the full card: its ranges and filtration target apply there too.
-  static extraFields(tr) {
-    return PoolCardEditor.extraFields(tr).filter((f) => f.name !== "collapsed");
+    return [...PoolCardEditor.toggles, ["zoom", true]];
   }
 }
 
