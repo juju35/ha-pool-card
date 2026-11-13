@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2 - 2026-11-14
+
+### Fixes
+- Mini card visual editor: it now offers the full card's options that its detailed view uses (`show_advice`, `show_filtration`, `show_equipment`, `collapsed`), which could only be set in YAML.
+
 ## 1.0.1 - 2026-11-13
 
 ### Fixes

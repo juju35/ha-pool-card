@@ -1,6 +1,6 @@
 {
   "name": "ha-pool-card",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Lovelace cards for Home Assistant to monitor a swimming pool or a spa: water quality gauges with ideal ranges and advice, animated water, filtration time of the day, pump, lighting, heat pump, electrolyser and cover.",
   "private": true,
   "type": "module",

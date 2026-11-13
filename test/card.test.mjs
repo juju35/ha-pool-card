@@ -452,6 +452,20 @@ test("the visual editor lists the device, the entities (flat in the YAML) and th
   assert.equal(form.data.kind, "auto");
 });
 
+test("the mini card editor offers the full card's options, which its detailed view uses, and the zoom button", () => {
+  const names = (Editor) => {
+    const ed = new Editor();
+    ed.setConfig({ type: "custom:pool-mini-card" });
+    ed.hass = makeHass();
+    return ed.children[0].schema.flatMap((f) => (f.type === "grid" ? f.schema.map((s) => s.name) : [f.name]));
+  };
+  const full = names(pc.PoolCardEditor);
+  const mini = names(pc.PoolMiniCardEditor);
+  for (const name of full) assert.ok(mini.includes(name), name);
+  for (const name of ["collapsed", "show_advice", "show_filtration", "show_equipment", "ranges", "filtration_hours", "zoom"]) assert.ok(mini.includes(name), name);
+  assert.ok(!full.includes("zoom"));
+});
+
 test("an unrelated state change does not rebuild the card", () => {
   const hass = makeHass();
   const card = newCard(poolConfig, hass);

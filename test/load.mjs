@@ -71,7 +71,7 @@ export const load = () => {
     `${source}
     ({ STRINGS, roleOf, setupOf, tdsRange, autoDevice, rangeOf, levelOf, scaleOf, runHours, pumpOn, speedsOf, kindOf, fmtHours, toHours, esc, lang, sceneSvg,
        PoolCard: customElements.get("pool-card"), PoolMiniCard: customElements.get("pool-mini-card"),
-       PoolCardEditor: customElements.get("pool-card-editor"), fireDocument, window })`,
+       PoolCardEditor: customElements.get("pool-card-editor"), PoolMiniCardEditor: customElements.get("pool-mini-card-editor"), fireDocument, window })`,
     sandbox,
   );
 };
