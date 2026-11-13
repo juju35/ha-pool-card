@@ -308,6 +308,13 @@ test("heat pump target: one step up or down, within its limits", () => {
   ]);
 });
 
+// A tap on the page: the press and the release (what folds the card, iOS sending no click for a tap on something
+// that is not clickable).
+const tap = (ev) => {
+  pc.fireDocument("pointerdown", ev);
+  pc.fireDocument("pointerup", ev);
+};
+
 test("sections fold and unfold, and fold back on a click elsewhere on the page", () => {
   const card = newCard();
   card.connectedCallback();
@@ -315,10 +322,48 @@ test("sections fold and unfold, and fold back on a click elsewhere on the page",
   assert.match(html(card), /data-section="equipment" aria-expanded="true"/);
   assert.match(html(card), /Heat pump/);
   // A click in the more-info dialog opened from the card keeps it.
-  pc.fireDocument("click", { composedPath: () => [{ tagName: "HA-MORE-INFO-DIALOG" }] });
+  tap({ composedPath: () => [{ tagName: "HA-MORE-INFO-DIALOG" }] });
   assert.match(html(card), /data-section="equipment" aria-expanded="true"/);
-  pc.fireDocument("click", { composedPath: () => [{ tagName: "DIV" }] });
+  // A mouse click sends no fold of its own (the release did it); a press in the card released outside does nothing.
+  pc.fireDocument("click", { detail: 1, composedPath: () => [{ tagName: "DIV" }] });
+  pc.fireDocument("pointerdown", { composedPath: () => [card] });
+  pc.fireDocument("pointerup", { composedPath: () => [{ tagName: "DIV" }] });
+  assert.match(html(card), /data-section="equipment" aria-expanded="true"/);
+  tap({ composedPath: () => [{ tagName: "DIV" }] });
   assert.match(html(card), /data-section="equipment" aria-expanded="false"/);
+  // A keyboard click (no click count) still folds.
+  click(card, { action: "toggle_section", section: "equipment" });
+  pc.fireDocument("click", { detail: 0, composedPath: () => [{ tagName: "DIV" }] });
+  assert.match(html(card), /data-section="equipment" aria-expanded="false"/);
+  // Left with a section open and back on the page: folded.
+  click(card, { action: "toggle_section", section: "equipment" });
+  card.disconnectedCallback();
+  card.connectedCallback();
+  assert.match(html(card), /data-section="equipment" aria-expanded="false"/);
+  card.disconnectedCallback();
+});
+
+test("no rewrite under a press: an update waits for the release, a click draws at once", async () => {
+  const card = newCard();
+  const before = html(card);
+  // Pressed: an update (here a section unfolded from elsewhere) is held, the element pressed stays.
+  card.shadowRoot.listeners.pointerdown({});
+  card._toggled.set("equipment", false);
+  card._update();
+  assert.equal(html(card), before);
+  // Released without a click (dragged away): the pending update is drawn right after.
+  card._onPressEnd();
+  await new Promise((r) => setTimeout(r, 5));
+  assert.match(html(card), /data-section="equipment" aria-expanded="true"/);
+  // Pressed then clicked: the click draws what it changes at once.
+  card.shadowRoot.listeners.pointerdown({});
+  click(card, { action: "toggle_section", section: "equipment" });
+  assert.match(html(card), /data-section="equipment" aria-expanded="false"/);
+  assert.equal(card._pressing, false);
+  // A press marks the pointer as in use (no focus put back), a key the keyboard.
+  assert.equal(card._byPointer, true);
+  card.shadowRoot.listeners.keydown({ key: "Tab", target: {} });
+  assert.equal(card._byPointer, false);
 });
 
 test("the mini card shows a summary, its detail button switches to the full card and back", () => {
@@ -329,8 +374,14 @@ test("the mini card shows a summary, its detail button switches to the full card
   assert.doesNotMatch(html(card), /WATER QUALITY|class="gauge/);
   click(card, { action: "zoom" });
   assert.match(html(card), /class="gauge/);
-  pc.fireDocument("click", { composedPath: () => [{ tagName: "DIV" }] });
+  tap({ composedPath: () => [{ tagName: "DIV" }] });
   assert.doesNotMatch(html(card), /class="gauge/);
+  // Left zoomed and back on the page: compact.
+  click(card, { action: "zoom" });
+  card.disconnectedCallback();
+  card.connectedCallback();
+  assert.doesNotMatch(html(card), /class="gauge/);
+  card.disconnectedCallback();
   const off = newCard({ ...poolConfig, zoom: false }, makeHass(), pc.PoolMiniCard);
   assert.doesNotMatch(html(off), /data-action="zoom"/);
 });

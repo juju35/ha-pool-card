@@ -3004,6 +3004,42 @@ const isOutside = (card, ev) => {
 // After the popup closes, clicks are ignored this long (second click of a double click on OK).
 const CONFIRM_GUARD_MS = 400;
 
+// "A click elsewhere" is caught on the pointer, not only on the click event: on iOS (Safari and the companion app)
+// a tap on something that is not clickable (the background, an empty spot, a card with no action) sends no click to
+// the page. The handler runs when the press and the release are both outside the card (a slider dragged out of the
+// card does not count, and a scroll cancels the pointer); keyboard clicks (no click count) still go through the click
+// event. The handler keeps its own checks (dialogs opened from the card…). `tap(ev)` is for the tests.
+const watchOutside = (card, handler) => {
+  let downOutside = false;
+  const outside = (ev) => !ev.composedPath().includes(card);
+  const onDown = (ev) => {
+    downOutside = outside(ev);
+  };
+  const onUp = (ev) => {
+    if (downOutside && outside(ev)) handler(ev);
+    downOutside = false;
+  };
+  const onClick = (ev) => {
+    if (ev.detail === 0) handler(ev);
+  };
+  return {
+    on() {
+      document.addEventListener("pointerdown", onDown, true);
+      document.addEventListener("pointerup", onUp, true);
+      document.addEventListener("click", onClick, true);
+    },
+    off() {
+      document.removeEventListener("pointerdown", onDown, true);
+      document.removeEventListener("pointerup", onUp, true);
+      document.removeEventListener("click", onClick, true);
+    },
+    tap(ev) {
+      onDown(ev);
+      onUp(ev);
+    },
+  };
+};
+
 class PoolCard extends HTMLElement {
   constructor() {
     super();
@@ -3013,10 +3049,34 @@ class PoolCard extends HTMLElement {
     this.shadowRoot.addEventListener("click", (ev) => this._onClick(ev));
     // Enter / Space on an element with the button role acts as a click.
     this.shadowRoot.addEventListener("keydown", (ev) => {
+      // Used from the keyboard: the focus is kept across the rewrites again.
+      this._byPointer = false;
       if ((ev.key !== "Enter" && ev.key !== " ") || ev.target?.getAttribute?.("role") !== "button") return;
       ev.preventDefault();
       ev.target.click();
     });
+    // No rewrite of the card between the press and the release: Home Assistant updates the card several times a
+    // second, and a rewrite under the pointer replaces the element pressed, so that the click lands on the card
+    // itself and does nothing. The pending render is done once released (after the click). A press also means the
+    // pointer is in use: the focus is not put back on the clicked element after a rewrite (no focus ring).
+    this.shadowRoot.addEventListener("pointerdown", () => {
+      this._byPointer = true;
+      this._pressing = true;
+      window.addEventListener("pointerup", this._onPressEnd, true);
+      window.addEventListener("pointercancel", this._onPressEnd, true);
+    });
+    this._onPressEnd = () => {
+      window.removeEventListener("pointerup", this._onPressEnd, true);
+      window.removeEventListener("pointercancel", this._onPressEnd, true);
+      setTimeout(() => {
+        if (!this._pressing) return;
+        this._pressing = false;
+        if (this._dirty) {
+          this._dirty = false;
+          this._update();
+        }
+      }, 0);
+    };
     this._onKey = (ev) => {
       if (ev.key !== "Escape" || !this._confirm) return;
       ev.stopPropagation();
@@ -3083,7 +3143,9 @@ class PoolCard extends HTMLElement {
       if (this._confirm) this._closeConfirm();
       else this._update();
     };
-    document.addEventListener("click", this._onOutside, true);
+    (this._onOutsideWatch ??= watchOutside(this, (ev) => this._onOutside(ev))).on();
+    // Back on the page after leaving it: rendered again in its default state.
+    this._update?.();
     if (this._confirm) window.addEventListener("keydown", this._onKey);
     // The filtration time of the day moves on its own while the pump runs: re-checked every minute.
     clearInterval(this._tick);
@@ -3095,7 +3157,14 @@ class PoolCard extends HTMLElement {
   disconnectedCallback() {
     clearInterval(this._tick);
     this._tick = null;
-    document.removeEventListener("click", this._onOutside, true);
+    this._onOutsideWatch?.off();
+    this._pressing = false;
+    window.removeEventListener("pointerup", this._onPressEnd, true);
+    window.removeEventListener("pointercancel", this._onPressEnd, true);
+    // Left (another dashboard view, a conditional card hidden): back to the default state, so that the card does
+    // not come back unfolded or with its popup open.
+    this._toggled = new Map();
+    this._confirm = null;
     window.removeEventListener("keydown", this._onKey);
   }
 
@@ -3118,10 +3187,17 @@ class PoolCard extends HTMLElement {
 
   _update() {
     if (!this._hass || !this._config) return;
+    // Held while the card is pressed (see the constructor): drawn once released.
+    if (this._pressing) {
+      this._dirty = true;
+      return;
+    }
+    this._dirty = false;
     let html = this._render();
     if (this._confirm) html = html.replace(/<ha-card>([\s\S]*)<\/ha-card>\s*$/, (_, inner) => `<ha-card class="dialog-open">${inner}${this._confirmHtml()}</ha-card>`);
     if (html === this._html) return;
-    const focused = this.shadowRoot.activeElement;
+    // For the keyboard only: after a click, it would draw the focus ring on the clicked element.
+    const focused = this._byPointer ? null : this.shadowRoot.activeElement;
     const key = focused?.dataset ? JSON.stringify({ ...focused.dataset }) : null;
     this._html = html;
     this.shadowRoot.innerHTML = html;
@@ -3534,6 +3610,9 @@ class PoolCard extends HTMLElement {
   // ----- Actions -----------------------------------------------------------
 
   _onClick(ev) {
+    // The press is over: what the click changes is drawn at once (and a pending update with it).
+    this._pressing = false;
+    if (ev.detail === 0) this._byPointer = false;
     const path = ev.composedPath();
     const el = path.find((n) => n?.dataset && (n.dataset.action || n.dataset.entity));
     if (this._confirm) {
@@ -3662,12 +3741,17 @@ class PoolMiniCard extends PoolCard {
 
   connectedCallback() {
     super.connectedCallback();
-    document.addEventListener("click", this._onUnzoom, true);
+    (this._onUnzoomWatch ??= watchOutside(this, (ev) => this._onUnzoom(ev))).on();
+    // Back on the page after leaving it: rendered again in its default state.
+    this._update?.();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    document.removeEventListener("click", this._onUnzoom, true);
+    this._onUnzoomWatch?.off();
+    // Left (another dashboard view, a conditional card hidden): back to the default state, so that the card does
+    // not come back unfolded or with its popup open.
+    this._zoomed = false;
   }
 
   getCardSize() {
