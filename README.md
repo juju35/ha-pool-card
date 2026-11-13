@@ -8,6 +8,15 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/juju35/ha-pool-card/blob/main/LICENSE)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/julienstep9)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/iopool.png" alt="iopool" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/esphome.png" alt="ESPHome" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/screenlogic.png" alt="Pentair ScreenLogic" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/intellicenter.png" alt="Pentair IntelliCenter" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/omnilogic.png" alt="Hayward OmniLogic" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/iaqualink.png" alt="Jandy iAquaLink" width="64">
+</p>
+
 Lovelace cards for Home Assistant to keep an eye on a **swimming pool** or a **spa**: water quality at a glance with colored gauges and their ideal ranges (pH, ORP, free chlorine, salt, TDS, water temperature), advice when a value drifts (pH too high, chlorine too low…), an animated scene of the pool, the filtration state and its time of the day, and buttons for the pump, the lighting, the heat pump and the cover.
 
 The cards work on top of the integrations you already use — [iopool](https://github.com/mguyard/hass-iopool), Blue Riiot / Blue Connect, [ESPHome](https://www.home-assistant.io/integrations/esphome/), [Pentair ScreenLogic](https://www.home-assistant.io/integrations/screenlogic/), [Pentair IntelliCenter](https://github.com/jlvaillant/intellicenter), [Hayward OmniLogic](https://www.home-assistant.io/integrations/omnilogic/), [Jandy iAquaLink](https://www.home-assistant.io/integrations/iaqualink/)… Pick the device of your probe: its sensors and equipment are **discovered automatically** from the Home Assistant registries, whatever your language or entity ids, and any entity can be set or replaced one by one (a Shelly switch for the pump, a template sensor for the salt…).
@@ -42,13 +51,13 @@ The card reads standard Home Assistant entities: any integration exposing them w
 
 | Integration | Devices | What the cards show |
 |---|---|---|
-| [iopool](https://github.com/mguyard/hass-iopool) (custom) | iopool ECO probe | Water temperature, pH, ORP, **filtration recommendation** (target of the day), filtration state (its *Filtration* binary sensor: the time of the day is computed from its history) |
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/iopool.png" alt="" width="16"> [iopool](https://github.com/mguyard/hass-iopool) (custom) | iopool ECO probe | Water temperature, pH, ORP, **filtration recommendation** (target of the day), filtration state (its *Filtration* binary sensor: the time of the day is computed from its history) |
 | Blue Riiot / Blue Connect — through [BlueRiiot2MQTT](https://github.com/LordMike/MBW.BlueRiiot2MQTT) or an [ESPHome BLE bridge](https://github.com/alexdelprete/ha-esphome-blueconnect) | Blue Connect, Blue Connect Go | Water temperature, pH, ORP, salinity |
-| [ESPHome](https://www.home-assistant.io/integrations/esphome/) (core) | DIY probes and controllers (Atlas Scientific, DFRobot…), spa controllers | Any sensor, switch, select, climate, light and cover, recognized from their names (`ph`, `orp`, `chlorine`, `salt`, `tds`, `pump`, `light`…) |
-| [Pentair ScreenLogic](https://www.home-assistant.io/integrations/screenlogic/) (core) | ScreenLogic, IntelliChem, IntelliChlor, IntelliFlo | Air temperature, pH, ORP and salt (IntelliChem and IntelliChlor sensors, filed as diagnostic but found all the same), pool / spa heaters (climate; their current temperature is the water temperature), lights. The filter pump runs with the *Pool* circuit: set that switch as `pump` |
-| [Pentair IntelliCenter](https://github.com/jlvaillant/intellicenter) (custom) | IntelliCenter | Water and air temperature, heaters, pump state (binary sensor; set the *Pool* body switch as `pump` to command it), lights, pH, ORP, salt |
-| [Hayward OmniLogic](https://www.home-assistant.io/integrations/omnilogic/) (core) | OmniLogic, OmniHub | Water and air temperature, pH, ORP, salt level, filter pump (switch), chlorinator output (electrolyser) |
-| [Jandy iAquaLink](https://www.home-assistant.io/integrations/iaqualink/) (core) | iAquaLink | Pool / spa heaters (climate), water and air temperature, pump and aux switches, lights |
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/esphome.png" alt="" width="16"> [ESPHome](https://www.home-assistant.io/integrations/esphome/) (core) | DIY probes and controllers (Atlas Scientific, DFRobot…), spa controllers | Any sensor, switch, select, climate, light and cover, recognized from their names (`ph`, `orp`, `chlorine`, `salt`, `tds`, `pump`, `light`…) |
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/screenlogic.png" alt="" width="16"> [Pentair ScreenLogic](https://www.home-assistant.io/integrations/screenlogic/) (core) | ScreenLogic, IntelliChem, IntelliChlor, IntelliFlo | Air temperature, pH, ORP and salt (IntelliChem and IntelliChlor sensors, filed as diagnostic but found all the same), pool / spa heaters (climate; their current temperature is the water temperature), lights. The filter pump runs with the *Pool* circuit: set that switch as `pump` |
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/intellicenter.png" alt="" width="16"> [Pentair IntelliCenter](https://github.com/jlvaillant/intellicenter) (custom) | IntelliCenter | Water and air temperature, heaters, pump state (binary sensor; set the *Pool* body switch as `pump` to command it), lights, pH, ORP, salt |
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/omnilogic.png" alt="" width="16"> [Hayward OmniLogic](https://www.home-assistant.io/integrations/omnilogic/) (core) | OmniLogic, OmniHub | Water and air temperature, pH, ORP, salt level, filter pump (switch), chlorinator output (electrolyser) |
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/iaqualink.png" alt="" width="16"> [Jandy iAquaLink](https://www.home-assistant.io/integrations/iaqualink/) (core) | iAquaLink | Pool / spa heaters (climate), water and air temperature, pump and aux switches, lights |
 | Any other | Shelly / Sonoff switches, `history_stats`, template sensors, helpers | Set each entity in the options: pump, speed, heat pump, electrolyser, light, cover, sensors |
 
 How the card recognizes each entity is detailed in [How it works](#how-it-works).
