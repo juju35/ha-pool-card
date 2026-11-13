@@ -3049,10 +3049,34 @@ class PoolCard extends HTMLElement {
     this.shadowRoot.addEventListener("click", (ev) => this._onClick(ev));
     // Enter / Space on an element with the button role acts as a click.
     this.shadowRoot.addEventListener("keydown", (ev) => {
+      // Used from the keyboard: the focus is kept across the rewrites again.
+      this._byPointer = false;
       if ((ev.key !== "Enter" && ev.key !== " ") || ev.target?.getAttribute?.("role") !== "button") return;
       ev.preventDefault();
       ev.target.click();
     });
+    // No rewrite of the card between the press and the release: Home Assistant updates the card several times a
+    // second, and a rewrite under the pointer replaces the element pressed, so that the click lands on the card
+    // itself and does nothing. The pending render is done once released (after the click). A press also means the
+    // pointer is in use: the focus is not put back on the clicked element after a rewrite (no focus ring).
+    this.shadowRoot.addEventListener("pointerdown", () => {
+      this._byPointer = true;
+      this._pressing = true;
+      window.addEventListener("pointerup", this._onPressEnd, true);
+      window.addEventListener("pointercancel", this._onPressEnd, true);
+    });
+    this._onPressEnd = () => {
+      window.removeEventListener("pointerup", this._onPressEnd, true);
+      window.removeEventListener("pointercancel", this._onPressEnd, true);
+      setTimeout(() => {
+        if (!this._pressing) return;
+        this._pressing = false;
+        if (this._dirty) {
+          this._dirty = false;
+          this._update();
+        }
+      }, 0);
+    };
     this._onKey = (ev) => {
       if (ev.key !== "Escape" || !this._confirm) return;
       ev.stopPropagation();
@@ -3134,6 +3158,9 @@ class PoolCard extends HTMLElement {
     clearInterval(this._tick);
     this._tick = null;
     this._onOutsideWatch?.off();
+    this._pressing = false;
+    window.removeEventListener("pointerup", this._onPressEnd, true);
+    window.removeEventListener("pointercancel", this._onPressEnd, true);
     // Left (another dashboard view, a conditional card hidden): back to the default state, so that the card does
     // not come back unfolded or with its popup open.
     this._toggled = new Map();
@@ -3160,10 +3187,17 @@ class PoolCard extends HTMLElement {
 
   _update() {
     if (!this._hass || !this._config) return;
+    // Held while the card is pressed (see the constructor): drawn once released.
+    if (this._pressing) {
+      this._dirty = true;
+      return;
+    }
+    this._dirty = false;
     let html = this._render();
     if (this._confirm) html = html.replace(/<ha-card>([\s\S]*)<\/ha-card>\s*$/, (_, inner) => `<ha-card class="dialog-open">${inner}${this._confirmHtml()}</ha-card>`);
     if (html === this._html) return;
-    const focused = this.shadowRoot.activeElement;
+    // For the keyboard only: after a click, it would draw the focus ring on the clicked element.
+    const focused = this._byPointer ? null : this.shadowRoot.activeElement;
     const key = focused?.dataset ? JSON.stringify({ ...focused.dataset }) : null;
     this._html = html;
     this.shadowRoot.innerHTML = html;
@@ -3576,6 +3610,9 @@ class PoolCard extends HTMLElement {
   // ----- Actions -----------------------------------------------------------
 
   _onClick(ev) {
+    // The press is over: what the click changes is drawn at once (and a pending update with it).
+    this._pressing = false;
+    if (ev.detail === 0) this._byPointer = false;
     const path = ev.composedPath();
     const el = path.find((n) => n?.dataset && (n.dataset.action || n.dataset.entity));
     if (this._confirm) {

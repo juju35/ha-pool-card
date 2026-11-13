@@ -343,6 +343,29 @@ test("sections fold and unfold, and fold back on a click elsewhere on the page",
   card.disconnectedCallback();
 });
 
+test("no rewrite under a press: an update waits for the release, a click draws at once", async () => {
+  const card = newCard();
+  const before = html(card);
+  // Pressed: an update (here a section unfolded from elsewhere) is held, the element pressed stays.
+  card.shadowRoot.listeners.pointerdown({});
+  card._toggled.set("equipment", false);
+  card._update();
+  assert.equal(html(card), before);
+  // Released without a click (dragged away): the pending update is drawn right after.
+  card._onPressEnd();
+  await new Promise((r) => setTimeout(r, 5));
+  assert.match(html(card), /data-section="equipment" aria-expanded="true"/);
+  // Pressed then clicked: the click draws what it changes at once.
+  card.shadowRoot.listeners.pointerdown({});
+  click(card, { action: "toggle_section", section: "equipment" });
+  assert.match(html(card), /data-section="equipment" aria-expanded="false"/);
+  assert.equal(card._pressing, false);
+  // A press marks the pointer as in use (no focus put back), a key the keyboard.
+  assert.equal(card._byPointer, true);
+  card.shadowRoot.listeners.keydown({ key: "Tab", target: {} });
+  assert.equal(card._byPointer, false);
+});
+
 test("the mini card shows a summary, its detail button switches to the full card and back", () => {
   const card = newCard(poolConfig, makeHass(), pc.PoolMiniCard);
   card.connectedCallback();
