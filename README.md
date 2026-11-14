@@ -193,7 +193,7 @@ zoom: true
 | `heat_pump` | both | Discovered | Heat pump or heater (`climate`): on / off, target with − / +, heating animation |
 | `electrolyser` | both | Discovered | Salt electrolyser: a `switch` (on / off button) or a production `sensor` (in %) |
 | `light` | both | Discovered | Pool light (`light` or `switch`): button, glow in the scene in the light's color |
-| `cover` | both | Discovered | Pool cover (`cover`): open / close button, drawn at its position, animated while it moves |
+| `cover` | both | Discovered | Pool cover: a `cover` (open / close button, drawn at its position, animated while it moves) or a `switch` / `input_boolean` (on = covering the pool, off = rolled back) |
 | `ranges` | both | See below | Ideal ranges: `<measure>_min` and `<measure>_max` for `water_temperature`, `ph`, `orp`, `chlorine`, `salt` and `tds`, in the unit of the sensor |
 | `show_title` | both | `true` | Show the title in the header |
 | `show_subtitle` | both | `true` | Show the subtitle (filtration state and time of the day) |
@@ -320,7 +320,7 @@ With a `device`, the card goes through the entities of that device in the Home A
 | `chlorine`, `salt`, `tds` | *salt* / *sel* / *salinity* (in g/L, ppm or mg/L, checked before the chlorine: *Chlorinator salt* is salt), *chlor* (in mg/L, ppm or mV), *tds* (in ppm or mg/L) in the name. Set points, supply and tank levels, dosing states and volumes, alarms are never a measure |
 | `filtration_time` / `filtration_target` | A *filtration* sensor in min, h or s; *recommendation* / *target* for the target |
 | `pump`, `pump_speed` | A switch, fan, select or binary sensor named *pump*, *pompe*, *filtration* — not a heat pump, a dosing (pH, chlorine, acid) pump, a booster or a cleaner; a switch first, a binary sensor (state only) last; a select named *speed* for the speed |
-| `heat_pump`, `light`, `cover` | The `climate`, `light` and `cover` entities (and switches named *light*) |
+| `heat_pump`, `light`, `cover` | The `climate`, `light` and `cover` entities (and switches named *light*, or a switch named *cover* / *volet* / *roller* for a cover driven by a switch) |
 | `electrolyser` | A switch named *electrolyser* / *chlorinator* (not *superchlorinate*), or a *chlorinator* / *production* sensor in % |
 
 Configuration, disabled and hidden entities are left out, and so are diagnostic ones except water measures (ScreenLogic files its chemistry sensors there). Any role set in the options replaces the discovered one, so the card also works with no device at all, entity by entity.

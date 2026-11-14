@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0 - 2026-11-14
+
+### Features
+- The cover can now be a `switch` or an `input_boolean`, not only a `cover` entity (for a roller cover driven by a relay): `on` means it covers the pool, `off` that it is rolled back. The open / close button, the hero line, the scene and the equipment tile follow it, and the button turns it on and off. A switch named *cover* / *volet* / *roller*… on the device is discovered as the cover too, a real `cover` entity still winning when both are present (#10).
+
 ## 1.0.2 - 2026-11-14
 
 ### Fixes

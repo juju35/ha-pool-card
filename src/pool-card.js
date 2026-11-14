@@ -2402,6 +2402,8 @@ const W = (words) => new RegExp(`(^|[^a-z])(${words})([^a-z]|$)`);
 const LIGHT_RE = /light|lumi|eclairage|lamp|licht|beleuchtung|luz/;
 const LIGHT_WORD_RE = W("led|spot");
 const ELECTRO_RE = /electroly|chlorinat|salt.?cell|elektroly/;
+// A switch / input_boolean that drives the roller cover (DIY and template setups that expose it as a switch).
+const COVER_RE = /cover|volet|couverture|roller|shutter|rollladen|rolladen|abdeckung|lamell|persienne|b(a|â)che/;
 // Things that are not the filtration pump: heat pump, dosing pumps, cleaner, booster, modes.
 const NOT_PUMP_RE = /heat.?pump|pompe.?a.?chaleur|warmepumpe|bomba.?de.?calor|dos(e|ing|age|euse|ier)|peristalt|chlor|acid|booster|cleaner|robot|boost|mode|winter|hivern|super/;
 const NOT_PUMP_WORD_RE = W("ph|pac|swg");
@@ -2431,6 +2433,7 @@ const roleOf = (id, hass) => {
     case "select":
       if (has(LIGHT_RE) || has(LIGHT_WORD_RE)) return domain === "select" ? null : "light";
       if (has(ELECTRO_RE) && !has(/super/)) return domain === "fan" ? null : "electrolyser";
+      if ((domain === "switch" || domain === "input_boolean") && has(COVER_RE)) return "cover";
       if (domain === "select" && has(/speed|vitesse|rpm|geschwindigkeit|velocidad/)) return "pump_speed";
       if (has(NOT_PUMP_RE) || has(NOT_PUMP_WORD_RE)) return null;
       if (has(/pump|pompe|filtrat|pumpe|bomba|depuradora/)) return "pump";
@@ -2480,6 +2483,7 @@ const rankOf = (role, id, hass, diagnostic) => {
   let r = diagnostic ? -1 : 0;
   if (role === "pump") r += PUMP_RANK[domainOf(id)] ?? 0;
   if (role === "light") r += domainOf(id) === "light" ? 2 : 0;
+  if (role === "cover") r += domainOf(id) === "cover" ? 2 : 0;
   if (role === "water_temperature" && WATER_RE.test(norm([id, hass.entities?.[id]?.original_name, hass.states?.[id]?.attributes?.friendly_name].join(" ")))) r += 2;
   return r;
 };
@@ -2664,6 +2668,27 @@ const pumpOn = (s) => {
 };
 
 const isOn = (s) => valid(s) && !["off", "closed", "idle"].includes(s.state) && (domainOf(s.entity_id) !== "select" || !isOffOption(s.state));
+
+// The pool cover as a `cover`, or as a `switch` / `input_boolean` (on = covering the pool, off = rolled back): what the
+// rest of the card reads of it. `closed` offers the open action and shows the hero line; `shut` is fully closed (the
+// closed icon and idle tile); `moving` is the opening / closing animation (covers only); `part` is how far it is drawn
+// (1 closed … 0 open); `key` its state label; `pos` its position (covers that report one).
+const coverInfo = (s) => {
+  const d = domainOf(s.entity_id);
+  if (d === "switch" || d === "input_boolean") {
+    const shut = s.state === "on";
+    return { closed: shut, shut, moving: "", part: shut ? 1 : 0, key: shut ? "cover_closed" : "cover_open", pos: Number.NaN };
+  }
+  const pos = Number(s.attributes?.current_position);
+  return {
+    closed: s.state === "closed" || s.state === "closing",
+    shut: s.state === "closed",
+    moving: s.state === "closing" || s.state === "opening" ? s.state : "",
+    part: Number.isFinite(pos) ? clamp(1 - pos / 100, 0, 1) : s.state === "closed" ? 1 : 0,
+    key: { open: "cover_open", closed: "cover_closed", opening: "opening", closing: "closing" }[s.state] || "cover_open",
+    pos,
+  };
+};
 
 // Heat pump heating: its action when it reports one, else its mode.
 const heating = (s) => valid(s) && (s.attributes?.hvac_action ? s.attributes.hvac_action === "heating" : s.state === "heat");
@@ -3392,9 +3417,9 @@ class PoolCard extends HTMLElement {
     let coverPart = 0;
     let coverMove = "";
     if (valid(cover)) {
-      const pos = Number(cover.attributes?.current_position);
-      coverPart = Number.isFinite(pos) ? clamp(1 - pos / 100, 0, 1) : cover.state === "closed" ? 1 : 0;
-      if (cover.state === "closing" || cover.state === "opening") coverMove = cover.state;
+      const ci = coverInfo(cover);
+      coverPart = ci.part;
+      coverMove = ci.moving;
     }
     const s = {
       filtering: pumpOn(m.pump),
@@ -3427,9 +3452,9 @@ class PoolCard extends HTMLElement {
       lines.push(`<div class="line clickable" role="button" tabindex="0" data-entity="${esc(air.entity)}">${svgIcon(ICONS.air)}<span>${esc(this._t("air"))} <b>${esc(a.v)} ${esc(a.unit)}</b></span></div>`);
     }
     if (heating(m.hp)) lines.push(`<div class="line warn">${svgIcon(ICONS.heat_pump)}<span>${esc(this._t("heating"))}</span></div>`);
-    if (valid(cover) && cover.state !== "open") {
-      const key = { closed: "cover_closed", opening: "opening", closing: "closing" }[cover.state] || "cover_open";
-      lines.push(`<div class="line">${svgIcon(ICONS.cover)}<span>${esc(`${this._t("cover")} · ${this._t(key)}`)}</span></div>`);
+    const coverHero = valid(cover) ? coverInfo(cover) : null;
+    if (coverHero && (coverHero.closed || coverHero.moving)) {
+      lines.push(`<div class="line">${svgIcon(ICONS.cover)}<span>${esc(`${this._t("cover")} · ${this._t(coverHero.key)}`)}</span></div>`);
     }
     const big = w
       ? `<div class="big clickable" role="button" tabindex="0" data-entity="${esc(w.entity)}" aria-label="${esc(`${this._t("water_temperature")} ${this._value(w).v} ${w.unit}`)}"><span class="val">${esc(this._value(w).v)}<small>${esc(w.unit)}</small></span><span class="lbl">${esc(this._t("water"))}</span></div>`
@@ -3454,7 +3479,7 @@ class PoolCard extends HTMLElement {
     if (m.hp) list.push(btn("heat_pump", r.heat_pump, ICONS.heat_pump, this._t("heat_pump"), valid(m.hp) && m.hp.state !== "off"));
     const cover = this._s(r.cover);
     if (cover) {
-      const closed = cover.state === "closed" || cover.state === "closing";
+      const closed = coverInfo(cover).closed;
       list.push(btn("cover", r.cover, closed ? ICONS.cover : ICONS.cover_open, this._t(closed ? "open_cover" : "close_cover"), !closed));
     }
     if (m.electro && ["switch", "input_boolean"].includes(domainOf(r.electrolyser)))
@@ -3573,10 +3598,9 @@ class PoolCard extends HTMLElement {
     }
     const cover = this._s(r.cover);
     if (cover) {
-      const key = { open: "cover_open", closed: "cover_closed", opening: "opening", closing: "closing" }[cover.state];
-      const pos = Number(cover.attributes?.current_position);
-      const value = !valid(cover) ? this._t("unavailable") : `${this._t(key || "cover_open")}${Number.isFinite(pos) && pos > 0 && pos < 100 ? ` · ${Math.round(pos)} %` : ""}`;
-      tiles.push(tile(r.cover, cover.state === "closed" ? ICONS.cover : ICONS.cover_open, this._t("cover"), value, cover.state === "closed" ? "idle" : "active"));
+      const ci = coverInfo(cover);
+      const value = !valid(cover) ? this._t("unavailable") : `${this._t(ci.key)}${Number.isFinite(ci.pos) && ci.pos > 0 && ci.pos < 100 ? ` · ${Math.round(ci.pos)} %` : ""}`;
+      tiles.push(tile(r.cover, ci.shut ? ICONS.cover : ICONS.cover_open, this._t("cover"), value, ci.shut ? "idle" : "active"));
     }
     const light = this._s(r.light);
     if (light) tiles.push(tile(r.light, lightIcon(light), this._t("light"), !valid(light) ? this._t("unavailable") : this._t(isOn(light) ? "on" : "off"), isOn(light) ? "active" : "idle"));
@@ -3665,6 +3689,8 @@ class PoolCard extends HTMLElement {
       return this._call("climate", "set_temperature", { entity_id: entity, temperature: Math.round(v * 10) / 10 });
     }
     if (action === "cover") {
+      const d = domainOf(entity);
+      if (d === "switch" || d === "input_boolean") return this._call(d, s.state === "on" ? "turn_off" : "turn_on", { entity_id: entity });
       const closed = s.state === "closed" || s.state === "closing";
       return this._call("cover", closed ? "open_cover" : "close_cover", { entity_id: entity });
     }
@@ -3835,7 +3861,7 @@ const ENTITY_DOMAINS = {
   heat_pump: ["climate"],
   electrolyser: ["switch", "input_boolean", "sensor", "number", "select"],
   light: ["light", "switch", "input_boolean"],
-  cover: ["cover"],
+  cover: ["cover", "switch", "input_boolean"],
 };
 
 class PoolEditorBase extends HTMLElement {
