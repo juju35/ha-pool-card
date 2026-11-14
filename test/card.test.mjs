@@ -254,6 +254,29 @@ test("pump, light, cover, heat pump and speed buttons call their services", () =
   ]);
 });
 
+test("a switch or input_boolean can drive the cover (on = closed over the pool)", () => {
+  // Auto-discovery: a switch or input_boolean named like a cover takes the cover role.
+  const hass = makeHass();
+  assert.equal(pc.roleOf("switch.volet_piscine", hass), "cover");
+  assert.equal(pc.roleOf("input_boolean.couverture_bassin", hass), "cover");
+  // A real cover entity still wins over a switch when both are candidates.
+  assert.equal(pc.setupOf(makeHass(), poolConfig).roles.cover, "cover.volet_piscine");
+
+  // Set in the options, the switch is accepted as the cover and its button toggles it: on (closed) opens, off closes.
+  const config = { ...poolConfig, cover: "switch.pool_cover" };
+  const closed = makeHass({ "switch.pool_cover": { state: "on", attributes: { friendly_name: "Pool cover" } } });
+  click(newCard(config, closed), { action: "cover", entity: "switch.pool_cover" });
+  assert.deepEqual(plain(closed.calls), [["switch", "turn_off", { entity_id: "switch.pool_cover" }]]);
+
+  const open = makeHass({ "switch.pool_cover": { state: "off", attributes: { friendly_name: "Pool cover" } } });
+  const openCard = newCard(config, open);
+  click(openCard, { action: "cover", entity: "switch.pool_cover" });
+  assert.deepEqual(plain(open.calls), [["switch", "turn_on", { entity_id: "switch.pool_cover" }]]);
+  // The open switch shows the close action and no cover line in the hero (as a rolled-back cover does).
+  assert.match(html(openCard), /data-action="cover" data-entity="switch\.pool_cover"/);
+  assert.doesNotMatch(html(openCard), /· (Closed|closing|opening)/i);
+});
+
 test("stopping the pump while the heat pump heats asks first, in a popup at the top of the card", () => {
   const hass = makeHass();
   const card = newCard(poolConfig, hass);
