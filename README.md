@@ -193,7 +193,8 @@ zoom: true
 | `heat_pump` | both | Discovered | Heat pump or heater (`climate`): on / off, target with − / +, heating animation |
 | `electrolyser` | both | Discovered | Salt electrolyser: a `switch` (on / off button) or a production `sensor` (in %) |
 | `light` | both | Discovered | Pool light (`light` or `switch`): button, glow in the scene in the light's color |
-| `cover` | both | Discovered | Pool cover: a `cover` (open / close button, drawn at its position, animated while it moves) or a `switch` / `input_boolean` (on = covering the pool, off = rolled back) |
+| `cover` | both | Discovered | Pool cover: a `cover` (open / close button, drawn at its position, animated while it moves) or a `switch` / `input_boolean` (on = covering the pool, off = rolled back; see `invert_cover` for a relay wired the other way round) |
+| `invert_cover` | both | `false` | Invert the `switch` / `input_boolean` cover: `on` becomes rolled back and `off` covering the pool (for a relay wired the other way round). No effect on a real `cover` entity |
 | `ranges` | both | See below | Ideal ranges: `<measure>_min` and `<measure>_max` for `water_temperature`, `ph`, `orp`, `chlorine`, `salt` and `tds`, in the unit of the sensor |
 | `show_title` | both | `true` | Show the title in the header |
 | `show_subtitle` | both | `true` | Show the subtitle (filtration state and time of the day) |

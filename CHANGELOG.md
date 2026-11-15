@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0 - 2026-11-15
+
+### Features
+- New `invert_cover` option for a cover driven by a `switch` or an `input_boolean`: when the relay is wired the other way round, `on` is read as rolled back and `off` as covering the pool. The state, the open / close button, the hero line, the scene and the equipment tile all follow it. It has no effect on a real `cover` entity, and is available in the visual editor (#12).
+
 ## 1.1.0 - 2026-11-14
 
 ### Features
