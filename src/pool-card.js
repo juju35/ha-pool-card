@@ -41,6 +41,9 @@ const ICONS = {
   minus: "M19,13H5V11H19V13Z",
   plus: "M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z",
   power: "M16.56,5.44L15.11,6.89C16.84,7.94 18,9.83 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12C6,9.83 7.16,7.94 8.88,6.88L7.44,5.44C5.36,6.88 4,9.28 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12C20,9.28 18.64,6.88 16.56,5.44M13,3H11V13H13",
+  flash: "M7,2V13H10V22L17,10H13L17,2H7Z",
+  counter:
+    "M4,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M4,6V18H11V6H4M20,18V6H18.76C19,6.54 18.95,7.07 18.95,7.13C18.88,7.8 18.41,8.5 18.24,8.75L15.91,11.3L19.23,11.28L19.24,12.5L14.04,12.47L14,11.47C14,11.47 17.05,8.24 17.2,7.95C17.34,7.67 17.91,6 16.5,6C15.27,6.05 15.41,7.3 15.41,7.3L13.87,7.31C13.87,7.31 13.88,6.65 14.25,6H13V18H15.58L15.57,17.14L16.54,17.13C16.54,17.13 17.45,16.97 17.46,16.08C17.5,15.08 16.65,15.08 16.5,15.08C16.37,15.08 15.43,15.13 15.43,15.95H13.91C13.91,15.95 13.95,13.89 16.5,13.89C19.1,13.89 18.96,15.91 18.96,15.91C18.96,15.91 19,17.16 17.85,17.63L18.37,18H20M8.92,16H7.42V10.2L5.62,10.76V9.53L8.76,8.41H8.92V16Z",
   speed: "M12,16A3,3 0 0,1 9,13C9,11.88 9.61,10.9 10.5,10.39L20.21,4.77L14.68,14.35C14.18,15.33 13.17,16 12,16M12,3C13.81,3 15.5,3.5 16.97,4.32L14.87,5.53C14,5.19 13,5 12,5A8,8 0 0,0 4,13C4,15.21 4.89,17.21 6.34,18.65H6.35C6.74,19.04 6.74,19.67 6.35,20.06C5.96,20.45 5.32,20.45 4.93,20.07V20.07C3.12,18.26 2,15.76 2,13A10,10 0 0,1 12,3M22,13C22,15.76 20.88,18.26 19.07,20.07V20.07C18.68,20.45 18.05,20.45 17.66,20.06C17.27,19.67 17.27,19.04 17.66,18.65V18.65C19.11,17.2 20,15.21 20,13C20,12 19.81,11 19.46,10.1L20.67,8C21.5,9.5 22,11.18 22,13Z",
   water: "M12,20A6,6 0 0,1 6,14C6,10 12,3.25 12,3.25C12,3.25 18,10 18,14A6,6 0 0,1 12,20Z",
   advice: "M8 2C11.9 2 15 5.1 15 9C15 11.4 13.8 13.5 12 14.7V17C12 17.6 11.6 18 11 18H5C4.4 18 4 17.6 4 17V14.7C2.2 13.5 1 11.4 1 9C1 5.1 4.1 2 8 2M5 21V20H11V21C11 21.6 10.6 22 10 22H6C5.4 22 5 21.6 5 21M8 4C5.2 4 3 6.2 3 9C3 11.1 4.2 12.8 6 13.6V16H10V13.6C11.8 12.8 13 11.1 13 9C13 6.2 10.8 4 8 4M20.5 14.5V16H19V14.5H20.5M18.5 9.5H17V9C17 7.3 18.3 6 20 6S23 7.3 23 9C23 10 22.5 10.9 21.7 11.4L21.4 11.6C20.8 12 20.5 12.6 20.5 13.3V13.5H19V13.3C19 12.1 19.6 11 20.6 10.4L20.9 10.2C21.3 9.9 21.5 9.5 21.5 9C21.5 8.2 20.8 7.5 20 7.5S18.5 8.2 18.5 9V9.5Z",
@@ -64,6 +67,8 @@ const STRINGS = {
     pump_speed: "Pump speed",
     filtration_time: "Filtration time today",
     filtration_target: "Filtration target",
+    power: "Power",
+    energy: "Energy",
     heat_pump: "Heat pump",
     electrolyser: "Electrolyser",
     light: "Light",
@@ -168,6 +173,8 @@ const STRINGS = {
     pump_speed: "Vitesse de la pompe",
     filtration_time: "Temps de filtration du jour",
     filtration_target: "Objectif de filtration",
+    power: "Puissance",
+    energy: "Énergie",
     heat_pump: "Pompe à chaleur",
     electrolyser: "Électrolyseur",
     light: "Éclairage",
@@ -272,6 +279,8 @@ const STRINGS = {
     pump_speed: "Pumpendrehzahl",
     filtration_time: "Filterzeit heute",
     filtration_target: "Filterziel",
+    power: "Leistung",
+    energy: "Energie",
     heat_pump: "Wärmepumpe",
     electrolyser: "Elektrolyse",
     light: "Beleuchtung",
@@ -376,6 +385,8 @@ const STRINGS = {
     pump_speed: "Velocidad de la bomba",
     filtration_time: "Tiempo de filtración hoy",
     filtration_target: "Objetivo de filtración",
+    power: "Potencia",
+    energy: "Energía",
     heat_pump: "Bomba de calor",
     electrolyser: "Clorador salino",
     light: "Iluminación",
@@ -480,6 +491,8 @@ const STRINGS = {
     pump_speed: "Брзина пумпе",
     filtration_time: "Време филтрације данас",
     filtration_target: "Циљ филтрације",
+    power: "Снага",
+    energy: "Енергија",
     heat_pump: "Топлотна пумпа",
     electrolyser: "Електролизер",
     light: "Осветљење",
@@ -584,6 +597,8 @@ const STRINGS = {
     pump_speed: "Brzina pumpe",
     filtration_time: "Vreme filtracije danas",
     filtration_target: "Cilj filtracije",
+    power: "Snaga",
+    energy: "Energija",
     heat_pump: "Toplotna pumpa",
     electrolyser: "Elektrolizer",
     light: "Osvetljenje",
@@ -688,6 +703,8 @@ const STRINGS = {
     pump_speed: "Velocità della pompa",
     filtration_time: "Tempo di filtrazione oggi",
     filtration_target: "Obiettivo di filtrazione",
+    power: "Potenza",
+    energy: "Energia",
     heat_pump: "Pompa di calore",
     electrolyser: "Elettrolizzatore",
     light: "Illuminazione",
@@ -792,6 +809,8 @@ const STRINGS = {
     pump_speed: "Pompsnelheid",
     filtration_time: "Filtertijd vandaag",
     filtration_target: "Filterdoel",
+    power: "Vermogen",
+    energy: "Energie",
     heat_pump: "Warmtepomp",
     electrolyser: "Zoutelektrolyse",
     light: "Verlichting",
@@ -896,6 +915,8 @@ const STRINGS = {
     pump_speed: "Velocidade da bomba",
     filtration_time: "Tempo de filtração hoje",
     filtration_target: "Objetivo de filtração",
+    power: "Potência",
+    energy: "Energia",
     heat_pump: "Bomba de calor",
     electrolyser: "Eletrolisador",
     light: "Iluminação",
@@ -1000,6 +1021,8 @@ const STRINGS = {
     pump_speed: "Prędkość pompy",
     filtration_time: "Czas filtracji dzisiaj",
     filtration_target: "Cel filtracji",
+    power: "Moc",
+    energy: "Energia",
     heat_pump: "Pompa ciepła",
     electrolyser: "Elektrolizer",
     light: "Oświetlenie",
@@ -1104,6 +1127,8 @@ const STRINGS = {
     pump_speed: "Viteza pompei",
     filtration_time: "Timp de filtrare azi",
     filtration_target: "Obiectiv de filtrare",
+    power: "Putere",
+    energy: "Energie",
     heat_pump: "Pompă de căldură",
     electrolyser: "Electrolizor",
     light: "Iluminare",
@@ -1208,6 +1233,8 @@ const STRINGS = {
     pump_speed: "Pumpehastighed",
     filtration_time: "Filtreringstid i dag",
     filtration_target: "Filtreringsmål",
+    power: "Effekt",
+    energy: "Energi",
     heat_pump: "Varmepumpe",
     electrolyser: "Saltklorinator",
     light: "Belysning",
@@ -1312,6 +1339,8 @@ const STRINGS = {
     pump_speed: "Pumphastighet",
     filtration_time: "Filtreringstid i dag",
     filtration_target: "Filtreringsmål",
+    power: "Effekt",
+    energy: "Energi",
     heat_pump: "Värmepump",
     electrolyser: "Saltklorinator",
     light: "Belysning",
@@ -1416,6 +1445,8 @@ const STRINGS = {
     pump_speed: "Скорост на помпата",
     filtration_time: "Време на филтриране днес",
     filtration_target: "Цел на филтрирането",
+    power: "Мощност",
+    energy: "Енергия",
     heat_pump: "Термопомпа",
     electrolyser: "Електролизер",
     light: "Осветление",
@@ -1520,6 +1551,8 @@ const STRINGS = {
     pump_speed: "Скорость насоса",
     filtration_time: "Время фильтрации сегодня",
     filtration_target: "Цель фильтрации",
+    power: "Мощность",
+    energy: "Энергия",
     heat_pump: "Тепловой насос",
     electrolyser: "Электролизёр",
     light: "Подсветка",
@@ -1624,6 +1657,8 @@ const STRINGS = {
     pump_speed: "Швидкість насоса",
     filtration_time: "Час фільтрації сьогодні",
     filtration_target: "Мета фільтрації",
+    power: "Потужність",
+    energy: "Енергія",
     heat_pump: "Тепловий насос",
     electrolyser: "Електролізер",
     light: "Підсвічування",
@@ -1728,6 +1763,8 @@ const STRINGS = {
     pump_speed: "Szivattyú fordulatszáma",
     filtration_time: "Mai szűrési idő",
     filtration_target: "Szűrési cél",
+    power: "Teljesítmény",
+    energy: "Energia",
     heat_pump: "Hőszivattyú",
     electrolyser: "Sóbontó",
     light: "Világítás",
@@ -1832,6 +1869,8 @@ const STRINGS = {
     pump_speed: "Rýchlosť čerpadla",
     filtration_time: "Čas filtrácie dnes",
     filtration_target: "Cieľ filtrácie",
+    power: "Výkon",
+    energy: "Energia",
     heat_pump: "Tepelné čerpadlo",
     electrolyser: "Elektrolyzér",
     light: "Osvetlenie",
@@ -1936,6 +1975,8 @@ const STRINGS = {
     pump_speed: "Rychlost čerpadla",
     filtration_time: "Doba filtrace dnes",
     filtration_target: "Cíl filtrace",
+    power: "Výkon",
+    energy: "Energie",
     heat_pump: "Tepelné čerpadlo",
     electrolyser: "Elektrolyzér",
     light: "Osvětlení",
@@ -2040,6 +2081,8 @@ const STRINGS = {
     pump_speed: "Hitrost črpalke",
     filtration_time: "Čas filtracije danes",
     filtration_target: "Cilj filtracije",
+    power: "Moč",
+    energy: "Energija",
     heat_pump: "Toplotna črpalka",
     electrolyser: "Elektrolizer",
     light: "Osvetlitev",
@@ -2144,6 +2187,8 @@ const STRINGS = {
     pump_speed: "Sūkņa ātrums",
     filtration_time: "Filtrācijas laiks šodien",
     filtration_target: "Filtrācijas mērķis",
+    power: "Jauda",
+    energy: "Enerģija",
     heat_pump: "Siltumsūknis",
     electrolyser: "Elektrolizators",
     light: "Apgaismojums",
@@ -2248,6 +2293,8 @@ const STRINGS = {
     pump_speed: "Ταχύτητα αντλίας",
     filtration_time: "Χρόνος φιλτραρίσματος σήμερα",
     filtration_target: "Στόχος φιλτραρίσματος",
+    power: "Ισχύς",
+    energy: "Ενέργεια",
     heat_pump: "Αντλία θερμότητας",
     electrolyser: "Ηλεκτρόλυση",
     light: "Φωτισμός",
@@ -2434,7 +2481,8 @@ const toHours = (s) => {
 const METRIC_ROLES = ["water_temperature", "ph", "orp", "chlorine", "salt", "tds"];
 const SENSOR_ROLES = [...METRIC_ROLES, "air_temperature"];
 const EQUIPMENT_ROLES = ["pump", "pump_speed", "filtration_time", "filtration_target", "heat_pump", "electrolyser", "light", "cover"];
-const ROLES = [...SENSOR_ROLES, ...EQUIPMENT_ROLES];
+const ENERGY_ROLES = ["power", "energy"];
+const ROLES = [...SENSOR_ROLES, ...EQUIPMENT_ROLES, ...ENERGY_ROLES];
 const DEFAULT_COLLAPSED = ["equipment"];
 const SECTIONS = ["advice", "filtration", "equipment"];
 
@@ -2485,7 +2533,12 @@ const roleOf = (id, hass) => {
     case "sensor": {
       const dc = a.device_class || e.device_class || e.original_device_class;
       const unit = String(a.unit_of_measurement || "");
-      if (["battery", "signal_strength", "timestamp", "voltage", "power", "energy", "current", "enum"].includes(dc)) return null;
+      if (["battery", "signal_strength", "timestamp", "voltage", "current", "enum"].includes(dc)) return null;
+      // Electrical consumption of the pool: instantaneous power (W) and cumulative energy (Wh). The device class wins,
+      // then the unit, so a "filtration power" named sensor is still read as power and not mistaken for a filtration time.
+      const u = unit.toLowerCase().replace(/\s/g, "");
+      if (dc === "power" || (!dc && ["w", "kw", "mw"].includes(u))) return "power";
+      if (dc === "energy" || (!dc && ["wh", "kwh", "mwh"].includes(u))) return "energy";
       if (has(/filtrat/)) {
         if (has(/recommend|target|objecti|recommand|empfehl|recomend/)) return "filtration_target";
         if (/^(min|h|s)$/.test(unit)) return "filtration_time";
@@ -3593,6 +3646,18 @@ class PoolCard extends HTMLElement {
           .join("")}</div></div>`,
       );
     }
+    // Instantaneous electrical consumption: the real-time power of the pool, which also confirms the pump is running.
+    const sensorRow = (entity, icon, key) => {
+      const s = this._s(entity);
+      if (!s) return;
+      const v = num(s);
+      const unit = s.attributes?.unit_of_measurement || "";
+      const text = !valid(s) ? this._t("unavailable") : v === null ? s.state : `${fmtNum(v, Number.isInteger(v) ? 0 : 1, loc)}${unit ? ` ${unit}` : ""}`;
+      rows.push(
+        `<div class="row clickable" role="button" tabindex="0" data-entity="${esc(entity)}"><span class="k">${svgIcon(icon)}${esc(this._t(key))}</span><span class="v">${esc(text)}</span></div>`,
+      );
+    };
+    sensorRow(r.power, ICONS.flash, "power");
     const rt = this._runtime(r);
     const target = this._target(m);
     if (rt !== null || target) {
@@ -3607,6 +3672,8 @@ class PoolCard extends HTMLElement {
       );
       if (target?.rule) rows.push(`<div class="note">${esc(this._t("target_rule"))}</div>`);
     }
+    // Cumulative energy consumed by the pool.
+    sensorRow(r.energy, ICONS.counter, "energy");
     if (!rows.length) return "";
     return this._section("filtration", ICONS.pump, this._t("filtration"), `<div class="filtration">${rows.join("")}</div>`);
   }
@@ -3907,6 +3974,8 @@ const ENTITY_DOMAINS = {
   electrolyser: ["switch", "input_boolean", "sensor", "number", "select"],
   light: ["light", "switch", "input_boolean"],
   cover: ["cover", "switch", "input_boolean"],
+  power: ["sensor"],
+  energy: ["sensor"],
 };
 
 class PoolEditorBase extends HTMLElement {

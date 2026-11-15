@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0 - 2026-11-15
+
+### Features
+- New `power` and `energy` options for the pool's electrical consumption: an instantaneous power sensor (W or kW) and a cumulative energy sensor (Wh, kWh or MWh), shown as two rows in the filtration section. The power also tells at a glance that the filtration is running. Both are discovered from the device (a sensor of device class `power` or `energy`) or set one by one, and are available in the visual editor (#14).
+
 ## 1.2.0 - 2026-11-15
 
 ### Features
