@@ -68,6 +68,8 @@ const STRINGS = {
     electrolyser: "Electrolyser",
     light: "Light",
     cover: "Cover",
+    invert_cover: "Invert cover state",
+    invert_cover_helper: "For a cover on a switch: turn on if your relay is wired the other way round, so on means open and off means closed.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -170,6 +172,8 @@ const STRINGS = {
     electrolyser: "Électrolyseur",
     light: "Éclairage",
     cover: "Couverture",
+    invert_cover: "Inverser l’état de la couverture",
+    invert_cover_helper: "Pour une couverture sur un interrupteur : activez si votre relais est câblé à l’envers, « on » signifiant alors ouverte et « off » fermée.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -272,6 +276,8 @@ const STRINGS = {
     electrolyser: "Elektrolyse",
     light: "Beleuchtung",
     cover: "Abdeckung",
+    invert_cover: "Abdeckungsstatus umkehren",
+    invert_cover_helper: "Für eine Abdeckung an einem Schalter: aktivieren, wenn Ihr Relais andersherum verdrahtet ist, sodass „ein“ offen und „aus“ geschlossen bedeutet.",
     ph_short: "pH",
     orp_short: "Redox",
     chlorine_short: "Cl",
@@ -374,6 +380,8 @@ const STRINGS = {
     electrolyser: "Clorador salino",
     light: "Iluminación",
     cover: "Cubierta",
+    invert_cover: "Invertir el estado de la cubierta",
+    invert_cover_helper: "Para una cubierta con un interruptor: actívalo si tu relé está cableado al revés, de modo que «on» signifique abierta y «off» cerrada.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -476,6 +484,8 @@ const STRINGS = {
     electrolyser: "Електролизер",
     light: "Осветљење",
     cover: "Покривач",
+    invert_cover: "Обрни стање покривача",
+    invert_cover_helper: "За покривач на прекидачу: укључите ако је реле ожичен обрнуто, тако да „укључено“ значи отворен, а „искључено“ затворен.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -578,6 +588,8 @@ const STRINGS = {
     electrolyser: "Elektrolizer",
     light: "Osvetljenje",
     cover: "Pokrivač",
+    invert_cover: "Obrni stanje pokrivača",
+    invert_cover_helper: "Za pokrivač na prekidaču: uključite ako je relej ožičen obrnuto, tako da „uključeno“ znači otvoren, a „isključeno“ zatvoren.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -680,6 +692,8 @@ const STRINGS = {
     electrolyser: "Elettrolizzatore",
     light: "Illuminazione",
     cover: "Copertura",
+    invert_cover: "Inverti lo stato della copertura",
+    invert_cover_helper: "Per una copertura su un interruttore: attiva se il relè è cablato al contrario, così «on» significa aperta e «off» chiusa.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -782,6 +796,8 @@ const STRINGS = {
     electrolyser: "Zoutelektrolyse",
     light: "Verlichting",
     cover: "Afdekking",
+    invert_cover: "Afdekkingsstatus omkeren",
+    invert_cover_helper: "Voor een afdekking op een schakelaar: inschakelen als je relais omgekeerd is bedraad, zodat aan open en uit gesloten betekent.",
     ph_short: "pH",
     orp_short: "Redox",
     chlorine_short: "Cl",
@@ -884,6 +900,8 @@ const STRINGS = {
     electrolyser: "Eletrolisador",
     light: "Iluminação",
     cover: "Cobertura",
+    invert_cover: "Inverter o estado da cobertura",
+    invert_cover_helper: "Para uma cobertura num interruptor: ative se o seu relé estiver ligado ao contrário, de modo que «on» signifique aberta e «off» fechada.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -986,6 +1004,8 @@ const STRINGS = {
     electrolyser: "Elektrolizer",
     light: "Oświetlenie",
     cover: "Przykrycie",
+    invert_cover: "Odwróć stan przykrycia",
+    invert_cover_helper: "Dla przykrycia na przełączniku: włącz, jeśli przekaźnik jest podłączony odwrotnie, tak że „wł.“ oznacza otwarte, a „wył.“ zamknięte.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -1088,6 +1108,8 @@ const STRINGS = {
     electrolyser: "Electrolizor",
     light: "Iluminare",
     cover: "Prelată",
+    invert_cover: "Inversează starea prelatei",
+    invert_cover_helper: "Pentru o prelată pe un întrerupător: activați dacă releul este cablat invers, astfel încât „pornit“ să însemne deschisă, iar „oprit“ închisă.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -1190,6 +1212,8 @@ const STRINGS = {
     electrolyser: "Saltklorinator",
     light: "Belysning",
     cover: "Overdækning",
+    invert_cover: "Vend dækslets tilstand",
+    invert_cover_helper: "For et dæksel på en kontakt: slå til, hvis dit relæ er forbundet omvendt, så til betyder åben og fra lukket.",
     ph_short: "pH",
     orp_short: "Redox",
     chlorine_short: "Cl",
@@ -1292,6 +1316,8 @@ const STRINGS = {
     electrolyser: "Saltklorinator",
     light: "Belysning",
     cover: "Pooltäckning",
+    invert_cover: "Invertera skyddets status",
+    invert_cover_helper: "För ett skydd på en strömbrytare: slå på om ditt relä är kopplat tvärtom, så att på betyder öppet och av stängt.",
     ph_short: "pH",
     orp_short: "Redox",
     chlorine_short: "Cl",
@@ -1394,6 +1420,8 @@ const STRINGS = {
     electrolyser: "Електролизер",
     light: "Осветление",
     cover: "Покривало",
+    invert_cover: "Обръщане на състоянието на покривалото",
+    invert_cover_helper: "За покривало на ключ: включете, ако релето е свързано обратно, така че „включено“ да означава отворено, а „изключено“ — затворено.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -1496,6 +1524,8 @@ const STRINGS = {
     electrolyser: "Электролизёр",
     light: "Подсветка",
     cover: "Покрытие",
+    invert_cover: "Инвертировать состояние покрытия",
+    invert_cover_helper: "Для покрытия на переключателе: включите, если реле подключено наоборот, чтобы «вкл.» означало открыто, а «выкл.» — закрыто.",
     ph_short: "pH",
     orp_short: "ОВП",
     chlorine_short: "Cl",
@@ -1598,6 +1628,8 @@ const STRINGS = {
     electrolyser: "Електролізер",
     light: "Підсвічування",
     cover: "Покриття",
+    invert_cover: "Інвертувати стан накриття",
+    invert_cover_helper: "Для накриття на перемикачі: увімкніть, якщо реле підключено навпаки, щоб «увімк.» означало відкрито, а «вимк.» — закрито.",
     ph_short: "pH",
     orp_short: "ОВП",
     chlorine_short: "Cl",
@@ -1700,6 +1732,8 @@ const STRINGS = {
     electrolyser: "Sóbontó",
     light: "Világítás",
     cover: "Takarás",
+    invert_cover: "Fedél állapotának invertálása",
+    invert_cover_helper: "Kapcsolóval vezérelt fedélhez: kapcsold be, ha a relé fordítva van bekötve, így a bekapcsolt állapot nyitottat, a kikapcsolt zártat jelent.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -1802,6 +1836,8 @@ const STRINGS = {
     electrolyser: "Elektrolyzér",
     light: "Osvetlenie",
     cover: "Zakrytie",
+    invert_cover: "Obrátiť stav krytu",
+    invert_cover_helper: "Pre kryt na spínači: zapnite, ak je relé zapojené naopak, takže „zap.“ znamená otvorený a „vyp.“ zatvorený.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -1904,6 +1940,8 @@ const STRINGS = {
     electrolyser: "Elektrolyzér",
     light: "Osvětlení",
     cover: "Zakrytí",
+    invert_cover: "Obrátit stav krytu",
+    invert_cover_helper: "Pro kryt na spínači: zapněte, pokud je relé zapojeno obráceně, takže „zap.“ znamená otevřený a „vyp.“ zavřený.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -2006,6 +2044,8 @@ const STRINGS = {
     electrolyser: "Elektrolizer",
     light: "Osvetlitev",
     cover: "Pokrivalo",
+    invert_cover: "Obrni stanje pokrivala",
+    invert_cover_helper: "Za pokrivalo na stikalu: vklopite, če je rele povezan obratno, tako da „vklopljeno“ pomeni odprto in „izklopljeno“ zaprto.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -2108,6 +2148,8 @@ const STRINGS = {
     electrolyser: "Elektrolizators",
     light: "Apgaismojums",
     cover: "Pārsegs",
+    invert_cover: "Apvērst pārsega stāvokli",
+    invert_cover_helper: "Pārsegam uz slēdža: ieslēdziet, ja relejs ir pieslēgts otrādi, lai „ieslēgts“ nozīmē atvērts un „izslēgts“ aizvērts.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -2210,6 +2252,8 @@ const STRINGS = {
     electrolyser: "Ηλεκτρόλυση",
     light: "Φωτισμός",
     cover: "Κάλυμμα",
+    invert_cover: "Αντιστροφή κατάστασης καλύμματος",
+    invert_cover_helper: "Για κάλυμμα σε διακόπτη: ενεργοποιήστε το αν το ρελέ σας είναι συνδεδεμένο ανάποδα, ώστε το «on» να σημαίνει ανοιχτό και το «off» κλειστό.",
     ph_short: "pH",
     orp_short: "ORP",
     chlorine_short: "Cl",
@@ -2673,10 +2717,11 @@ const isOn = (s) => valid(s) && !["off", "closed", "idle"].includes(s.state) && 
 // rest of the card reads of it. `closed` offers the open action and shows the hero line; `shut` is fully closed (the
 // closed icon and idle tile); `moving` is the opening / closing animation (covers only); `part` is how far it is drawn
 // (1 closed … 0 open); `key` its state label; `pos` its position (covers that report one).
-const coverInfo = (s) => {
+const coverInfo = (s, invert) => {
   const d = domainOf(s.entity_id);
   if (d === "switch" || d === "input_boolean") {
-    const shut = s.state === "on";
+    // The switch covers the pool when it is on, unless `invert_cover` is set for a relay wired the other way round.
+    const shut = invert ? s.state === "off" : s.state === "on";
     return { closed: shut, shut, moving: "", part: shut ? 1 : 0, key: shut ? "cover_closed" : "cover_open", pos: Number.NaN };
   }
   const pos = Number(s.attributes?.current_position);
@@ -3417,7 +3462,7 @@ class PoolCard extends HTMLElement {
     let coverPart = 0;
     let coverMove = "";
     if (valid(cover)) {
-      const ci = coverInfo(cover);
+      const ci = coverInfo(cover, this._config.invert_cover);
       coverPart = ci.part;
       coverMove = ci.moving;
     }
@@ -3452,7 +3497,7 @@ class PoolCard extends HTMLElement {
       lines.push(`<div class="line clickable" role="button" tabindex="0" data-entity="${esc(air.entity)}">${svgIcon(ICONS.air)}<span>${esc(this._t("air"))} <b>${esc(a.v)} ${esc(a.unit)}</b></span></div>`);
     }
     if (heating(m.hp)) lines.push(`<div class="line warn">${svgIcon(ICONS.heat_pump)}<span>${esc(this._t("heating"))}</span></div>`);
-    const coverHero = valid(cover) ? coverInfo(cover) : null;
+    const coverHero = valid(cover) ? coverInfo(cover, this._config.invert_cover) : null;
     if (coverHero && (coverHero.closed || coverHero.moving)) {
       lines.push(`<div class="line">${svgIcon(ICONS.cover)}<span>${esc(`${this._t("cover")} · ${this._t(coverHero.key)}`)}</span></div>`);
     }
@@ -3479,7 +3524,7 @@ class PoolCard extends HTMLElement {
     if (m.hp) list.push(btn("heat_pump", r.heat_pump, ICONS.heat_pump, this._t("heat_pump"), valid(m.hp) && m.hp.state !== "off"));
     const cover = this._s(r.cover);
     if (cover) {
-      const closed = coverInfo(cover).closed;
+      const closed = coverInfo(cover, this._config.invert_cover).closed;
       list.push(btn("cover", r.cover, closed ? ICONS.cover : ICONS.cover_open, this._t(closed ? "open_cover" : "close_cover"), !closed));
     }
     if (m.electro && ["switch", "input_boolean"].includes(domainOf(r.electrolyser)))
@@ -3598,7 +3643,7 @@ class PoolCard extends HTMLElement {
     }
     const cover = this._s(r.cover);
     if (cover) {
-      const ci = coverInfo(cover);
+      const ci = coverInfo(cover, this._config.invert_cover);
       const value = !valid(cover) ? this._t("unavailable") : `${this._t(ci.key)}${Number.isFinite(ci.pos) && ci.pos > 0 && ci.pos < 100 ? ` · ${Math.round(ci.pos)} %` : ""}`;
       tiles.push(tile(r.cover, ci.shut ? ICONS.cover : ICONS.cover_open, this._t("cover"), value, ci.shut ? "idle" : "active"));
     }
@@ -3918,7 +3963,7 @@ class PoolEditorBase extends HTMLElement {
     if (!this._form) {
       this._form = document.createElement("ha-form");
       this._form.computeLabel = (s) => this._label(s.name);
-      this._form.computeHelper = (s) => (s.name === "device" ? t(this._hass, this._config, "device_helper") : s.name === "zoom" ? t(this._hass, this._config, "zoom_helper") : undefined);
+      this._form.computeHelper = (s) => (s.name === "device" ? t(this._hass, this._config, "device_helper") : s.name === "zoom" ? t(this._hass, this._config, "zoom_helper") : s.name === "invert_cover" ? t(this._hass, this._config, "invert_cover_helper") : undefined);
       this._form.addEventListener("value-changed", (ev) => {
         ev.stopPropagation();
         const config = { ...ev.detail.value };
@@ -3961,6 +4006,7 @@ class PoolCardEditor extends PoolEditorBase {
       ["show_advice", true],
       ["show_filtration", true],
       ["show_equipment", true],
+      ["invert_cover", false],
     ];
   }
 
