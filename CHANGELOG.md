@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.0 - 2026-11-17
+
+### Features
+- Illustrated header on the full and the mini card (90 px): the pool seen from above on a lawn, with its animated scene (ripples and current while filtering, the cover unrolling, the light glowing, the heat pump), the title and subtitle on the grass at its left and a strip of coping stones along the bottom. It turns to night after sunset (`sun.sun`, else the dark theme), and the new `illustration_theme` option (`auto`, `day`, `night`) forces it. `illustration: false` keeps the classic header. Both options are in the visual editor of both cards.
+- The header icon's colour now always tells the state: red or amber when the water needs care, the accent while the filtration, the heating, the cover or the light is on, grey at rest.
+- Each card draws its scene with its own SVG ids, so several pool cards on one page no longer share their gradients.
+
 ## 1.3.0 - 2026-11-15
 
 ### Features
