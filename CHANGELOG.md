@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.4.0 - 2026-11-17
+
+### Features
+- Illustrated header on the full and the mini card (90 px): the pool seen from above on a lawn, with its animated scene (ripples and current while filtering, the cover unrolling, the light glowing, the heat pump), the title and subtitle on the grass at its left and a strip of coping stones along the bottom. It turns to night after sunset (`sun.sun`) or with the dark theme, and the new `illustration_theme` option (`auto`, `day`, `night`) forces it. `illustration: false` keeps the classic header. Both options are in the visual editor of both cards.
+- The header icon's colour now always tells the state: red or amber when the water needs care, the accent while the filtration, the heating, the cover or the light is on, grey at rest.
+- Each card draws its scene with its own SVG ids, so several pool cards on one page no longer share their gradients.
+- The status pill sits in the header icon's colour, right after the title only when the whole title and its whole label fit there (the title is never cut for it), else on a line of its own under the subtitle (kept to one line); when even that does not fit in the header, and on cards 200 px wide or less, only its dot stays (the status in its tooltip). Measured on the rendered header, so it holds in every language, in both headers. The mini card's detail button is a small frosted round button in the banner's top right corner, the pool stepping aside for it (in the card's corner with the classic header).
+
+### Fixes
+- Night picture with the dark theme even while the sun is up (`illustration_theme: auto`): the header is night when `sun.sun` is below the horizon or Home Assistant's theme is dark; `day` / `night` still force it.
+
 ## 1.3.0 - 2026-11-15
 
 ### Features

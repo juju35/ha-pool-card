@@ -162,7 +162,9 @@ test("a pump that can be commanded wins over its state sensor, and diagnostic wa
 
 test("the status: a cold water alone is not a problem, a salt pool's TDS includes its salt", () => {
   const cold = newCard({ device: "Pool", collapsed: [] }, makeHass({ "sensor.piscine_temperature": { state: "15" }, "sensor.piscine_ph": { state: "7.4" } }));
-  assert.match(html(cold), /class="chip ok"/);
+  // Water fine: the pill in the header icon's colour (accent while filtering, grey at rest), never amber or red.
+  assert.match(html(cold), /class="chip (active|idle)"[^>]*title="[^"]+"/);
+  assert.doesNotMatch(html(cold), /class="chip (warn|crit)"/);
   assert.doesNotMatch(html(cold), /status_cold/);
   const range = pc.tdsRange(pc.rangeOf("tds", "ppm", "pool"), { v: 3.2, unit: "g/L" }, null);
   assert.deepEqual(plain(range.ideal), [0, 4700]);
@@ -502,4 +504,46 @@ test("an unrelated state change does not rebuild the card", () => {
   assert.equal(renders, 0);
   card.hass = { ...hass, states: { ...hass.states, "sensor.piscine_ph": { ...hass.states["sensor.piscine_ph"], state: "7.4" } } };
   assert.equal(renders, 1);
+});
+
+test("illustrated header: the pool on its lawn, the coping strip, night by the sun or the option, classic when off", () => {
+  const h = html(newCard());
+  assert.match(h, /<div class="banner">/);
+  assert.match(h, /class="ground g-coping"/);
+  assert.match(h, /\.banner \{ position: relative; height: 90px;/);
+  // The scene moved into the banner: drawn once, not beside the big value.
+  assert.equal(h.match(/class="scene /g).length, 1);
+  assert.match(h, /<div class="hero"><div class="info">/);
+  const sunDown = makeHass({ "sun.sun": { entity_id: "sun.sun", state: "below_horizon", attributes: {} } });
+  assert.match(html(newCard(poolConfig, sunDown)), /<div class="banner night">/);
+  assert.match(html(newCard({ ...poolConfig, illustration_theme: "day" }, sunDown)), /<div class="banner">/);
+  assert.match(html(newCard({ ...poolConfig, illustration_theme: "night" })), /<div class="banner night">/);
+  // The dark theme gives the night picture even while the sun is up; a light theme with the sun up keeps the day.
+  const sunUp = { "sun.sun": { entity_id: "sun.sun", state: "above_horizon", attributes: {} } };
+  assert.match(html(newCard(poolConfig, makeHass(sunUp, { themes: { darkMode: true } }))), /<div class="banner night">/);
+  assert.match(html(newCard(poolConfig, makeHass(sunUp, { themes: { darkMode: false } }))), /<div class="banner">/);
+  assert.match(html(newCard({ ...poolConfig, illustration_theme: "day" }, makeHass(sunUp, { themes: { darkMode: true } }))), /<div class="banner">/);
+  assert.match(html(newCard({ ...poolConfig, illustration_theme: "night" }, makeHass(sunUp, { themes: { darkMode: false } }))), /<div class="banner night">/);
+  const classic = html(newCard({ ...poolConfig, illustration: false }));
+  assert.doesNotMatch(classic, /class="banner/);
+  assert.match(classic, /<div class="header">/);
+  assert.match(classic, /<div class="hero"><div class="scene /);
+  // The mini card has the same 90 px banner, its filtration state as the subtitle.
+  const mini = html(newCard(poolConfig, makeHass(), pc.PoolMiniCard));
+  assert.match(mini, /<div class="banner">/);
+  assert.match(mini, /class="sub">Filtering · /);
+});
+
+test("the header icon's colour follows the state, and each card has its own SVG ids", () => {
+  const ok = { "sensor.piscine_ph": { state: "7.4" } };
+  const still = { ...ok, "switch.pompe_piscine": { state: "off" }, "climate.pac_piscine": { state: "off", attributes: { hvac_action: "off" } } };
+  assert.match(html(newCard(poolConfig, makeHass(still))), /<div class="type-icon idle">/);
+  assert.match(html(newCard(poolConfig, makeHass(ok))), /<div class="type-icon active">/);
+  assert.match(html(newCard()), /<div class="type-icon warn">/);
+  assert.match(html(newCard({ ...poolConfig, collapsed: [] }, makeHass(problems))), /<div class="type-icon crit">/);
+  const a = html(newCard());
+  const b = html(newCard());
+  const id = (h) => /id="pc-water(-\d+)"/.exec(h)[1];
+  assert.notEqual(id(a), id(b));
+  assert.match(a, new RegExp(`id="pc-lawn${id(a)}"`));
 });

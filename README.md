@@ -33,8 +33,9 @@ The cards work on top of the integrations you already use — [iopool](https://g
 ## Features
 
 - Two cards: a full **Pool Card** (`custom:pool-card`) and a compact **Pool Mini Card** (`custom:pool-mini-card`), for a pool or a spa (`kind`, guessed from the name)
+- Illustrated header (90 px on both cards): the pool seen from above on its lawn, the title and subtitle on the grass at its left, a strip of coping stones along the bottom; it switches to night after sunset (`sun.sun`) or with the dark theme, even with the sun up (`illustration_theme` forces day or night), and `illustration: false` brings back the classic header with the scene next to the big value
 - Animated scene of the pool (or of the round spa) on its deck: the water ripples and a current crosses it while the pump filters, bubbles rise in a spa, the heat pump spins its fan and its flame flickers while it heats, the underwater light glows in its color, the roller cover unrolls and rolls back; the water turns teal on a critical value and green when the disinfection is too low (see [Animations](#animations))
-- Header icon (pool or spa) in a round badge colored with the water status, and a status pill on the title line: **Water OK**, **Check the water**, **Action needed**; its dot blinks while something runs
+- Header icon (pool or spa) in a round badge colored with the state (red or amber when the water needs care, blue while the filtration, the heating, the cover or the light is on, grey at rest), and a status pill on the title line: **Water OK**, **Check the water**, **Action needed**; its dot blinks while something runs
 - Big water temperature with the air temperature, heating and cover state next to the scene
 - Colored gauges for water temperature, pH, ORP, free chlorine, salt and TDS: the ideal range in green, a warning margin in orange, critical beyond it in red (cold water in blue), the value marked on it, the ideal range written under it; all ranges configurable (`ranges`), in the unit of each sensor (°C or °F, g/L or ppm)
 - Advice for every value out of its range (pH too high: add pH minus…) and for equipment running without water flow (heat pump heating or electrolyser on while the pump is stopped)
@@ -157,6 +158,8 @@ ranges:
   salt_max: 6
   water_temperature_min: 26
   water_temperature_max: 29
+illustration: true
+illustration_theme: auto
 show_title: true
 show_subtitle: true
 show_controls: true
@@ -199,6 +202,8 @@ zoom: true
 | `power` | both | Discovered | Instantaneous electrical power of the pool (a `sensor` in W or kW): its real-time consumption, shown in the filtration section (also confirms the pump is running) |
 | `energy` | both | Discovered | Cumulative energy of the pool (a `sensor` in Wh, kWh or MWh): its total consumption, shown in the filtration section |
 | `ranges` | both | See below | Ideal ranges: `<measure>_min` and `<measure>_max` for `water_temperature`, `ph`, `orp`, `chlorine`, `salt` and `tds`, in the unit of the sensor |
+| `illustration` | both | `true` | Illustrated header: the pool seen from above on its lawn, with the coping stones at the bottom (90 px, also on the mini card). `false` keeps the classic header, the scene next to the big value |
+| `illustration_theme` | both | `auto` | `auto` (night when `sun.sun` is below the horizon or with the dark theme, even with the sun up), `day` or `night` |
 | `show_title` | both | `true` | Show the title in the header |
 | `show_subtitle` | both | `true` | Show the subtitle (filtration state and time of the day) |
 | `show_controls` | both | `true` | Control buttons (pump, light, heat pump, cover, electrolyser; pump and light on the mini card) |
