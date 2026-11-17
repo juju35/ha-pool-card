@@ -3049,7 +3049,7 @@ const BASE_STYLE = `
           --pc-crit-z: color-mix(in srgb, var(--pc-crit) 32%, transparent); --pc-cold-z: color-mix(in srgb, var(--pc-cold) 30%, transparent);
           /* Text in a state or accent color is mixed with the text color so that it reads at 4.5:1 at least. */
           --pc-accent-text: color-mix(in srgb, var(--pc-accent) 55%, var(--primary-text-color)); }
-  ha-card { overflow: hidden; container-type: inline-size; }
+  ha-card { overflow: hidden; container-type: inline-size; container-name: pc-card; }
   /* Natural width in a parent that sizes to its content, without a minimum (see ha-vacuum-card). */
   :host { display: block; min-width: 0; --pc-natural-width: 380px; }
   :host::before { content: ""; display: grid; grid-template-columns: minmax(0, var(--pc-natural-width)); height: 0; }
@@ -3095,6 +3095,9 @@ const BASE_STYLE = `
   .zoom .icon { width: 16px; height: 16px; }
   .zoom:hover { background: color-mix(in srgb, var(--pc-idle) 16%, transparent); color: var(--primary-text-color); }
   .zoom:focus-visible { outline: 2px solid var(--primary-color, var(--pc-accent)); outline-offset: 1px; }
+  /* Classic header: the detail button in the card's top right corner, out of the title row. */
+  .header:has(.zoom) { position: relative; padding-right: 44px; }
+  .header .title-row > .zoom { position: absolute; top: 12px; right: 12px; margin: 0; box-shadow: inset 0 0 0 1px var(--divider-color, rgba(127,127,127,.3)); }
   /* Scene (as the weather and device pictures of the other ha-* cards: a drawing next to the big value) */
   .hero { display: flex; align-items: center; gap: 14px; }
   .scene { position: relative; flex: none; width: 120px; height: 96px; --pc-w1: #7ccdf8; --pc-w2: #0b72b8; --pc-g1: #fff8d6; --pc-deck: #e9e2d6; }
@@ -3160,12 +3163,37 @@ const BASE_STYLE = `
   .banner.night .type-icon .icon { fill: color-mix(in srgb, var(--pc-tint) 70%, #fff); }
   .banner .type-icon.idle .icon { fill: #6b7680; }
   .banner.night .type-icon.idle .icon { fill: #a7b0b8; }
-  .banner .chip { background: rgba(255,255,255,.72); color: color-mix(in srgb, var(--c) 60%, #10283f); }
-  .banner.night .chip { background: rgba(10,20,40,.5); color: color-mix(in srgb, var(--c) 45%, #fff); }
-  .banner .zoom { position: absolute; top: 6px; right: 6px; margin: 0; color: #10283f; background: rgba(255,255,255,.6); }
-  .banner.night .zoom { color: #fff; background: rgba(10,20,40,.5); }
-  .banner .zoom:hover { background: rgba(255,255,255,.85); color: #10283f; }
-  .banner.night .zoom:hover { background: rgba(10,20,40,.7); color: #fff; }
+  /* Title row: the name, then the status pill right after it (the name gives way first, down to four characters).
+     When the row is too narrow for both, the pill takes a line of its own under the subtitle; on the narrowest
+     cards only its dot stays (its label in its title). */
+  .banner .titles { container: pc-titles / inline-size; }
+  .banner .name { flex: 0 1 auto; min-width: 4ch; }
+  .banner .chip { flex: none; max-width: 51%; color: color-mix(in srgb, var(--c) 45%, #0d2a45);
+                  background: color-mix(in srgb, var(--c) 18%, rgba(255,255,255,.78)); }
+  .banner.night .chip { color: color-mix(in srgb, var(--c) 35%, #ffffff); background: color-mix(in srgb, var(--c) 30%, rgba(8,18,38,.55)); }
+  .banner .chip .dot { width: 7px; height: 7px; }
+  @container pc-titles (max-width: 210px) {
+    .banner .title-row { display: contents; }
+    .banner .titles > .sub { order: 1; }
+    .banner .title-row > .chip { order: 2; align-self: flex-start; max-width: 100%; margin-top: 2px; }
+  }
+  @container pc-card (max-width: 260px) {
+    .banner .title-row { display: contents; }
+    .banner .titles > .sub { order: 1; }
+    .banner .title-row > .chip { order: 2; align-self: flex-start; max-width: 100%; margin-top: 2px; }
+  }
+  @container pc-card (max-width: 200px) {
+    .banner .chip { padding: 0; width: 16px; height: 16px; justify-content: center; }
+    .banner .chip .chip-text { display: none; }
+  }
+  /* Detail button (mini card): a small frosted round button in the banner's top right corner; the pool steps aside. */
+  .banner .zoom { position: absolute; z-index: 2; top: 5px; right: 5px; margin: 0; width: 24px; height: 24px; color: #33506b;
+                  background: rgba(255,255,255,.55); box-shadow: inset 0 0 0 1px rgba(255,255,255,.7); backdrop-filter: blur(4px); }
+  .banner.night .zoom { color: #fff; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }
+  .banner .zoom:hover { background: rgba(255,255,255,.75); color: #33506b; }
+  .banner.night .zoom:hover { background: rgba(255,255,255,.22); color: #fff; }
+  .banner:has(> .zoom) .scene { right: 34px; }
+  .banner:has(> .zoom) .htext { right: 147px; }
   /* Coping stones edging the pool, the water's edge as a thin blue line on top. */
   .ground { position: absolute; left: 0; right: 0; bottom: 0; height: 10px; }
   .g-coping { background: repeating-linear-gradient(90deg, #e6dcc8 0 30px, #cfc3ab 30px 32px); box-shadow: inset 0 2px 0 #4fb3e8, inset 0 3px 0 #f4ede0; }
@@ -3211,7 +3239,7 @@ const BASE_STYLE = `
            border-radius: 14px; padding: 16px; box-shadow: 0 8px 30px rgba(0,0,0,.4); display: flex; flex-direction: column; gap: 12px; }
   .modal .msg { font-size: 14px; line-height: 1.4; }
   .modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
-  @container (max-width: 230px) {
+  @container pc-card (max-width: 230px) {
     .chip { padding: 4px; flex: none; }
     .chip-text { display: none; }
   }
@@ -3655,7 +3683,8 @@ class PoolCard extends HTMLElement {
   _header(m, sub) {
     const label = this._statusText(m.status);
     const icon = `<div class="type-icon ${this._iconCls(m)}">${svgIcon(m.kind === "spa" ? ICONS.spa : ICONS.pool)}</div>`;
-    const chip = `<span class="chip ${m.status}" title="${esc(label)}" aria-label="${esc(label)}"><span class="dot"></span><span class="chip-text">${esc(label)}</span></span>`;
+    // The status pill, in the header icon's colour.
+    const chip = `<span class="chip ${this._iconCls(m)}" title="${esc(label)}" aria-label="${esc(label)}"><span class="dot"></span><span class="chip-text">${esc(label)}</span></span>`;
     const titles = (zoom) => `
         <div class="titles">
           <div class="title-row">

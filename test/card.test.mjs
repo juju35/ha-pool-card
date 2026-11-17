@@ -162,7 +162,9 @@ test("a pump that can be commanded wins over its state sensor, and diagnostic wa
 
 test("the status: a cold water alone is not a problem, a salt pool's TDS includes its salt", () => {
   const cold = newCard({ device: "Pool", collapsed: [] }, makeHass({ "sensor.piscine_temperature": { state: "15" }, "sensor.piscine_ph": { state: "7.4" } }));
-  assert.match(html(cold), /class="chip ok"/);
+  // Water fine: the pill in the header icon's colour (accent while filtering, grey at rest), never amber or red.
+  assert.match(html(cold), /class="chip (active|idle)"[^>]*title="[^"]+"/);
+  assert.doesNotMatch(html(cold), /class="chip (warn|crit)"/);
   assert.doesNotMatch(html(cold), /status_cold/);
   const range = pc.tdsRange(pc.rangeOf("tds", "ppm", "pool"), { v: 3.2, unit: "g/L" }, null);
   assert.deepEqual(plain(range.ideal), [0, 4700]);
