@@ -3027,13 +3027,14 @@ const lawnSvg = (uid, night) => {
   return `<svg class="lawn" aria-hidden="true"><defs><pattern id="pc-lawn${uid}" width="24" height="24" patternUnits="userSpaceOnUse"><rect width="24" height="24" fill="${base}"/><rect width="12" height="24" fill="${stripe}"/><g stroke-width=".7" stroke-linecap="round">${blades}</g></pattern></defs><rect width="100%" height="100%" fill="url(#pc-lawn${uid})"/><g fill="${flower}" opacity=".8">${flowers}</g></svg>`;
 };
 
-// Night picture: forced by illustration_theme, else the sun below the horizon, else Home Assistant's dark mode.
+// Night picture: forced by illustration_theme, else the sun below the horizon OR Home Assistant's dark mode (the dark
+// theme wins even while the sun is up; with no usable sun.sun the dark mode alone decides).
 const isNight = (hass, config) => {
   const theme = config?.illustration_theme;
   if (theme === "night") return true;
   if (theme === "day") return false;
   const sun = hass?.states?.["sun.sun"];
-  if (valid(sun)) return sun.state === "below_horizon";
+  if (valid(sun)) return sun.state === "below_horizon" || !!hass?.themes?.darkMode;
   return !!hass?.themes?.darkMode;
 };
 let pcUid = 0;

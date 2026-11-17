@@ -518,6 +518,12 @@ test("illustrated header: the pool on its lawn, the coping strip, night by the s
   assert.match(html(newCard(poolConfig, sunDown)), /<div class="banner night">/);
   assert.match(html(newCard({ ...poolConfig, illustration_theme: "day" }, sunDown)), /<div class="banner">/);
   assert.match(html(newCard({ ...poolConfig, illustration_theme: "night" })), /<div class="banner night">/);
+  // The dark theme gives the night picture even while the sun is up; a light theme with the sun up keeps the day.
+  const sunUp = { "sun.sun": { entity_id: "sun.sun", state: "above_horizon", attributes: {} } };
+  assert.match(html(newCard(poolConfig, makeHass(sunUp, { themes: { darkMode: true } }))), /<div class="banner night">/);
+  assert.match(html(newCard(poolConfig, makeHass(sunUp, { themes: { darkMode: false } }))), /<div class="banner">/);
+  assert.match(html(newCard({ ...poolConfig, illustration_theme: "day" }, makeHass(sunUp, { themes: { darkMode: true } }))), /<div class="banner">/);
+  assert.match(html(newCard({ ...poolConfig, illustration_theme: "night" }, makeHass(sunUp, { themes: { darkMode: false } }))), /<div class="banner night">/);
   const classic = html(newCard({ ...poolConfig, illustration: false }));
   assert.doesNotMatch(classic, /class="banner/);
   assert.match(classic, /<div class="header">/);
