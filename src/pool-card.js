@@ -3070,8 +3070,17 @@ const BASE_STYLE = `
                --pc-tint: var(--c, var(--pc-accent)); background: color-mix(in srgb, var(--pc-tint) 16%, transparent); transition: background-color .3s ease; }
   .type-icon .icon { width: 24px; height: 24px; fill: color-mix(in srgb, var(--pc-tint) 65%, var(--primary-text-color)); transition: fill .3s ease; }
   .titles { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
-  /* The status chip (and the detail button) sit on the title's line, at the right of the header. */
+  /* Title row (both headers): the name, then the status pill right after it, only when the whole name and the whole
+     label fit there (measured by the card, see _fitPill); else the pill takes a line of its own under the subtitle,
+     and when even that does not fit, only its dot stays (its label in its title). */
   .title-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .title-row > .name { flex: 0 1 auto; min-width: 4ch; }
+  .title-row > .chip { flex: none; max-width: none; }
+  .titles.below .title-row { display: contents; }
+  .titles.below > .sub { order: 1; }
+  .titles.below .title-row > .chip { order: 2; align-self: flex-start; max-width: 100%; margin-top: 2px; }
+  .titles.dot-only .chip { padding: 0; width: 16px; height: 16px; justify-content: center; }
+  .titles.dot-only .chip .chip-text { display: none; }
   .name { flex: 1 1 0; min-width: 5ch; font-size: 16px; font-weight: 500; line-height: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   :host([hide-title]) .name { visibility: hidden; }
   :host([hide-subtitle]) .sub { display: none; }
@@ -3150,7 +3159,7 @@ const BASE_STYLE = `
   ha-card:has(.scene.running) .title-row .dot { animation: pc-blink 1.6s ease-in-out infinite; }
   /* Illustrated header (banner): the pool seen from above on its lawn, the title on the grass at its left, a strip of
      coping stones at the bottom. 90 px high on the full and the mini card. */
-  .banner { position: relative; height: 90px; overflow: hidden; background: #7cc35c; --pc-bt: #0d2a45; --pc-bs: #183a5a; }
+  .banner { position: relative; height: 90px; overflow: hidden; --pc-g: 10px; background: #7cc35c; --pc-bt: #0d2a45; --pc-bs: #183a5a; }
   .banner.night { background: #1a3326; --pc-bt: #fff; --pc-bs: rgba(255,255,255,.8); }
   .banner .lawn { position: absolute; inset: 0 0 10px; width: 100%; height: calc(100% - 10px); }
   .banner .scene { position: absolute; right: 12px; bottom: 12px; width: 101px; height: 76px; }
@@ -3164,28 +3173,12 @@ const BASE_STYLE = `
   .banner.night .type-icon .icon { fill: color-mix(in srgb, var(--pc-tint) 70%, #fff); }
   .banner .type-icon.idle .icon { fill: #6b7680; }
   .banner.night .type-icon.idle .icon { fill: #a7b0b8; }
-  /* Title row: the name, then the status pill right after it (the name gives way first, down to four characters).
-     When the row is too narrow for both, the pill takes a line of its own under the subtitle; on the narrowest
-     cards only its dot stays (its label in its title). */
-  .banner .titles { container: pc-titles / inline-size; }
-  .banner .name { flex: 0 1 auto; min-width: 4ch; }
-  .banner .chip { flex: none; max-width: 51%; color: color-mix(in srgb, var(--c) 45%, #0d2a45);
-                  background: color-mix(in srgb, var(--c) 18%, rgba(255,255,255,.78)); }
+  .banner .chip { color: color-mix(in srgb, var(--c) 45%, #0d2a45); background: color-mix(in srgb, var(--c) 18%, rgba(255,255,255,.78)); }
   .banner.night .chip { color: color-mix(in srgb, var(--c) 35%, #ffffff); background: color-mix(in srgb, var(--c) 30%, rgba(8,18,38,.55)); }
   .banner .chip .dot { width: 7px; height: 7px; }
-  @container pc-titles (max-width: 210px) {
-    .banner .title-row { display: contents; }
-    .banner .titles > .sub { order: 1; }
-    .banner .title-row > .chip { order: 2; align-self: flex-start; max-width: 100%; margin-top: 2px; }
-  }
-  @container pc-card (max-width: 260px) {
-    .banner .title-row { display: contents; }
-    .banner .titles > .sub { order: 1; }
-    .banner .title-row > .chip { order: 2; align-self: flex-start; max-width: 100%; margin-top: 2px; }
-  }
   @container pc-card (max-width: 200px) {
-    .banner .chip { padding: 0; width: 16px; height: 16px; justify-content: center; }
-    .banner .chip .chip-text { display: none; }
+    .title-row > .chip { padding: 0; width: 16px; height: 16px; justify-content: center; }
+    .title-row > .chip .chip-text { display: none; }
   }
   /* Detail button (mini card): a small frosted round button in the banner's top right corner; the pool steps aside. */
   .banner .zoom { position: absolute; z-index: 2; top: 5px; right: 5px; margin: 0; width: 24px; height: 24px; color: #33506b;
@@ -3241,8 +3234,8 @@ const BASE_STYLE = `
   .modal .msg { font-size: 14px; line-height: 1.4; }
   .modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
   @container pc-card (max-width: 230px) {
-    .chip { padding: 4px; flex: none; }
-    .chip-text { display: none; }
+    :not(.title-row) > .chip { padding: 4px; flex: none; }
+    :not(.title-row) > .chip .chip-text { display: none; }
   }
 `;
 
@@ -3470,6 +3463,18 @@ class PoolCard extends HTMLElement {
       else this._update();
     };
     (this._onOutsideWatch ??= watchOutside(this, (ev) => this._onOutside(ev))).on();
+    // A new width (or the web font loaded): the status pill is fitted again, in the next frame.
+    if (typeof ResizeObserver === "function") {
+      this._resize ??= new ResizeObserver((entries) => {
+        const w = Math.round(entries.at(-1).contentRect.width);
+        if (w === this._fitWidth) return;
+        this._fitWidth = w;
+        cancelAnimationFrame(this._fitFrame);
+        this._fitFrame = requestAnimationFrame(() => this._fitPill());
+      });
+      this._resize.observe(this);
+    }
+    document.fonts?.ready?.then(() => this._fitPill());
     // Back on the page after leaving it: rendered again in its default state.
     this._update?.();
     if (this._confirm) window.addEventListener("keydown", this._onKey);
@@ -3480,10 +3485,53 @@ class PoolCard extends HTMLElement {
     }, 60000);
   }
 
+  // The status pill goes right after the title only when the whole title and the whole label fit there; otherwise it
+  // takes a line of its own under the subtitle (.below, the subtitle kept to one line, its whole text in its tooltip).
+  // When the label does not fit that line either, or the banner has no room for the lines above its ground strip, the
+  // pill keeps its dot only (.dot-only, back beside the title when the dot fits there). Measured after render, so that
+  // it holds in every language.
+  _fitPill() {
+    const root = this.shadowRoot;
+    if (!root?.querySelectorAll || typeof getComputedStyle !== "function") return;
+    for (const t of root.querySelectorAll(".titles")) {
+      const chip = t.querySelector(".title-row > .chip");
+      t.classList.remove("below", "dot-only");
+      if (!chip?.getClientRects().length) continue;
+      const row = chip.parentElement;
+      const name = row.querySelector(".name");
+      const fits = () => {
+        let title = 0;
+        if (name && getComputedStyle(name).display !== "none") {
+          const range = document.createRange();
+          range.selectNodeContents(name);
+          const cs = getComputedStyle(name);
+          title = Math.max(name.scrollWidth, range.getBoundingClientRect().width) + (parseFloat(cs.marginLeft) || 0) + (parseFloat(cs.marginRight) || 0) +
+            (parseFloat(getComputedStyle(row).columnGap) || 0);
+        }
+        return title + chip.getBoundingClientRect().width <= row.getBoundingClientRect().width + 0.5;
+      };
+      if (fits()) continue;
+      t.classList.add("below");
+      for (const sub of t.querySelectorAll(".sub")) sub.title = sub.scrollWidth > sub.clientWidth ? sub.textContent.trim() : "";
+      const text = chip.querySelector(".chip-text");
+      const banner = t.closest(".banner");
+      const tb = t.getBoundingClientRect();
+      const bb = banner?.getBoundingClientRect();
+      const ground = banner ? parseFloat(getComputedStyle(banner).getPropertyValue("--pc-g")) || 0 : 0;
+      const tall = !!bb && (tb.top < bb.top - 0.5 || tb.bottom > bb.bottom - ground + 0.5);
+      if (!tall && !(text && text.scrollWidth > text.clientWidth + 0.5)) continue;
+      t.classList.add("dot-only");
+      t.classList.remove("below");
+      if (!fits()) t.classList.add("below");
+    }
+  }
+
   disconnectedCallback() {
     clearInterval(this._tick);
     this._tick = null;
     this._onOutsideWatch?.off();
+    this._resize?.disconnect();
+    this._fitWidth = null;
     this._pressing = false;
     window.removeEventListener("pointerup", this._onPressEnd, true);
     window.removeEventListener("pointercancel", this._onPressEnd, true);
@@ -3527,6 +3575,7 @@ class PoolCard extends HTMLElement {
     const key = focused?.dataset ? JSON.stringify({ ...focused.dataset }) : null;
     this._html = html;
     this.shadowRoot.innerHTML = html;
+    this._fitPill();
     // The element that had the keyboard focus gets it back once rewritten.
     // The popup's safe choice (Cancel) gets the focus: Enter or Space right after the click does not stop the pump.
     if (this._confirm) this.shadowRoot.querySelector('.modal [data-action="confirm_cancel"]')?.focus({ preventScroll: true });
