@@ -137,7 +137,7 @@ const STRINGS = {
     zoom_helper: "Top right of the mini card: shows the full card and back; a click outside the card also goes back.",
     illustration: "Animated illustration",
     illustration_theme: "Illustration theme",
-    theme_auto: "Automatic (sun or dark theme)",
+    theme_auto: "Automatic (follows the theme)",
     theme_day: "Day",
     theme_night: "Night",
     device: "Device",
@@ -248,7 +248,7 @@ const STRINGS = {
     zoom_helper: "En haut à droite de la mini-carte : affiche la carte complète et revient ; un clic hors de la carte revient aussi.",
     illustration: "Illustration animée",
     illustration_theme: "Thème de l’illustration",
-    theme_auto: "Automatique (soleil ou thème sombre)",
+    theme_auto: "Automatique (suit le thème)",
     theme_day: "Jour",
     theme_night: "Nuit",
     device: "Appareil",
@@ -359,7 +359,7 @@ const STRINGS = {
     zoom_helper: "Oben rechts auf der Mini-Karte: zeigt die vollständige Karte und zurück; ein Klick außerhalb der Karte kehrt ebenfalls zurück.",
     illustration: "Animierte Illustration",
     illustration_theme: "Thema der Illustration",
-    theme_auto: "Automatisch (Sonne oder dunkles Design)",
+    theme_auto: "Automatisch (folgt dem Design)",
     theme_day: "Tag",
     theme_night: "Nacht",
     device: "Gerät",
@@ -470,7 +470,7 @@ const STRINGS = {
     zoom_helper: "Arriba a la derecha de la minitarjeta: muestra la tarjeta completa y vuelve; un clic fuera de la tarjeta también vuelve.",
     illustration: "Ilustración animada",
     illustration_theme: "Tema de la ilustración",
-    theme_auto: "Automático (sol o tema oscuro)",
+    theme_auto: "Automático (sigue el tema)",
     theme_day: "Día",
     theme_night: "Noche",
     device: "Dispositivo",
@@ -581,7 +581,7 @@ const STRINGS = {
     zoom_helper: "Горе десно на мини картици: приказује целу картицу и враћа назад; клик ван картице такође враћа.",
     illustration: "Анимирана илустрација",
     illustration_theme: "Тема илустрације",
-    theme_auto: "Аутоматски (сунце или тамна тема)",
+    theme_auto: "Аутоматски (прати тему)",
     theme_day: "Дан",
     theme_night: "Ноћ",
     device: "Уређај",
@@ -692,7 +692,7 @@ const STRINGS = {
     zoom_helper: "Gore desno na mini kartici: prikazuje celu karticu i vraća nazad; klik van kartice takođe vraća.",
     illustration: "Animirana ilustracija",
     illustration_theme: "Tema ilustracije",
-    theme_auto: "Automatski (sunce ili tamna tema)",
+    theme_auto: "Automatski (prati temu)",
     theme_day: "Dan",
     theme_night: "Noć",
     device: "Uređaj",
@@ -803,7 +803,7 @@ const STRINGS = {
     zoom_helper: "In alto a destra della mini scheda: mostra la scheda completa e torna indietro; anche un clic fuori dalla scheda torna indietro.",
     illustration: "Illustrazione animata",
     illustration_theme: "Tema dell’illustrazione",
-    theme_auto: "Automatico (sole o tema scuro)",
+    theme_auto: "Automatico (segue il tema)",
     theme_day: "Giorno",
     theme_night: "Notte",
     device: "Dispositivo",
@@ -914,7 +914,7 @@ const STRINGS = {
     zoom_helper: "Rechtsboven op de minikaart: toont de volledige kaart en terug; een klik buiten de kaart gaat ook terug.",
     illustration: "Geanimeerde illustratie",
     illustration_theme: "Thema van de illustratie",
-    theme_auto: "Automatisch (zon of donker thema)",
+    theme_auto: "Automatisch (volgt het thema)",
     theme_day: "Dag",
     theme_night: "Nacht",
     device: "Apparaat",
@@ -1025,7 +1025,7 @@ const STRINGS = {
     zoom_helper: "No canto superior direito do minicartão: mostra o cartão completo e volta; um clique fora do cartão também volta.",
     illustration: "Ilustração animada",
     illustration_theme: "Tema da ilustração",
-    theme_auto: "Automático (sol ou tema escuro)",
+    theme_auto: "Automático (segue o tema)",
     theme_day: "Dia",
     theme_night: "Noite",
     device: "Dispositivo",
@@ -1136,7 +1136,7 @@ const STRINGS = {
     zoom_helper: "W prawym górnym rogu mini karty: pokazuje pełną kartę i wraca; kliknięcie poza kartą też wraca.",
     illustration: "Animowana ilustracja",
     illustration_theme: "Motyw ilustracji",
-    theme_auto: "Automatycznie (słońce lub ciemny motyw)",
+    theme_auto: "Automatycznie (zgodnie z motywem)",
     theme_day: "Dzień",
     theme_night: "Noc",
     device: "Urządzenie",
@@ -1247,7 +1247,7 @@ const STRINGS = {
     zoom_helper: "În dreapta sus pe mini-card: arată cardul complet și revine; un clic în afara cardului revine și el.",
     illustration: "Ilustrație animată",
     illustration_theme: "Tema ilustrației",
-    theme_auto: "Automat (soare sau temă întunecată)",
+    theme_auto: "Automat (urmează tema)",
     theme_day: "Zi",
     theme_night: "Noapte",
     device: "Dispozitiv",
@@ -1358,7 +1358,7 @@ const STRINGS = {
     zoom_helper: "Øverst til højre på minikortet: viser hele kortet og tilbage; et klik uden for kortet går også tilbage.",
     illustration: "Animeret illustration",
     illustration_theme: "Illustrationens tema",
-    theme_auto: "Automatisk (sol eller mørkt tema)",
+    theme_auto: "Automatisk (følger temaet)",
     theme_day: "Dag",
     theme_night: "Nat",
     device: "Enhed",
@@ -1469,7 +1469,7 @@ const STRINGS = {
     zoom_helper: "Uppe till höger på minikortet: visar hela kortet och tillbaka; ett klick utanför kortet går också tillbaka.",
     illustration: "Animerad illustration",
     illustration_theme: "Illustrationens tema",
-    theme_auto: "Automatiskt (sol eller mörkt tema)",
+    theme_auto: "Automatiskt (följer temat)",
     theme_day: "Dag",
     theme_night: "Natt",
     device: "Enhet",
@@ -1580,7 +1580,7 @@ const STRINGS = {
     zoom_helper: "Горе вдясно на мини картата: показва цялата карта и обратно; щракване извън картата също връща.",
     illustration: "Анимирана илюстрация",
     illustration_theme: "Тема на илюстрацията",
-    theme_auto: "Автоматично (слънце или тъмна тема)",
+    theme_auto: "Автоматично (следва темата)",
     theme_day: "Ден",
     theme_night: "Нощ",
     device: "Устройство",
@@ -1691,7 +1691,7 @@ const STRINGS = {
     zoom_helper: "В правом верхнем углу мини-карточки: показывает полную карточку и обратно; щелчок вне карточки тоже возвращает.",
     illustration: "Анимированная иллюстрация",
     illustration_theme: "Тема иллюстрации",
-    theme_auto: "Автоматически (солнце или тёмная тема)",
+    theme_auto: "Автоматически (по теме)",
     theme_day: "День",
     theme_night: "Ночь",
     device: "Устройство",
@@ -1802,7 +1802,7 @@ const STRINGS = {
     zoom_helper: "У правому верхньому куті міні-картки: показує повну картку й назад; клацання поза карткою теж повертає.",
     illustration: "Анімована ілюстрація",
     illustration_theme: "Тема ілюстрації",
-    theme_auto: "Автоматично (сонце або темна тема)",
+    theme_auto: "Автоматично (за темою)",
     theme_day: "День",
     theme_night: "Ніч",
     device: "Пристрій",
@@ -1913,7 +1913,7 @@ const STRINGS = {
     zoom_helper: "A mini kártya jobb felső sarkában: megmutatja a teljes kártyát, majd vissza; a kártyán kívüli kattintás is visszavált.",
     illustration: "Animált illusztráció",
     illustration_theme: "Az illusztráció témája",
-    theme_auto: "Automatikus (nap vagy sötét téma)",
+    theme_auto: "Automatikus (a témát követi)",
     theme_day: "Nappal",
     theme_night: "Éjszaka",
     device: "Eszköz",
@@ -2024,7 +2024,7 @@ const STRINGS = {
     zoom_helper: "Vpravo hore na mini karte: zobrazí celú kartu a späť; kliknutie mimo karty sa tiež vráti.",
     illustration: "Animovaná ilustrácia",
     illustration_theme: "Téma ilustrácie",
-    theme_auto: "Automaticky (slnko alebo tmavá téma)",
+    theme_auto: "Automaticky (podľa témy)",
     theme_day: "Deň",
     theme_night: "Noc",
     device: "Zariadenie",
@@ -2135,7 +2135,7 @@ const STRINGS = {
     zoom_helper: "Vpravo nahoře na mini kartě: zobrazí celou kartu a zpět; kliknutí mimo kartu se také vrátí.",
     illustration: "Animovaná ilustrace",
     illustration_theme: "Motiv ilustrace",
-    theme_auto: "Automaticky (slunce nebo tmavý motiv)",
+    theme_auto: "Automaticky (podle motivu)",
     theme_day: "Den",
     theme_night: "Noc",
     device: "Zařízení",
@@ -2246,7 +2246,7 @@ const STRINGS = {
     zoom_helper: "Zgoraj desno na mini kartici: prikaže celotno kartico in nazaj; klik zunaj kartice prav tako vrne.",
     illustration: "Animirana ilustracija",
     illustration_theme: "Tema ilustracije",
-    theme_auto: "Samodejno (sonce ali temna tema)",
+    theme_auto: "Samodejno (sledi temi)",
     theme_day: "Dan",
     theme_night: "Noč",
     device: "Naprava",
@@ -2357,7 +2357,7 @@ const STRINGS = {
     zoom_helper: "Mini kartes augšējā labajā stūrī: parāda pilno karti un atpakaļ; klikšķis ārpus kartes arī atgriež.",
     illustration: "Animēta ilustrācija",
     illustration_theme: "Ilustrācijas motīvs",
-    theme_auto: "Automātiski (saule vai tumšā tēma)",
+    theme_auto: "Automātiski (atbilstoši tēmai)",
     theme_day: "Diena",
     theme_night: "Nakts",
     device: "Ierīce",
@@ -2468,7 +2468,7 @@ const STRINGS = {
     zoom_helper: "Πάνω δεξιά στη μίνι κάρτα: δείχνει την πλήρη κάρτα και επιστρέφει· ένα κλικ έξω από την κάρτα επιστρέφει επίσης.",
     illustration: "Κινούμενη εικονογράφηση",
     illustration_theme: "Θέμα εικονογράφησης",
-    theme_auto: "Αυτόματο (ήλιος ή σκοτεινό θέμα)",
+    theme_auto: "Αυτόματο (ακολουθεί το θέμα)",
     theme_day: "Ημέρα",
     theme_night: "Νύχτα",
     device: "Συσκευή",
@@ -3027,14 +3027,12 @@ const lawnSvg = (uid, night) => {
   return `<svg class="lawn" aria-hidden="true"><defs><pattern id="pc-lawn${uid}" width="24" height="24" patternUnits="userSpaceOnUse"><rect width="24" height="24" fill="${base}"/><rect width="12" height="24" fill="${stripe}"/><g stroke-width=".7" stroke-linecap="round">${blades}</g></pattern></defs><rect width="100%" height="100%" fill="url(#pc-lawn${uid})"/><g fill="${flower}" opacity=".8">${flowers}</g></svg>`;
 };
 
-// Night picture: forced by illustration_theme, else the sun below the horizon OR Home Assistant's dark mode (the dark
-// theme wins even while the sun is up; with no usable sun.sun the dark mode alone decides).
+// Night picture: forced by illustration_theme, else Home Assistant's dark mode alone (a light theme keeps the day
+// picture after sunset).
 const isNight = (hass, config) => {
   const theme = config?.illustration_theme;
   if (theme === "night") return true;
   if (theme === "day") return false;
-  const sun = hass?.states?.["sun.sun"];
-  if (valid(sun)) return sun.state === "below_horizon" || !!hass?.themes?.darkMode;
   return !!hass?.themes?.darkMode;
 };
 let pcUid = 0;
@@ -3451,7 +3449,7 @@ class PoolCard extends HTMLElement {
     if (setup.error) return null;
     const ids = Object.values(setup.roles);
     const rt = this._runtime(setup.roles);
-    return [h.entities, h.devices, h.language, h.locale, h.themes?.darkMode, h.states["sun.sun"]?.state, rt === null ? null : Math.round(rt * 60), ...ids.map((id) => h.states[id])];
+    return [h.entities, h.devices, h.language, h.locale, h.themes?.darkMode, rt === null ? null : Math.round(rt * 60), ...ids.map((id) => h.states[id])];
   }
 
   connectedCallback() {
