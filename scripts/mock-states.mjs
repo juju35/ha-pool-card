@@ -61,6 +61,15 @@ entity("climate.spa_chauffage", "spa", "esphome", "heat", {
 entity("light.spa_lumiere", "spa", "esphome", "off", { supported_color_modes: ["rgb"], friendly_name: "Garden spa Light" });
 entity("sensor.spa_wifi", "spa", "esphome", "-61", { device_class: "signal_strength", unit_of_measurement: "dBm" }, { entity_category: "diagnostic" });
 
+// Pool robot (MyDolphin Plus style, a device of its own): cleaning, 1 h 12 left of a 2 h cycle, its cleaning mode and
+// filter basket. Hidden from discovery, so that the other captures stay as they are: the robot's captures set it.
+device("robot", "Pool robot", "Dolphin", "mydolphin_plus");
+entity("vacuum.robot_piscine", "robot", "mydolphin_plus", "cleaning", { friendly_name: "Pool robot", supported_features: 4 | 8 | 16 | 4096 | 8192 }, { hidden: true });
+entity("sensor.robot_piscine_temps_restant", "robot", "mydolphin_plus", "72", { unit_of_measurement: "min", friendly_name: "Pool robot Time left" }, { original_name: "Time left" });
+entity("sensor.robot_piscine_duree_cycle", "robot", "mydolphin_plus", "120", { unit_of_measurement: "min", friendly_name: "Pool robot Cycle time" }, { original_name: "Cycle time" });
+entity("select.robot_piscine_mode", "robot", "mydolphin_plus", "regular", { options: ["regular", "fast_mode", "floor_only", "water_line"], friendly_name: "Pool robot Cleaning mode" }, { original_name: "Cleaning mode" });
+entity("binary_sensor.robot_piscine_filtre", "robot", "mydolphin_plus", "off", { device_class: "problem", friendly_name: "Pool robot Filter status" }, { original_name: "Filter status" });
+
 // The pool card of the screenshots: the iopool device, and its equipment set one by one.
 export const poolConfig = {
   device: "Pool",
@@ -74,6 +83,7 @@ export const poolConfig = {
   cover: "cover.volet_piscine",
 };
 export const spaConfig = { device: "Garden spa" };
+export const robotConfig = { ...poolConfig, robot: "vacuum.robot_piscine", collapsed: ["advice", "filtration", "equipment"] };
 
 // The day of the screenshots, in the time zone of the machine (the page runs in the same one): 15:30.
 export const MIDNIGHT = new Date(2026, 6, 14).getTime();

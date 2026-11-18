@@ -548,3 +548,40 @@ test("the header icon's colour follows the state, and each card has its own SVG 
   assert.notEqual(id(a), id(b));
   assert.match(a, new RegExp(`id="pc-lawn${id(a)}"`));
 });
+
+test("the pool robot: a vacuum or a plug named like one is its role, the robot of its own is found, false removes it", () => {
+  const hass = makeHass();
+  assert.equal(pc.roleOf("vacuum.robot_piscine", hass), "robot");
+  assert.equal(pc.roleOf("switch.pool_cleaner", { states: { "switch.pool_cleaner": { attributes: { friendly_name: "Pool cleaner" } } }, entities: {} }), "robot");
+  // Hidden in the mock (the other captures keep no robot): found once shown.
+  assert.equal(pc.poolRobot(hass), undefined);
+  const shown = makeHass({}, { entities: { ...entities, "vacuum.robot_piscine": { ...entities["vacuum.robot_piscine"], hidden: false } } });
+  assert.equal(pc.poolRobot(shown), "vacuum.robot_piscine");
+  assert.equal(pc.setupOf(shown, poolConfig).roles.robot, "vacuum.robot_piscine");
+  assert.equal(pc.setupOf(shown, { ...poolConfig, robot: false }).roles.robot, undefined);
+  assert.deepEqual(JSON.parse(JSON.stringify(pc.robotParts(hass, "vacuum.robot_piscine"))), {
+    left: "sensor.robot_piscine_temps_restant",
+    total: "sensor.robot_piscine_duree_cycle",
+    mode: "select.robot_piscine_mode",
+    filter: "binary_sensor.robot_piscine_filtre",
+  });
+});
+
+test("the robot's section: ring, mode, time left, filter, and its buttons call the vacuum", () => {
+  const card = newCard({ ...poolConfig, robot: "vacuum.robot_piscine" });
+  const html = card.shadowRoot.innerHTML;
+  assert.match(html, /class="robot on"/);
+  assert.match(html, /class="robot-row on"/);
+  assert.match(html, /1 hr 12 min left/);
+  assert.match(html, /Filter OK/);
+  assert.match(html, /data-action="robot_mode"[^>]*data-option="floor_only"/);
+  click(card, { action: "robot_cmd", cmd: "pause", entity: "vacuum.robot_piscine" });
+  click(card, { action: "robot", entity: "vacuum.robot_piscine" });
+  click(card, { action: "robot_mode", entity: "select.robot_piscine_mode", option: "water_line" });
+  assert.deepEqual(JSON.parse(JSON.stringify(card._hass.calls)), [
+    ["vacuum", "pause", { entity_id: "vacuum.robot_piscine" }],
+    ["vacuum", "return_to_base", { entity_id: "vacuum.robot_piscine" }],
+    ["select", "select_option", { entity_id: "select.robot_piscine_mode", option: "water_line" }],
+  ]);
+  assert.doesNotMatch(newCard({ ...poolConfig, robot: "vacuum.robot_piscine", show_robot: false }).shadowRoot.innerHTML, /class="robot-row/);
+});

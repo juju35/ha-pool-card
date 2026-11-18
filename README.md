@@ -41,7 +41,8 @@ The cards work on top of the integrations you already use — [iopool](https://g
 - Advice for every value out of its range (pH too high: add pH minus…) and for equipment running without water flow (heat pump heating or electrolyser on while the pump is stopped)
 - Filtration: pump state, speed buttons (select or fan presets), time filtered today against a daily target (the `filtration_hours` option, iopool's recommendation, or the classic rule *water temperature ÷ 2*), from a sensor or computed from the pump's history
 - Electrical consumption (`power`, `energy`): the real-time power of the pool (which also confirms the filtration is running) and the cumulative energy, shown in the filtration section, discovered from the device or set one by one
-- Control buttons for the pump, the light, the heat pump, the cover and the electrolyser; heat pump target with − / + buttons; stopping the pump while the heat pump heats (pump button, or the *off* option of its speed select) asks for a confirmation (popup at the top of the card, **Cancel** focused)
+- **Pool robot**: the robot crawls along the floor of the pool in the scene while it cleans, a dotted trail behind it; a *Robot* button starts it and sends it back; its section shows its state or cleaning mode, the time left of its cycle (a ring filling up when the cycle's length is known), Start / Pause / Return (those the robot supports), its cleaning modes as buttons, its filter basket and battery. A `vacuum` entity (MyDolphin Plus, Maytronics One, iAqualink Robots…) or a plug powering the robot in its automation mode, found on the pool's device or as the pool robot of its own, or set with `robot`
+- Control buttons for the pump, the light, the heat pump, the cover, the electrolyser and the robot; heat pump target with − / + buttons; stopping the pump while the heat pump heats (pump button, or the *off* option of its speed select) asks for a confirmation (popup at the top of the card, **Cancel** focused)
 - Collapsible sections (advice, filtration, equipment; equipment folded by default), folded back by a click anywhere else on the page
 - Detail button on the mini card (top right): it switches the mini card to the full card's content and back; a click anywhere outside the card brings the compact view back
 - Click any value to open its Home Assistant history (more-info dialog); buttons disabled while their entity is unavailable
@@ -62,6 +63,7 @@ The card reads standard Home Assistant entities: any integration exposing them w
 | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/intellicenter.png" alt="" width="16"> [Pentair IntelliCenter](https://github.com/jlvaillant/intellicenter) (custom) | IntelliCenter | Water and air temperature, heaters, pump state (binary sensor; set the *Pool* body switch as `pump` to command it), lights, pH, ORP, salt |
 | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/omnilogic.png" alt="" width="16"> [Hayward OmniLogic](https://www.home-assistant.io/integrations/omnilogic/) (core) | OmniLogic, OmniHub | Water and air temperature, pH, ORP, salt level, filter pump (switch), chlorinator output (electrolyser) |
 | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/iaqualink.png" alt="" width="16"> [Jandy iAquaLink](https://www.home-assistant.io/integrations/iaqualink/) (core) | iAquaLink | Pool / spa heaters (climate), water and air temperature, pump and aux switches, lights |
+| [MyDolphin Plus](https://github.com/sh00t2kill/dolphin-robot), [Maytronics One](https://github.com/Jycreyn/maytronics-one-ha), [iAqualink Robots](https://github.com/galletn/iaqualink) (custom) | Maytronics Dolphin, Zodiac / Polaris robots | The pool robot (`vacuum`): its state, start, pause and return, the time left of its cycle, its cleaning mode, its filter basket |
 | Any other | Shelly / Sonoff switches, `history_stats`, template sensors, helpers | Set each entity in the options: pump, speed, heat pump, electrolyser, light, cover, sensors |
 
 How the card recognizes each entity is detailed in [How it works](#how-it-works).
@@ -198,6 +200,7 @@ zoom: true
 | `electrolyser` | both | Discovered | Salt electrolyser: a `switch` (on / off button) or a production `sensor` (in %) |
 | `light` | both | Discovered | Pool light (`light` or `switch`): button, glow in the scene in the light's color |
 | `cover` | both | Discovered | Pool cover: a `cover` (open / close button, drawn at its position, animated while it moves) or a `switch` / `input_boolean` (on = covering the pool, off = rolled back; see `invert_cover` for a relay wired the other way round) |
+| `robot` | both | Discovered | Pool robot: a `vacuum` (start, pause, return; its device's time left, cycle time, cleaning mode select, filter and battery), or a `switch` / `input_boolean` powering it (on / off). Discovered on the pool's device, else the one `vacuum` from a pool robot integration or named like one (*Dolphin*, *Polaris*, *pool*…); `false` for none |
 | `invert_cover` | both | `false` | Invert the `switch` / `input_boolean` cover: `on` becomes rolled back and `off` covering the pool (for a relay wired the other way round). No effect on a real `cover` entity |
 | `power` | both | Discovered | Instantaneous electrical power of the pool (a `sensor` in W or kW): its real-time consumption, shown in the filtration section (also confirms the pump is running) |
 | `energy` | both | Discovered | Cumulative energy of the pool (a `sensor` in Wh, kWh or MWh): its total consumption, shown in the filtration section |
@@ -210,6 +213,7 @@ zoom: true
 | `show_advice` | both | `true` | Advice section |
 | `show_filtration` | both | `true` | Filtration section |
 | `show_equipment` | both | `true` | Equipment section |
+| `show_robot` | both | `true` | The robot: its section, its button and its drawing in the scene |
 | `collapsed` | both | `[equipment]` | Sections folded by default, among `advice`, `filtration` and `equipment` (`[]` to unfold everything). Click a section title (or Tab to it and press Enter or Space) to fold or unfold it |
 | `zoom` | mini | `true` | Detail button at the top right of the mini card: it shows the full card's content (with the same options, so `show_advice`, `show_filtration`, `show_equipment` and `collapsed` can be set on the mini card too, in YAML or in its visual editor) and switches back; a click outside the card also brings the compact view back. `false` removes the button |
 | `language` | both | Auto | Force language: `fr`, `en`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings) |
@@ -263,6 +267,12 @@ The roller cover unrolls over the pool while it closes, and rolls back while it 
 | Light | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/cover-closing.gif" alt="cover closing animation" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/cover-opening-light.gif" alt="cover opening animation light" width="400"> |
 | Dark | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/cover-closing-dark.gif" alt="cover closing animation dark" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/cover-opening.gif" alt="cover opening animation dark" width="400"> |
 
+While the pool robot cleans, it crawls along the floor of the pool, a dotted trail behind it:
+
+| Light | Dark |
+|---|---|
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/robot.gif" alt="pool robot animation" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/robot-dark.gif" alt="pool robot animation dark" width="400"> |
+
 In a spa with its pump on, bubbles rise everywhere:
 
 | Dark | Light |
@@ -295,6 +305,12 @@ Equipment section unfolded, advice and filtration folded (chevron to the right w
 | Dark | Light |
 |---|---|
 | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/card-equipment.png" alt="equipment" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/card-equipment-light.png" alt="equipment light" width="400"> |
+
+The pool robot cleaning (`robot: vacuum.pool_robot`): its cycle two-fifths done, its cleaning mode, the time left, its filter basket, and Pause / Return:
+
+| Light | Dark |
+|---|---|
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/card-robot.png" alt="pool robot" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/card-robot-dark.png" alt="pool robot dark" width="400"> |
 
 Stopping the pump while the heat pump heats asks first, in a popup at the top of the card:
 
@@ -331,6 +347,7 @@ With a `device`, the card goes through the entities of that device in the Home A
 | `pump`, `pump_speed` | A switch, fan, select or binary sensor named *pump*, *pompe*, *filtration* — not a heat pump, a dosing (pH, chlorine, acid) pump, a booster or a cleaner; a switch first, a binary sensor (state only) last; a select named *speed* for the speed |
 | `heat_pump`, `light`, `cover` | The `climate`, `light` and `cover` entities (and switches named *light*, or a switch named *cover* / *volet* / *roller* for a cover driven by a switch) |
 | `electrolyser` | A switch named *electrolyser* / *chlorinator* (not *superchlorinate*), or a *chlorinator* / *production* sensor in % |
+| `robot` | A `vacuum`, or a switch named *robot*, *cleaner*, *nettoyeur*, *Dolphin*, *Polaris*…; else, off the pool's device, the `vacuum` of a pool robot integration or named like one. On the robot's device: a time sensor named *time left* / *remaining* (time left), *cycle time* (length of the cycle), a *mode* select, a *filter* binary sensor or sensor (full when on, or *full*, *clogged*…), a battery |
 | `power` / `energy` | A sensor of device class `power` (or in W / kW) for the instantaneous power, `energy` (or in Wh / kWh / MWh) for the cumulative energy |
 
 Configuration, disabled and hidden entities are left out, and so are diagnostic ones except water measures (ScreenLogic files its chemistry sensors there). Any role set in the options replaces the discovered one, so the card also works with no device at all, entity by entity.
