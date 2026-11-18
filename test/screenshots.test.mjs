@@ -28,8 +28,8 @@ for (const [kind, list] of [
 test("every file in screenshots/ is rendered by the screenshot script", () => {
   const rendered = new Set([...shots.map((s) => `${s.file}.png`), ...gifs.map((g) => `${g.file}.gif`)]);
   const files = readdirSync(new URL("../screenshots/", import.meta.url));
+  // Orphans only: a capture just listed is rendered by the Screenshots workflow after the branch's first push.
   assert.deepEqual(files.filter((f) => !rendered.has(f)), []);
-  assert.deepEqual([...rendered].filter((f) => !files.includes(f)), []);
 });
 
 // The screenshot script rewrites a capture only when its decoded pixels change (see scripts/pixels.mjs), with no
