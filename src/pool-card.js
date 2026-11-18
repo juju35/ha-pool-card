@@ -3378,7 +3378,7 @@ const sceneSvg = ({ filtering, spa, heat, heatPump, light, lightColor, cover, co
       ${heat ? `${rect(basin, ' class="warm"')}` : ""}
       ${
         robot && !spa
-          ? `<g class="robot${robot.on ? " on" : ""}">${robot.on ? `<path class="trail" d="M${basin.x + basin.w - 14} ${basin.y + basin.h - 9}H${basin.x + 10}"/>` : ""}<g class="rb" style="--rx:${-(basin.w - 30)}px"><rect class="rbody" x="${basin.x + basin.w - 22}" y="${basin.y + basin.h - 15}" width="14" height="10" rx="3"/><rect class="rbrush" x="${basin.x + basin.w - 21}" y="${basin.y + basin.h - 6}" width="12" height="2.4" rx="1.2"/></g></g>`
+          ? `<g class="robot${robot.on ? " on" : ""}">${robot.on ? `<path class="trail" d="M${basin.x + basin.w - 24} ${basin.y + basin.h - 6}H${basin.x + 10}"/>` : ""}<g class="rb" style="--rx:${-(basin.w - 46)}px"><path class="rhandle" d="M${basin.x + basin.w - 30} ${basin.y + basin.h - 20}q6 -7 12 0"/><rect class="rbody" x="${basin.x + basin.w - 35}" y="${basin.y + basin.h - 21}" width="22" height="14" rx="4"/><rect class="rbrush" x="${basin.x + basin.w - 34}" y="${basin.y + basin.h - 8}" width="20" height="3.2" rx="1.6"/></g></g></g>`
           : ""
       }
       ${filtering && !spa ? `<g class="flow">${FLOW.map(([y, d]) => `<circle cx="10" cy="${y}" r="1.4" style="animation-delay:${d}s"/>`).join("")}</g>` : ""}
@@ -3553,6 +3553,7 @@ const BASE_STYLE = `
   /* The pool robot on the floor of the basin: it crawls along it while it cleans, a dotted trail behind it. */
   .scene .robot .rbody { fill: #37474f; stroke: #263238; stroke-width: .6; }
   .scene .robot .rbrush { fill: #80deea; }
+  .scene .robot .rhandle { fill: none; stroke: #263238; stroke-width: 1.6; stroke-linecap: round; }
   .scene .robot .trail { fill: none; stroke: #fff; stroke-opacity: .7; stroke-width: 1.2; stroke-dasharray: 2 3; }
   .scene .robot.on .rb { animation: pc-robot 9s ease-in-out infinite; }
   .scene .flame { fill: #ff7043; transform-box: fill-box; transform-origin: 50% 100%; animation: pc-flame 1s ease-in-out infinite; }
