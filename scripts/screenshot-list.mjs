@@ -1,7 +1,7 @@
 // The README screenshots (PNG) and animations (GIF) rendered by scripts/screenshots.mjs.
 // Every capture has a twin in the other theme ("-dark" for a light capture, "-light" for a dark one)
 // that shows exactly the same state: only the theme differs (checked by test/screenshots.test.mjs).
-import { coverClosing, coverOpening, filtering, heatingState, lightOn, poolConfig, problems, spaConfig, spaJets } from "./mock-states.mjs";
+import { coverClosing, coverOpening, filtering, heatingState, lightOn, poolConfig, problems, robotConfig, spaConfig, spaJets } from "./mock-states.mjs";
 
 const pair = (base, other = "dark") => [
   { ...base, theme: other === "dark" ? "light" : "dark" },
@@ -13,9 +13,12 @@ export const shots = [
   ...pair({ file: "mini-card", type: "pool-mini-card", width: 380, config: poolConfig }),
   ...pair({ file: "mini-card-zoom", type: "pool-mini-card", width: 460, config: poolConfig, clicks: [".zoom"] }),
   ...pair({ file: "card-spa", type: "pool-card", width: 460, config: { ...spaConfig, collapsed: [] } }, "light"),
+  ...pair({ file: "mini-card-robot", type: "pool-mini-card", width: 380, config: robotConfig }),
   ...pair({ file: "mini-card-spa", type: "pool-mini-card", width: 380, config: spaConfig }, "light"),
   ...pair({ file: "card-problems", type: "pool-card", width: 460, config: { ...poolConfig, collapsed: ["filtration"] }, overrides: problems }),
   ...pair({ file: "card-equipment", type: "pool-card", width: 460, config: { ...poolConfig, collapsed: ["advice", "filtration"] } }, "light"),
+  // The pool robot cleaning: its ring, mode, time left and filter basket; it crawls along the pool's floor in the scene.
+  ...pair({ file: "card-robot", type: "pool-card", width: 460, config: robotConfig }),
   // Stopping the pump while the heat pump heats asks first (popup at the top of the card).
   ...pair({ file: "card-confirm", type: "pool-card", width: 460, config: poolConfig, clicks: ['[data-action="pump"]'] }),
   // Narrow cards: the full card at 6 of 12 columns of a phone's Sections view and the mini card at 170 px.
@@ -30,11 +33,13 @@ export const shots = [
 //   cover-closing — the roller cover unrolls over the pool
 //   cover-opening — the roller cover rolls back
 //   spa-jets      — the spa's pump on: bubbles rise everywhere
+//   robot         — the pool robot cleaning: it crawls along the floor of the pool, a dotted trail behind it
 export const gifs = [
   ...pair({ file: "filtering", type: "pool-card", width: 460, config: poolConfig, overrides: filtering, scene: true }),
   ...pair({ file: "heating", type: "pool-card", width: 460, config: poolConfig, overrides: heatingState, scene: true }),
   ...pair({ file: "light", type: "pool-card", width: 460, config: poolConfig, overrides: lightOn, scene: true }, "light"),
   ...pair({ file: "cover-closing", type: "pool-card", width: 460, config: poolConfig, overrides: coverClosing, scene: true }),
   ...pair({ file: "cover-opening", type: "pool-card", width: 460, config: poolConfig, overrides: coverOpening, scene: true }, "light"),
+  ...pair({ file: "robot", type: "pool-card", width: 460, config: robotConfig, scene: true }),
   ...pair({ file: "spa-jets", type: "pool-card", width: 460, config: spaConfig, overrides: spaJets, scene: true }, "light"),
 ];

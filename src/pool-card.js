@@ -32,6 +32,10 @@ const ICONS = {
   cover: "M3 4H21V8H19V20H17V8H7V20H5V8H3V4M8 9H16V11H8V9M8 12H16V14H8V12M8 15H16V17H8V15M8 18H16V20H8V18Z",
   cover_open: "M3 4H21V8H19V20H17V8H7V20H5V8H3V4M8 9H16V11H8V9Z",
   chevron: "M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z",
+  robot: "M5 7H19A3 3 0 0 1 22 10V16H2V10A3 3 0 0 1 5 7ZM4 17H20V19H4ZM8 10V12H16V10Z",
+  play: "M8,5.14V19.14L19,12.14L8,5.14Z",
+  pause: "M14,19H18V5H14M6,19H10V5H6V19Z",
+  home: "M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z",
   expand: "M10,21V19H6.41L10.91,14.5L9.5,13.09L5,17.59V14H3V21H10M14.5,10.91L19,6.41V10H21V3H14V5H17.59L13.09,9.5L14.5,10.91Z",
   collapse: "M19.5,3.09L15,7.59V4H13V11H20V9H16.41L20.91,4.5L19.5,3.09M4,13V15H7.59L3.09,19.5L4.5,20.91L9,16.41V20H11V13H4Z",
   alert: "M11,15H13V17H11V15M11,7H13V13H11V7M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20Z",
@@ -154,6 +158,21 @@ const STRINGS = {
     show_advice: "Show advice",
     show_filtration: "Show filtration",
     show_equipment: "Show equipment",
+    robot: "Robot",
+    robot_cleaning: "Cleaning",
+    robot_returning: "Returning",
+    robot_docked: "Docked",
+    robot_paused: "Paused",
+    robot_error: "Error",
+    time_left: "{time} left",
+    start: "Start",
+    pause: "Pause",
+    return_home: "Return",
+    robot_mode: "Cleaning mode",
+    filter_ok: "Filter OK",
+    filter_full: "Filter full",
+    battery: "Battery",
+    show_robot: "Show the robot",
     filtration_hours: "Daily filtration target (h, empty: automatic)",
     collapsed: "Sections folded by default",
     ranges: "Ideal ranges",
@@ -265,6 +284,21 @@ const STRINGS = {
     show_advice: "Afficher les conseils",
     show_filtration: "Afficher la filtration",
     show_equipment: "Afficher les équipements",
+    robot: "Robot",
+    robot_cleaning: "Nettoyage",
+    robot_returning: "Retour",
+    robot_docked: "À la base",
+    robot_paused: "En pause",
+    robot_error: "Erreur",
+    time_left: "encore {time}",
+    start: "Démarrer",
+    pause: "Pause",
+    return_home: "Retour",
+    robot_mode: "Mode de nettoyage",
+    filter_ok: "Filtre OK",
+    filter_full: "Filtre plein",
+    battery: "Batterie",
+    show_robot: "Afficher le robot",
     filtration_hours: "Objectif de filtration journalier (h, vide : automatique)",
     collapsed: "Sections repliées par défaut",
     ranges: "Plages idéales",
@@ -376,6 +410,21 @@ const STRINGS = {
     show_advice: "Hinweise anzeigen",
     show_filtration: "Filterung anzeigen",
     show_equipment: "Ausstattung anzeigen",
+    robot: "Roboter",
+    robot_cleaning: "Reinigt",
+    robot_returning: "Kehrt zurück",
+    robot_docked: "Angedockt",
+    robot_paused: "Pausiert",
+    robot_error: "Fehler",
+    time_left: "noch {time}",
+    start: "Starten",
+    pause: "Pause",
+    return_home: "Zurück",
+    robot_mode: "Reinigungsmodus",
+    filter_ok: "Filter OK",
+    filter_full: "Filter voll",
+    battery: "Akku",
+    show_robot: "Roboter anzeigen",
     filtration_hours: "Tägliches Filterziel (h, leer: automatisch)",
     collapsed: "Standardmäßig eingeklappte Bereiche",
     ranges: "Idealbereiche",
@@ -487,6 +536,21 @@ const STRINGS = {
     show_advice: "Mostrar los consejos",
     show_filtration: "Mostrar la filtración",
     show_equipment: "Mostrar los equipos",
+    robot: "Robot",
+    robot_cleaning: "Limpiando",
+    robot_returning: "Volviendo",
+    robot_docked: "En la base",
+    robot_paused: "En pausa",
+    robot_error: "Error",
+    time_left: "quedan {time}",
+    start: "Iniciar",
+    pause: "Pausa",
+    return_home: "Volver",
+    robot_mode: "Modo de limpieza",
+    filter_ok: "Filtro OK",
+    filter_full: "Filtro lleno",
+    battery: "Batería",
+    show_robot: "Mostrar el robot",
     filtration_hours: "Objetivo diario de filtración (h, vacío: automático)",
     collapsed: "Secciones plegadas por defecto",
     ranges: "Rangos ideales",
@@ -598,6 +662,21 @@ const STRINGS = {
     show_advice: "Прикажи савете",
     show_filtration: "Прикажи филтрацију",
     show_equipment: "Прикажи опрему",
+    robot: "Робот",
+    robot_cleaning: "Чишћење",
+    robot_returning: "Враћа се",
+    robot_docked: "На бази",
+    robot_paused: "Паузирано",
+    robot_error: "Грешка",
+    time_left: "још {time}",
+    start: "Покрени",
+    pause: "Пауза",
+    return_home: "Назад",
+    robot_mode: "Режим чишћења",
+    filter_ok: "Филтер у реду",
+    filter_full: "Филтер пун",
+    battery: "Батерија",
+    show_robot: "Прикажи робота",
     filtration_hours: "Дневни циљ филтрације (h, празно: аутоматски)",
     collapsed: "Подразумевано скупљени одељци",
     ranges: "Идеални опсези",
@@ -709,6 +788,21 @@ const STRINGS = {
     show_advice: "Prikaži savete",
     show_filtration: "Prikaži filtraciju",
     show_equipment: "Prikaži opremu",
+    robot: "Robot",
+    robot_cleaning: "Čišćenje",
+    robot_returning: "Vraća se",
+    robot_docked: "Na bazi",
+    robot_paused: "Pauzirano",
+    robot_error: "Greška",
+    time_left: "još {time}",
+    start: "Pokreni",
+    pause: "Pauza",
+    return_home: "Nazad",
+    robot_mode: "Režim čišćenja",
+    filter_ok: "Filter u redu",
+    filter_full: "Filter pun",
+    battery: "Baterija",
+    show_robot: "Prikaži robota",
     filtration_hours: "Dnevni cilj filtracije (h, prazno: automatski)",
     collapsed: "Podrazumevano skupljeni odeljci",
     ranges: "Idealni opsezi",
@@ -820,6 +914,21 @@ const STRINGS = {
     show_advice: "Mostra i consigli",
     show_filtration: "Mostra la filtrazione",
     show_equipment: "Mostra le dotazioni",
+    robot: "Robot",
+    robot_cleaning: "In pulizia",
+    robot_returning: "Rientro",
+    robot_docked: "Alla base",
+    robot_paused: "In pausa",
+    robot_error: "Errore",
+    time_left: "ancora {time}",
+    start: "Avvia",
+    pause: "Pausa",
+    return_home: "Rientra",
+    robot_mode: "Modalità di pulizia",
+    filter_ok: "Filtro OK",
+    filter_full: "Filtro pieno",
+    battery: "Batteria",
+    show_robot: "Mostra il robot",
     filtration_hours: "Obiettivo di filtrazione giornaliero (h, vuoto: automatico)",
     collapsed: "Sezioni chiuse per impostazione predefinita",
     ranges: "Intervalli ideali",
@@ -931,6 +1040,21 @@ const STRINGS = {
     show_advice: "Advies tonen",
     show_filtration: "Filtratie tonen",
     show_equipment: "Apparatuur tonen",
+    robot: "Robot",
+    robot_cleaning: "Reinigt",
+    robot_returning: "Keert terug",
+    robot_docked: "Gedockt",
+    robot_paused: "Gepauzeerd",
+    robot_error: "Fout",
+    time_left: "nog {time}",
+    start: "Starten",
+    pause: "Pauze",
+    return_home: "Terug",
+    robot_mode: "Reinigingsmodus",
+    filter_ok: "Filter OK",
+    filter_full: "Filter vol",
+    battery: "Batterij",
+    show_robot: "Robot tonen",
     filtration_hours: "Dagelijks filterdoel (u, leeg: automatisch)",
     collapsed: "Standaard ingeklapte secties",
     ranges: "Ideale bereiken",
@@ -1042,6 +1166,21 @@ const STRINGS = {
     show_advice: "Mostrar os conselhos",
     show_filtration: "Mostrar a filtração",
     show_equipment: "Mostrar os equipamentos",
+    robot: "Robô",
+    robot_cleaning: "A limpar",
+    robot_returning: "A regressar",
+    robot_docked: "Na base",
+    robot_paused: "Em pausa",
+    robot_error: "Erro",
+    time_left: "faltam {time}",
+    start: "Iniciar",
+    pause: "Pausa",
+    return_home: "Regressar",
+    robot_mode: "Modo de limpeza",
+    filter_ok: "Filtro OK",
+    filter_full: "Filtro cheio",
+    battery: "Bateria",
+    show_robot: "Mostrar o robô",
     filtration_hours: "Objetivo diário de filtração (h, vazio: automático)",
     collapsed: "Secções recolhidas por predefinição",
     ranges: "Intervalos ideais",
@@ -1153,6 +1292,21 @@ const STRINGS = {
     show_advice: "Pokaż porady",
     show_filtration: "Pokaż filtrację",
     show_equipment: "Pokaż wyposażenie",
+    robot: "Robot",
+    robot_cleaning: "Czyści",
+    robot_returning: "Wraca",
+    robot_docked: "W bazie",
+    robot_paused: "Wstrzymany",
+    robot_error: "Błąd",
+    time_left: "jeszcze {time}",
+    start: "Start",
+    pause: "Pauza",
+    return_home: "Powrót",
+    robot_mode: "Tryb czyszczenia",
+    filter_ok: "Filtr OK",
+    filter_full: "Filtr pełny",
+    battery: "Bateria",
+    show_robot: "Pokaż robota",
     filtration_hours: "Dzienny cel filtracji (h, puste: automatycznie)",
     collapsed: "Sekcje domyślnie zwinięte",
     ranges: "Zakresy idealne",
@@ -1264,6 +1418,21 @@ const STRINGS = {
     show_advice: "Afișează sfaturile",
     show_filtration: "Afișează filtrarea",
     show_equipment: "Afișează echipamentele",
+    robot: "Robot",
+    robot_cleaning: "Curăță",
+    robot_returning: "Revine",
+    robot_docked: "La bază",
+    robot_paused: "În pauză",
+    robot_error: "Eroare",
+    time_left: "încă {time}",
+    start: "Pornește",
+    pause: "Pauză",
+    return_home: "Revenire",
+    robot_mode: "Mod de curățare",
+    filter_ok: "Filtru OK",
+    filter_full: "Filtru plin",
+    battery: "Baterie",
+    show_robot: "Afișează robotul",
     filtration_hours: "Obiectiv zilnic de filtrare (h, gol: automat)",
     collapsed: "Secțiuni restrânse implicit",
     ranges: "Intervale ideale",
@@ -1375,6 +1544,21 @@ const STRINGS = {
     show_advice: "Vis råd",
     show_filtration: "Vis filtrering",
     show_equipment: "Vis udstyr",
+    robot: "Robot",
+    robot_cleaning: "Rengør",
+    robot_returning: "Vender tilbage",
+    robot_docked: "I dock",
+    robot_paused: "Sat på pause",
+    robot_error: "Fejl",
+    time_left: "{time} tilbage",
+    start: "Start",
+    pause: "Pause",
+    return_home: "Retur",
+    robot_mode: "Rengøringstilstand",
+    filter_ok: "Filter OK",
+    filter_full: "Filter fuldt",
+    battery: "Batteri",
+    show_robot: "Vis robotten",
     filtration_hours: "Dagligt filtreringsmål (t, tomt: automatisk)",
     collapsed: "Sektioner foldet sammen som standard",
     ranges: "Ideelle områder",
@@ -1486,6 +1670,21 @@ const STRINGS = {
     show_advice: "Visa råd",
     show_filtration: "Visa filtrering",
     show_equipment: "Visa utrustning",
+    robot: "Robot",
+    robot_cleaning: "Rengör",
+    robot_returning: "Återvänder",
+    robot_docked: "Dockad",
+    robot_paused: "Pausad",
+    robot_error: "Fel",
+    time_left: "{time} kvar",
+    start: "Starta",
+    pause: "Paus",
+    return_home: "Tillbaka",
+    robot_mode: "Rengöringsläge",
+    filter_ok: "Filter OK",
+    filter_full: "Filter fullt",
+    battery: "Batteri",
+    show_robot: "Visa roboten",
     filtration_hours: "Dagligt filtreringsmål (h, tomt: automatiskt)",
     collapsed: "Sektioner hopfällda som standard",
     ranges: "Idealområden",
@@ -1597,6 +1796,21 @@ const STRINGS = {
     show_advice: "Показване на съветите",
     show_filtration: "Показване на филтрирането",
     show_equipment: "Показване на оборудването",
+    robot: "Робот",
+    robot_cleaning: "Почиства",
+    robot_returning: "Връща се",
+    robot_docked: "В базата",
+    robot_paused: "На пауза",
+    robot_error: "Грешка",
+    time_left: "още {time}",
+    start: "Старт",
+    pause: "Пауза",
+    return_home: "Връщане",
+    robot_mode: "Режим на почистване",
+    filter_ok: "Филтър ОК",
+    filter_full: "Филтърът е пълен",
+    battery: "Батерия",
+    show_robot: "Показване на робота",
     filtration_hours: "Дневна цел на филтрирането (ч, празно: автоматично)",
     collapsed: "Секции, свити по подразбиране",
     ranges: "Идеални диапазони",
@@ -1708,6 +1922,21 @@ const STRINGS = {
     show_advice: "Показывать советы",
     show_filtration: "Показывать фильтрацию",
     show_equipment: "Показывать оборудование",
+    robot: "Робот",
+    robot_cleaning: "Уборка",
+    robot_returning: "Возвращается",
+    robot_docked: "На базе",
+    robot_paused: "Пауза",
+    robot_error: "Ошибка",
+    time_left: "ещё {time}",
+    start: "Запустить",
+    pause: "Пауза",
+    return_home: "Вернуть",
+    robot_mode: "Режим уборки",
+    filter_ok: "Фильтр в порядке",
+    filter_full: "Фильтр полон",
+    battery: "Батарея",
+    show_robot: "Показывать робота",
     filtration_hours: "Суточная цель фильтрации (ч, пусто: автоматически)",
     collapsed: "Разделы, свёрнутые по умолчанию",
     ranges: "Нормы",
@@ -1819,6 +2048,21 @@ const STRINGS = {
     show_advice: "Показувати поради",
     show_filtration: "Показувати фільтрацію",
     show_equipment: "Показувати обладнання",
+    robot: "Робот",
+    robot_cleaning: "Прибирання",
+    robot_returning: "Повертається",
+    robot_docked: "На базі",
+    robot_paused: "Пауза",
+    robot_error: "Помилка",
+    time_left: "ще {time}",
+    start: "Запустити",
+    pause: "Пауза",
+    return_home: "Повернути",
+    robot_mode: "Режим прибирання",
+    filter_ok: "Фільтр у нормі",
+    filter_full: "Фільтр повний",
+    battery: "Батарея",
+    show_robot: "Показувати робота",
     filtration_hours: "Добова мета фільтрації (год, порожньо: автоматично)",
     collapsed: "Розділи, згорнуті за замовчуванням",
     ranges: "Норми",
@@ -1930,6 +2174,21 @@ const STRINGS = {
     show_advice: "Tanácsok megjelenítése",
     show_filtration: "Szűrés megjelenítése",
     show_equipment: "Berendezések megjelenítése",
+    robot: "Robot",
+    robot_cleaning: "Takarít",
+    robot_returning: "Visszatér",
+    robot_docked: "Dokkolva",
+    robot_paused: "Szüneteltetve",
+    robot_error: "Hiba",
+    time_left: "még {time}",
+    start: "Indítás",
+    pause: "Szünet",
+    return_home: "Vissza",
+    robot_mode: "Takarítási mód",
+    filter_ok: "Szűrő rendben",
+    filter_full: "Szűrő tele",
+    battery: "Akkumulátor",
+    show_robot: "Robot megjelenítése",
     filtration_hours: "Napi szűrési cél (óra, üres: automatikus)",
     collapsed: "Alapértelmezetten összecsukott szakaszok",
     ranges: "Ideális tartományok",
@@ -2041,6 +2300,21 @@ const STRINGS = {
     show_advice: "Zobraziť rady",
     show_filtration: "Zobraziť filtráciu",
     show_equipment: "Zobraziť vybavenie",
+    robot: "Robot",
+    robot_cleaning: "Čistí",
+    robot_returning: "Vracia sa",
+    robot_docked: "V základni",
+    robot_paused: "Pozastavený",
+    robot_error: "Chyba",
+    time_left: "ešte {time}",
+    start: "Spustiť",
+    pause: "Pauza",
+    return_home: "Návrat",
+    robot_mode: "Režim čistenia",
+    filter_ok: "Filter OK",
+    filter_full: "Filter plný",
+    battery: "Batéria",
+    show_robot: "Zobraziť robota",
     filtration_hours: "Denný cieľ filtrácie (h, prázdne: automaticky)",
     collapsed: "Predvolene zbalené sekcie",
     ranges: "Ideálne rozsahy",
@@ -2152,6 +2426,21 @@ const STRINGS = {
     show_advice: "Zobrazit rady",
     show_filtration: "Zobrazit filtraci",
     show_equipment: "Zobrazit vybavení",
+    robot: "Robot",
+    robot_cleaning: "Čistí",
+    robot_returning: "Vrací se",
+    robot_docked: "V základně",
+    robot_paused: "Pozastaven",
+    robot_error: "Chyba",
+    time_left: "ještě {time}",
+    start: "Spustit",
+    pause: "Pauza",
+    return_home: "Návrat",
+    robot_mode: "Režim čištění",
+    filter_ok: "Filtr OK",
+    filter_full: "Filtr plný",
+    battery: "Baterie",
+    show_robot: "Zobrazit robota",
     filtration_hours: "Denní cíl filtrace (h, prázdné: automaticky)",
     collapsed: "Výchozí sbalené sekce",
     ranges: "Ideální rozsahy",
@@ -2263,6 +2552,21 @@ const STRINGS = {
     show_advice: "Prikaži nasvete",
     show_filtration: "Prikaži filtracijo",
     show_equipment: "Prikaži opremo",
+    robot: "Robot",
+    robot_cleaning: "Čisti",
+    robot_returning: "Vrača se",
+    robot_docked: "Na postaji",
+    robot_paused: "Zaustavljen",
+    robot_error: "Napaka",
+    time_left: "še {time}",
+    start: "Zaženi",
+    pause: "Premor",
+    return_home: "Vrni",
+    robot_mode: "Način čiščenja",
+    filter_ok: "Filter v redu",
+    filter_full: "Filter poln",
+    battery: "Baterija",
+    show_robot: "Prikaži robota",
     filtration_hours: "Dnevni cilj filtracije (h, prazno: samodejno)",
     collapsed: "Privzeto strnjeni razdelki",
     ranges: "Idealna območja",
@@ -2374,6 +2678,21 @@ const STRINGS = {
     show_advice: "Rādīt padomus",
     show_filtration: "Rādīt filtrāciju",
     show_equipment: "Rādīt aprīkojumu",
+    robot: "Robots",
+    robot_cleaning: "Tīra",
+    robot_returning: "Atgriežas",
+    robot_docked: "Bāzē",
+    robot_paused: "Pauzēts",
+    robot_error: "Kļūda",
+    time_left: "vēl {time}",
+    start: "Sākt",
+    pause: "Pauze",
+    return_home: "Atgriezties",
+    robot_mode: "Tīrīšanas režīms",
+    filter_ok: "Filtrs kārtībā",
+    filter_full: "Filtrs pilns",
+    battery: "Akumulators",
+    show_robot: "Rādīt robotu",
     filtration_hours: "Dienas filtrācijas mērķis (h, tukšs: automātiski)",
     collapsed: "Pēc noklusējuma sakļautās sadaļas",
     ranges: "Ideālie diapazoni",
@@ -2485,6 +2804,21 @@ const STRINGS = {
     show_advice: "Εμφάνιση συμβουλών",
     show_filtration: "Εμφάνιση φιλτραρίσματος",
     show_equipment: "Εμφάνιση εξοπλισμού",
+    robot: "Ρομπότ",
+    robot_cleaning: "Καθαρίζει",
+    robot_returning: "Επιστρέφει",
+    robot_docked: "Στη βάση",
+    robot_paused: "Σε παύση",
+    robot_error: "Σφάλμα",
+    time_left: "απομένουν {time}",
+    start: "Έναρξη",
+    pause: "Παύση",
+    return_home: "Επιστροφή",
+    robot_mode: "Λειτουργία καθαρισμού",
+    filter_ok: "Φίλτρο εντάξει",
+    filter_full: "Φίλτρο γεμάτο",
+    battery: "Μπαταρία",
+    show_robot: "Εμφάνιση του ρομπότ",
     filtration_hours: "Ημερήσιος στόχος φιλτραρίσματος (ώ, κενό: αυτόματα)",
     collapsed: "Ενότητες συμπτυγμένες από προεπιλογή",
     ranges: "Ιδανικά εύρη",
@@ -2558,6 +2892,11 @@ const norm = (s) =>
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase();
 const domainOf = (id) => String(id || "").split(".")[0];
+// An option or state written by an integration in snake_case, as words.
+const humanize = (v) => {
+  const w = String(v ?? "").replace(/_/g, " ").trim();
+  return w ? w[0].toUpperCase() + w.slice(1) : "";
+};
 const fmtNum = (v, digits, locale) =>
   v === null || v === undefined ? "—" : Number(v).toLocaleString(locale, { minimumFractionDigits: digits, maximumFractionDigits: digits });
 const c2f = (c) => Math.round((c * 9) / 5 + 32);
@@ -2590,11 +2929,11 @@ const toHours = (s) => {
 // What the card can show, one entity each. Sensors first: they are the gauges, in this order.
 const METRIC_ROLES = ["water_temperature", "ph", "orp", "chlorine", "salt", "tds"];
 const SENSOR_ROLES = [...METRIC_ROLES, "air_temperature"];
-const EQUIPMENT_ROLES = ["pump", "pump_speed", "filtration_time", "filtration_target", "heat_pump", "electrolyser", "light", "cover"];
+const EQUIPMENT_ROLES = ["pump", "pump_speed", "filtration_time", "filtration_target", "heat_pump", "electrolyser", "light", "cover", "robot"];
 const ENERGY_ROLES = ["power", "energy"];
 const ROLES = [...SENSOR_ROLES, ...EQUIPMENT_ROLES, ...ENERGY_ROLES];
 const DEFAULT_COLLAPSED = ["equipment"];
-const SECTIONS = ["advice", "filtration", "equipment"];
+const SECTIONS = ["advice", "filtration", "robot", "equipment"];
 
 // Role of an entity from its domain, device class, unit and names (entity id, translation key, names): the
 // integrations name them in English (iopool, ScreenLogic, IntelliCenter, OmniLogic, iAquaLink…), ESPHome and template
@@ -2609,6 +2948,10 @@ const COVER_RE = /cover|volet|couverture|roller|shutter|rollladen|rolladen|abdec
 // Things that are not the filtration pump: heat pump, dosing pumps, cleaner, booster, modes.
 const NOT_PUMP_RE = /heat.?pump|pompe.?a.?chaleur|warmepumpe|bomba.?de.?calor|dos(e|ing|age|euse|ier)|peristalt|chlor|acid|booster|cleaner|robot|boost|mode|winter|hivern|super/;
 const NOT_PUMP_WORD_RE = W("ph|pac|swg");
+// A pool cleaner: on the pool's device (a vacuum entity, or a plug or relay powering it in its automation mode), or a
+// robot of its own named like one or from a pool robot integration (MyDolphin Plus, Maytronics One, iAqualink Robots).
+const ROBOT_RE = /robot|cleaner|nettoyeur|dolphin|polaris|zodiac|aiper|beatbot|wybot|maytronic|reiniger|limpiafondos|pulitore|robo/;
+const POOL_ROBOT_RE = /dolphin|maytronic|aqualink|polaris|zodiac|aiper|beatbot|wybot|pool|piscine|piscina|schwimm|zwembad|basen/;
 // A measure the card must not read as the water quality itself: set points, dosing, tanks, alarms…
 const NOT_MEASURE_RE = /setpoint|set.?point|set.?pt|consigne|target|sollwert|desired|cible|suppl|dose|dosing|tank|reservoir|bidon|volume|state|status|alarm|lockout|limit|probe.?fault|_set([^a-z]|$)|_sp([^a-z]|$)/;
 // Temperatures that are not the water's: the controller's own, solar panels…
@@ -2625,6 +2968,8 @@ const roleOf = (id, hass) => {
   switch (domain) {
     case "climate":
       return "heat_pump";
+    case "vacuum":
+      return "robot";
     case "cover":
       return "cover";
     case "light":
@@ -2636,6 +2981,7 @@ const roleOf = (id, hass) => {
       if (has(LIGHT_RE) || has(LIGHT_WORD_RE)) return domain === "select" ? null : "light";
       if (has(ELECTRO_RE) && !has(/super/)) return domain === "fan" ? null : "electrolyser";
       if ((domain === "switch" || domain === "input_boolean") && has(COVER_RE)) return "cover";
+      if ((domain === "switch" || domain === "input_boolean") && has(ROBOT_RE)) return "robot";
       if (domain === "select" && has(/speed|vitesse|rpm|geschwindigkeit|velocidad/)) return "pump_speed";
       if (has(NOT_PUMP_RE) || has(NOT_PUMP_WORD_RE)) return null;
       if (has(/pump|pompe|filtrat|pumpe|bomba|depuradora/)) return "pump";
@@ -2767,7 +3113,47 @@ const setupOf = (hass, config) => {
   } else if (!Object.keys(explicit).length) deviceId = autoDevice(hass);
   const roles = { ...(deviceId ? rolesOf(hass, deviceId) : {}), ...explicit };
   if (!Object.keys(roles).length) return { error: "no_entities" };
+  // The pool robot: on the device or set, else the pool robot of its own; `robot: false` for none.
+  if (config.robot === false) delete roles.robot;
+  else if (!roles.robot) {
+    const robot = poolRobot(hass);
+    if (robot) roles.robot = robot;
+  }
   return { roles, deviceId, device: deviceId ? hass.devices?.[deviceId] : null };
+};
+
+// The pool robot of its own device: a vacuum entity from a pool robot integration or named like one.
+const poolRobot = (hass) =>
+  Object.keys(hass.states || {})
+    .filter((id) => id.startsWith("vacuum.") && !hass.entities?.[id]?.hidden)
+    .find((id) => POOL_ROBOT_RE.test(norm([hass.entities?.[id]?.platform, id, hass.states[id]?.attributes?.friendly_name].filter(Boolean).join(" "))));
+
+// What the robot's device tells besides its state: the time left of the cycle (and the cycle's length), its cleaning
+// mode (a select), its filter basket (full or not) and its battery, by name in any language.
+const ROBOT_PARTS = {
+  left: /time.?left|remaining|restant|restante|verbleib|rimanent|cycle.?left|time.?to.?(end|finish)/,
+  total: /cycle.?(time|duration|length)|duree|dauer|durata|duracion|cleaning.?time/,
+  mode: /mode|cycle|program|nettoyage|reinigung|limpieza|pulizia/,
+  filter: /filter|filtre|filtro|basket|panier|korb/,
+};
+const robotParts = (hass, id) => {
+  const device = hass.entities?.[id]?.device_id;
+  if (!device) return {};
+  const out = {};
+  for (const e of Object.values(hass.entities || {})) {
+    if (e.device_id !== device || e.entity_id === id || e.hidden || !hass.states[e.entity_id]) continue;
+    const d = domainOf(e.entity_id);
+    const st = hass.states[e.entity_id];
+    const text = norm([e.entity_id, e.translation_key, e.original_name, e.name, st.attributes?.friendly_name].filter(Boolean).join(" "));
+    const unit = String(st.attributes?.unit_of_measurement || "");
+    if (d === "sensor" && /^(min|h|s)$/.test(unit)) {
+      if (!out.left && ROBOT_PARTS.left.test(text)) out.left = e.entity_id;
+      else if (!out.total && ROBOT_PARTS.total.test(text)) out.total = e.entity_id;
+    } else if (d === "select" && !out.mode && ROBOT_PARTS.mode.test(text)) out.mode = e.entity_id;
+    else if ((d === "binary_sensor" || d === "sensor") && !out.filter && ROBOT_PARTS.filter.test(text)) out.filter = e.entity_id;
+    else if (d === "sensor" && !out.battery && (st.attributes?.device_class === "battery" || /battery|batterie|bateria/.test(text))) out.battery = e.entity_id;
+  }
+  return out;
 };
 
 const kindOf = (config, name) => {
@@ -2973,7 +3359,7 @@ const BUBBLES = [
 
 // `uid` keeps the gradient and clip ids unique per card, so several cards on one page do not share them; `viewBox`
 // crops the picture (the banner draws it from the deck's top edge).
-const sceneSvg = ({ filtering, spa, heat, heatPump, light, lightColor, cover, coverMove, hasCover, uid = "", viewBox = "0 0 120 96" }) => {
+const sceneSvg = ({ filtering, spa, heat, heatPump, light, lightColor, cover, coverMove, hasCover, robot, uid = "", viewBox = "0 0 120 96" }) => {
   const basin = spa ? { x: 22, y: 20, w: 76, h: 66, r: 30 } : { x: 12, y: 24, w: 96, h: 60, r: 10 };
   const rect = (b, extra = "") => `<rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="${b.r}"${extra}/>`;
   const slats = Array.from({ length: Math.ceil(basin.h / 6) }, (_, i) => `<rect x="${basin.x}" y="${basin.y + i * 6}" width="${basin.w}" height="5.5"/>`).join("");
@@ -2990,6 +3376,11 @@ const sceneSvg = ({ filtering, spa, heat, heatPump, light, lightColor, cover, co
       <path class="caustic" d="M10 46 q12 -5 24 0 t24 0 t24 0 t24 0 M18 66 q10 -4 20 0 t20 0 t20 0 t20 0"/>
       ${light ? `<ellipse class="glow" cx="${basin.x + basin.w / 2}" cy="${basin.y + basin.h / 2}" rx="${basin.w * 0.55}" ry="${basin.h * 0.6}" fill="url(#pc-glow${uid})"/>` : ""}
       ${heat ? `${rect(basin, ' class="warm"')}` : ""}
+      ${
+        robot && !spa
+          ? `<g class="robot${robot.on ? " on" : ""}">${robot.on ? `<path class="trail" d="M${basin.x + basin.w - 24} ${basin.y + basin.h - 6}H${basin.x + 10}"/>` : ""}<g class="rb" style="--rx:${-(basin.w - 46)}px"><path class="rhandle" d="M${basin.x + basin.w - 30} ${basin.y + basin.h - 20}q6 -7 12 0"/><rect class="rbody" x="${basin.x + basin.w - 35}" y="${basin.y + basin.h - 21}" width="22" height="14" rx="4"/><rect class="rbrush" x="${basin.x + basin.w - 34}" y="${basin.y + basin.h - 8}" width="20" height="3.2" rx="1.6"/></g></g></g>`
+          : ""
+      }
       ${filtering && !spa ? `<g class="flow">${FLOW.map(([y, d]) => `<circle cx="10" cy="${y}" r="1.4" style="animation-delay:${d}s"/>`).join("")}</g>` : ""}
       ${filtering && spa ? `<g class="bubbles">${BUBBLES.map(([x, r, d]) => `<circle cx="${x}" cy="88" r="${r}" style="animation-delay:${d}s"/>`).join("")}</g>` : ""}
       <g class="waves${filtering ? " moving" : ""}" transform="translate(${basin.x} 0)"><path class="wave wa" d="${wavePath(basin.y + 7, 2.5)}"/><path class="wave wb" d="${wavePath(basin.y + 12, 1.6)}"/></g>
@@ -3097,6 +3488,21 @@ const BASE_STYLE = `
   .btn:disabled { opacity: .45; cursor: default; }
   .btn.round { width: 36px; height: 36px; padding: 0; border-radius: 50%; flex: none; }
   .btn.small { width: 28px; height: 28px; padding: 0; border-radius: 50%; flex: none; }
+  .robot-row { display: flex; gap: 14px; align-items: center; padding: 12px; border-radius: 12px; background: var(--secondary-background-color, rgba(127,127,127,.08)); --c: var(--pc-accent); }
+  .robot-row.crit { --c: var(--error-color, #db4437); }
+  .robot-row .ring { width: 64px; height: 64px; display: block; flex: none; }
+  .robot-row .ring .rt { fill: none; stroke: var(--divider-color, rgba(127,127,127,.25)); stroke-width: 6; }
+  .robot-row .ring .rv { fill: none; stroke: var(--c); stroke-width: 6; stroke-linecap: round; }
+  .robot-row .ring .rv.spin { transform-origin: 32px 32px; animation: pc-spin 2.4s linear infinite; }
+  .robot-row .ring path { fill: var(--secondary-text-color); }
+  .robot-row.on .ring path { fill: var(--c); }
+  .robot-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .robot-title { font-size: 17px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .robot-sub { font-size: 13px; color: var(--secondary-text-color); }
+  .robot-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .robot-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .robot-body { display: flex; flex-direction: column; gap: 10px; }
+  .robot-row .btn { background: var(--card-background-color, #fff); }
   .btn.small .icon { width: 16px; height: 16px; }
   .zoom { all: unset; flex: none; cursor: pointer; width: 24px; height: 24px; margin: -2px -4px -2px 0; border-radius: 50%;
           display: grid; place-items: center; color: var(--secondary-text-color); }
@@ -3144,6 +3550,12 @@ const BASE_STYLE = `
   .scene .heatpump .fan-ring { fill: #eceff1; stroke: #90a4ae; stroke-width: .8; }
   .scene .heatpump .fan { fill: #78909c; transform-box: view-box; transform-origin: 107px 82px; }
   .scene .heatpump.on .fan { animation: pc-spin 1s linear infinite; }
+  /* The pool robot on the floor of the basin: it crawls along it while it cleans, a dotted trail behind it. */
+  .scene .robot .rbody { fill: #37474f; stroke: #263238; stroke-width: .6; }
+  .scene .robot .rbrush { fill: #80deea; }
+  .scene .robot .rhandle { fill: none; stroke: #263238; stroke-width: 1.6; stroke-linecap: round; }
+  .scene .robot .trail { fill: none; stroke: #fff; stroke-opacity: .7; stroke-width: 1.2; stroke-dasharray: 2 3; }
+  .scene .robot.on .rb { animation: pc-robot 9s ease-in-out infinite; }
   .scene .flame { fill: #ff7043; transform-box: fill-box; transform-origin: 50% 100%; animation: pc-flame 1s ease-in-out infinite; }
   @keyframes pc-wave { from { transform: translateX(0); } to { transform: translateX(-20px); } }
   @keyframes pc-flow { from { transform: translateX(0); opacity: 0; } 10% { opacity: 1; } 85% { opacity: 1; } to { transform: translateX(100px); opacity: 0; } }
@@ -3151,6 +3563,7 @@ const BASE_STYLE = `
   @keyframes pc-glow { from { opacity: .45; } to { opacity: 1; } }
   @keyframes pc-unroll { 0%, 10% { transform: scaleY(0); } 85%, 100% { transform: scaleY(1); } }
   @keyframes pc-spin { to { transform: rotate(360deg); } }
+  @keyframes pc-robot { 0%, 8% { transform: translateX(0); } 46%, 54% { transform: translateX(var(--rx)); } 92%, 100% { transform: translateX(0); } }
   @keyframes pc-flame { 0%, 100% { transform: scale(1, 1); } 30% { transform: scale(.9, 1.12); } 60% { transform: scale(1.06, .92); } }
   @keyframes pc-blink { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
   /* The status dot blinks while something runs (filtration, heating, cover moving), as on the other ha-* cards. */
@@ -3448,6 +3861,7 @@ class PoolCard extends HTMLElement {
     const setup = setupOf(h, this._config);
     if (setup.error) return null;
     const ids = Object.values(setup.roles);
+    if (setup.roles.robot) ids.push(...Object.values(robotParts(h, setup.roles.robot)));
     const rt = this._runtime(setup.roles);
     return [h.entities, h.devices, h.language, h.locale, h.themes?.darkMode, rt === null ? null : Math.round(rt * 60), ...ids.map((id) => h.states[id])];
   }
@@ -3622,6 +4036,7 @@ class PoolCard extends HTMLElement {
     const pump = this._s(roles.pump);
     const hp = this._s(roles.heat_pump);
     const electro = this._s(roles.electrolyser);
+    const robot = roles.robot ? this._robot(roles.robot) : null;
     const tips = [];
     for (const r of quality) {
       const m = metrics[r];
@@ -3642,7 +4057,40 @@ class PoolCard extends HTMLElement {
     // The water turns green when the disinfection is too low, teal on any other critical value.
     const disinfection = ["orp", "chlorine"].some((r) => metrics[r]?.cls === "crit" && metrics[r].side === "low");
     const water = disinfection ? "water-green" : levels.includes("crit") ? "water-warn" : "water-ok";
-    return { ...setup, name: name || this._t(kind), kind, metrics, quality, tips, status, water, pump, hp, electro };
+    return { ...setup, name: name || this._t(kind), kind, metrics, quality, tips, status, water, pump, hp, electro, robot };
+  }
+
+  // The pool robot: its state (a vacuum's, or on / off for a plug), whether it cleans, the time left of its cycle, its
+  // mode, filter basket and battery.
+  _robot(id) {
+    const st = this._s(id);
+    const d = domainOf(id);
+    const parts = robotParts(this._hass, id);
+    let state = !valid(st) ? "unavailable" : d === "vacuum" ? st.state : st.state === "on" ? "cleaning" : "off";
+    if (!["cleaning", "returning", "docked", "paused", "error", "idle", "off", "unavailable"].includes(state)) state = "idle";
+    const left = parts.left ? toHours(this._s(parts.left)) : null;
+    const total = parts.total ? toHours(this._s(parts.total)) : null;
+    const filter = this._s(parts.filter);
+    let filterFull = null;
+    if (valid(filter)) filterFull = domainOf(filter.entity_id) === "binary_sensor" ? filter.state === "on" : /full|plein|voll|lleno|pieno|clog|dirty|sale|sporco|sucio/.test(norm(filter.state));
+    const mode = this._s(parts.mode);
+    const battery = parts.battery ? num(this._s(parts.battery)) : Number.isFinite(st?.attributes?.battery_level) ? st.attributes.battery_level : null;
+    const label = ["cleaning", "returning", "docked", "paused", "error"].includes(state) ? `robot_${state}` : state;
+    return {
+      id,
+      d,
+      st,
+      state,
+      on: state === "cleaning",
+      label,
+      left: state === "cleaning" || state === "paused" ? left : null,
+      total,
+      parts,
+      mode: valid(mode) ? { id: mode.entity_id, options: mode.attributes?.options || [], current: mode.state } : null,
+      filterFull,
+      battery,
+      features: Number(st?.attributes?.supported_features) || 0,
+    };
   }
 
   // Hours the pump ran today: the filtration time sensor when set, else the pump's history (read with the history
@@ -3801,8 +4249,9 @@ class PoolCard extends HTMLElement {
       cover: coverPart,
       coverMove,
       hasCover: !!cover,
+      robot: m.robot && this._config.show_robot !== false ? { on: m.robot.on } : null,
     };
-    s.running = s.filtering || s.heat || !!coverMove;
+    s.running = s.filtering || s.heat || !!coverMove || !!s.robot?.on;
     return s;
   }
 
@@ -3825,6 +4274,7 @@ class PoolCard extends HTMLElement {
       lines.push(`<div class="line clickable" role="button" tabindex="0" data-entity="${esc(air.entity)}">${svgIcon(ICONS.air)}<span>${esc(this._t("air"))} <b>${esc(a.v)} ${esc(a.unit)}</b></span></div>`);
     }
     if (heating(m.hp)) lines.push(`<div class="line warn">${svgIcon(ICONS.heat_pump)}<span>${esc(this._t("heating"))}</span></div>`);
+    lines.push(this._robotLine(m));
     const coverHero = valid(cover) ? coverInfo(cover, this._config.invert_cover) : null;
     if (coverHero && (coverHero.closed || coverHero.moving)) {
       lines.push(`<div class="line">${svgIcon(ICONS.cover)}<span>${esc(`${this._t("cover")} · ${this._t(coverHero.key)}`)}</span></div>`);
@@ -3836,6 +4286,13 @@ class PoolCard extends HTMLElement {
   }
 
   // Control buttons of the equipment that can be switched: pump, light, heat pump, cover, electrolyser.
+  // The robot while it cleans, with the time left of its cycle (hero of the full card, line of the mini card).
+  _robotLine(m) {
+    if (!m.robot?.on || this._config.show_robot === false) return "";
+    const left = m.robot.left != null ? ` · ${this._t("time_left", { time: fmtHours(m.robot.left, this._locale()) })}` : "";
+    return `<div class="line clickable" role="button" tabindex="0" data-entity="${esc(m.robot.id)}">${svgIcon(ICONS.robot)}<span>${esc(`${this._t("robot")} · ${this._t("robot_cleaning")}${left}`)}</span></div>`;
+  }
+
   _controls(m, round = false) {
     if (this._config.show_controls === false) return "";
     const list = [];
@@ -3848,7 +4305,8 @@ class PoolCard extends HTMLElement {
     if (m.pump && domainOf(r.pump) !== "binary_sensor") list.push(btn("pump", r.pump, ICONS.pump, this._t("pump"), pumpOn(m.pump)));
     const light = this._s(r.light);
     if (light && ["light", "switch", "input_boolean"].includes(domainOf(r.light))) list.push(btn("toggle", r.light, lightIcon(light), this._t("light"), isOn(light)));
-    if (round) return list.join("");
+    const robot = m.robot && this._config.show_robot !== false ? btn("robot", r.robot, ICONS.robot, this._t("robot"), m.robot.on) : "";
+    if (round) return list.join("") + robot;
     if (m.hp) list.push(btn("heat_pump", r.heat_pump, ICONS.heat_pump, this._t("heat_pump"), valid(m.hp) && m.hp.state !== "off"));
     const cover = this._s(r.cover);
     if (cover) {
@@ -3857,7 +4315,7 @@ class PoolCard extends HTMLElement {
     }
     if (m.electro && ["switch", "input_boolean"].includes(domainOf(r.electrolyser)))
       list.push(btn("toggle", r.electrolyser, ICONS.electrolyser, this._t("electrolyser"), m.electro.state === "on"));
-    return list.join("");
+    return list.join("") + robot;
   }
 
   _isCollapsed(key) {
@@ -3953,6 +4411,47 @@ class PoolCard extends HTMLElement {
     return this._section("filtration", ICONS.pump, this._t("filtration"), `<div class="filtration">${rows.join("")}</div>`);
   }
 
+  // The pool robot: its state and the time left of its cycle (a ring when the cycle's length is known), start, pause
+  // and return buttons (those the vacuum supports; on / off for a plug), its cleaning mode, filter basket and battery.
+  _robotSection(m) {
+    const rb = m.robot;
+    if (!rb || this._config.show_robot === false) return "";
+    const loc = this._locale();
+    const off = rb.state === "unavailable";
+    const frac = rb.left != null && rb.total ? clamp(1 - rb.left / rb.total, 0, 1) : rb.on ? null : 0;
+    const C = 2 * Math.PI * 26;
+    const ring = `<svg class="ring" viewBox="0 0 64 64" aria-hidden="true"><circle class="rt" cx="32" cy="32" r="26"/>${
+      frac != null ? `<circle class="rv" cx="32" cy="32" r="26" stroke-dasharray="${(C * frac).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 32 32)"/>` : `<circle class="rv spin" cx="32" cy="32" r="26" stroke-dasharray="${(C * 0.25).toFixed(1)} ${C.toFixed(1)}"/>`
+    }<path d="${ICONS.robot}" transform="translate(20 20)"/></svg>`;
+    const title = rb.on && rb.mode?.current ? humanize(rb.mode.current) : this._t(rb.label);
+    const sub = [rb.on && rb.mode?.current ? this._t("robot_cleaning") : "", rb.left != null ? this._t("time_left", { time: fmtHours(rb.left, loc) }) : ""].filter(Boolean).join(" · ");
+    const act = (cmd, icon, key, enabled = true) =>
+      `<button class="btn" data-action="robot_cmd" data-cmd="${cmd}" data-entity="${esc(rb.id)}"${off || !enabled ? " disabled" : ""}>${svgIcon(icon)}<span>${esc(this._t(key))}</span></button>`;
+    const F = rb.features;
+    let buttons = "";
+    if (rb.d === "vacuum") {
+      const list = [];
+      if (rb.state !== "cleaning") list.push(act("start", ICONS.play, "start"));
+      if (rb.state === "cleaning" && F & 4) list.push(act("pause", ICONS.pause, "pause"));
+      if (rb.state === "cleaning" && !(F & 4) && F & 8) list.push(act("stop", ICONS.pause, "stop"));
+      if (F & 16 && !["docked", "returning"].includes(rb.state)) list.push(act("return_to_base", ICONS.home, "return_home"));
+      buttons = list.join("");
+    } else buttons = act("toggle", rb.on ? ICONS.pause : ICONS.play, rb.on ? "stop" : "start");
+    const head = `<div class="robot-row${rb.on ? " on" : ""}${rb.state === "error" ? " crit" : ""}"><div class="clickable" role="button" tabindex="0" data-entity="${esc(rb.id)}" aria-label="${esc(this._t("robot"))}">${ring}</div><div class="robot-info"><div class="robot-title">${esc(title)}</div>${sub ? `<div class="robot-sub">${esc(sub)}</div>` : ""}<div class="robot-btns">${buttons}</div></div></div>`;
+    let modes = "";
+    if (rb.mode && rb.mode.options.length >= 2) {
+      const moff = !valid(this._s(rb.mode.id));
+      modes = `<div class="row"><span class="k">${svgIcon(ICONS.robot)}${esc(this._t("robot_mode"))}</span><div class="speeds">${rb.mode.options
+        .map((o) => `<button class="btn${o === rb.mode.current ? " on" : ""}" data-action="robot_mode" data-entity="${esc(rb.mode.id)}" data-option="${esc(o)}" aria-pressed="${o === rb.mode.current ? "true" : "false"}"${moff ? " disabled" : ""}><span>${esc(humanize(o))}</span></button>`)
+        .join("")}</div></div>`;
+    }
+    const chips = [];
+    if (rb.filterFull != null) chips.push(`<span class="chip ${rb.filterFull ? "warn" : "ok"} clickable" role="button" tabindex="0" data-entity="${esc(rb.parts.filter)}"><span class="chip-text">${esc(this._t(rb.filterFull ? "filter_full" : "filter_ok"))}</span></span>`);
+    if (rb.battery != null) chips.push(`<span class="chip idle clickable" role="button" tabindex="0" data-entity="${esc(rb.parts.battery || rb.id)}"><span class="chip-text">${esc(`${this._t("battery")} ${Math.round(rb.battery)} %`)}</span></span>`);
+    const body = `<div class="robot-body">${head}${modes}${chips.length ? `<div class="robot-chips">${chips.join("")}</div>` : ""}</div>`;
+    return this._section("robot", ICONS.robot, this._t("robot"), body);
+  }
+
   _equipment(m) {
     const r = m.roles;
     const tiles = [];
@@ -4010,6 +4509,7 @@ class PoolCard extends HTMLElement {
     }
     if (c.show_advice !== false) parts.push(this._advice(m));
     if (c.show_filtration !== false) parts.push(this._filtration(m));
+    parts.push(this._robotSection(m));
     if (c.show_equipment !== false) parts.push(this._equipment(m));
     return `<style>${BASE_STYLE}${FULL_STYLE}${accentStyle(this._hass)}</style>
       <ha-card>
@@ -4062,6 +4562,18 @@ class PoolCard extends HTMLElement {
       if (isOffOption(option) && pumpOn(this._m?.pump) && heating(this._m?.hp)) return this._openConfirm({ text: this._t("confirm_pump_off"), ok: this._t("stop"), run });
       return run();
     }
+    if (action === "robot") {
+      if (domainOf(entity) !== "vacuum") return this._call(domainOf(entity), s.state === "on" ? "turn_off" : "turn_on", { entity_id: entity });
+      const F = Number(s.attributes?.supported_features) || 0;
+      if (s.state !== "cleaning") return this._call("vacuum", "start", { entity_id: entity });
+      return this._call("vacuum", F & 16 ? "return_to_base" : F & 8 ? "stop" : "pause", { entity_id: entity });
+    }
+    if (action === "robot_cmd") {
+      const cmd = el.dataset.cmd;
+      if (cmd === "toggle") return this._call(domainOf(entity), s.state === "on" ? "turn_off" : "turn_on", { entity_id: entity });
+      return this._call("vacuum", cmd, { entity_id: entity });
+    }
+    if (action === "robot_mode") return this._call("select", "select_option", { entity_id: entity, option: el.dataset.option });
     if (action === "heat_pump") {
       const modes = s.attributes?.hvac_modes || ["off", "heat"];
       const mode = s.state === "off" ? (modes.includes("heat") ? "heat" : modes.find((x) => x !== "off") || "heat") : "off";
@@ -4213,6 +4725,7 @@ class PoolMiniCard extends PoolCard {
       const on = pumpOn(m.pump);
       lines.push(`<div class="line ${on ? "active" : "idle"}">${svgIcon(ICONS.pump)}<span>${esc(this._subtitle(m))}</span></div>`);
     }
+    lines.push(this._robotLine(m));
     const tip = m.tips[0];
     if (tip) lines.push(`<div class="line tip-line ${tip.cls}">${svgIcon(tip.cls === "crit" ? ICONS.alert : ICONS.info)}<span>${esc(this._t(tip.key))}</span></div>`);
     const controls = this._controls(m, true);
@@ -4251,6 +4764,7 @@ const ENTITY_DOMAINS = {
   electrolyser: ["switch", "input_boolean", "sensor", "number", "select"],
   light: ["light", "switch", "input_boolean"],
   cover: ["cover", "switch", "input_boolean"],
+  robot: ["vacuum", "switch", "input_boolean"],
   power: ["sensor"],
   energy: ["sensor"],
 };
@@ -4353,6 +4867,7 @@ class PoolCardEditor extends PoolEditorBase {
       ["show_advice", true],
       ["show_filtration", true],
       ["show_equipment", true],
+      ["show_robot", true],
       ["invert_cover", false],
     ];
   }

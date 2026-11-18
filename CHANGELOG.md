@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.0 - 2026-11-18
+
+### Features
+- **Pool robot**: a `vacuum` (MyDolphin Plus, Maytronics One, iAqualink Robots…) or a plug powering the robot, found on the pool's device or as the pool robot of its own, or set with `robot` (`false` for none). It crawls along the floor of the pool in the scene while it cleans, a dotted trail behind it; a *Robot* button starts it and sends it back; its section shows its state or cleaning mode, the time left of its cycle (a ring when the cycle's length is known), Start / Pause / Return as the robot supports them, its cleaning modes as buttons, its filter basket and battery. `show_robot: false` hides it all.
+- **Pool robot on the mini card**: a line while it cleans (*Robot · Cleaning · 1 hr 12 min left*) and a round button to start it or send it back.
+
 ## 1.4.1 - 2026-11-18
 
 ### Fixes
