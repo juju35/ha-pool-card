@@ -313,6 +313,12 @@ The pool robot cleaning (`robot: vacuum.pool_robot`): its cycle two-fifths done,
 |---|---|
 | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/card-robot.png" alt="pool robot" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/card-robot-dark.png" alt="pool robot dark" width="400"> |
 
+On the mini card, a line while it cleans and a round button to start it or send it back:
+
+| Light | Dark |
+|---|---|
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/mini-card-robot.png" alt="pool robot on the mini card" width="380"> | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/mini-card-robot-dark.png" alt="pool robot on the mini card dark" width="380"> |
+
 Stopping the pump while the heat pump heats asks first, in a popup at the top of the card:
 
 | Light | Dark |

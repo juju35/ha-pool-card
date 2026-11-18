@@ -13,6 +13,7 @@ export const shots = [
   ...pair({ file: "mini-card", type: "pool-mini-card", width: 380, config: poolConfig }),
   ...pair({ file: "mini-card-zoom", type: "pool-mini-card", width: 460, config: poolConfig, clicks: [".zoom"] }),
   ...pair({ file: "card-spa", type: "pool-card", width: 460, config: { ...spaConfig, collapsed: [] } }, "light"),
+  ...pair({ file: "mini-card-robot", type: "pool-mini-card", width: 380, config: robotConfig }),
   ...pair({ file: "mini-card-spa", type: "pool-mini-card", width: 380, config: spaConfig }, "light"),
   ...pair({ file: "card-problems", type: "pool-card", width: 460, config: { ...poolConfig, collapsed: ["filtration"] }, overrides: problems }),
   ...pair({ file: "card-equipment", type: "pool-card", width: 460, config: { ...poolConfig, collapsed: ["advice", "filtration"] } }, "light"),

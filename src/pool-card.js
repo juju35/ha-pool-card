@@ -4274,10 +4274,7 @@ class PoolCard extends HTMLElement {
       lines.push(`<div class="line clickable" role="button" tabindex="0" data-entity="${esc(air.entity)}">${svgIcon(ICONS.air)}<span>${esc(this._t("air"))} <b>${esc(a.v)} ${esc(a.unit)}</b></span></div>`);
     }
     if (heating(m.hp)) lines.push(`<div class="line warn">${svgIcon(ICONS.heat_pump)}<span>${esc(this._t("heating"))}</span></div>`);
-    if (m.robot?.on && this._config.show_robot !== false) {
-      const left = m.robot.left != null ? ` · ${this._t("time_left", { time: fmtHours(m.robot.left, this._locale()) })}` : "";
-      lines.push(`<div class="line clickable" role="button" tabindex="0" data-entity="${esc(m.robot.id)}">${svgIcon(ICONS.robot)}<span>${esc(`${this._t("robot")} · ${this._t("robot_cleaning")}${left}`)}</span></div>`);
-    }
+    lines.push(this._robotLine(m));
     const coverHero = valid(cover) ? coverInfo(cover, this._config.invert_cover) : null;
     if (coverHero && (coverHero.closed || coverHero.moving)) {
       lines.push(`<div class="line">${svgIcon(ICONS.cover)}<span>${esc(`${this._t("cover")} · ${this._t(coverHero.key)}`)}</span></div>`);
@@ -4289,6 +4286,13 @@ class PoolCard extends HTMLElement {
   }
 
   // Control buttons of the equipment that can be switched: pump, light, heat pump, cover, electrolyser.
+  // The robot while it cleans, with the time left of its cycle (hero of the full card, line of the mini card).
+  _robotLine(m) {
+    if (!m.robot?.on || this._config.show_robot === false) return "";
+    const left = m.robot.left != null ? ` · ${this._t("time_left", { time: fmtHours(m.robot.left, this._locale()) })}` : "";
+    return `<div class="line clickable" role="button" tabindex="0" data-entity="${esc(m.robot.id)}">${svgIcon(ICONS.robot)}<span>${esc(`${this._t("robot")} · ${this._t("robot_cleaning")}${left}`)}</span></div>`;
+  }
+
   _controls(m, round = false) {
     if (this._config.show_controls === false) return "";
     const list = [];
@@ -4301,7 +4305,8 @@ class PoolCard extends HTMLElement {
     if (m.pump && domainOf(r.pump) !== "binary_sensor") list.push(btn("pump", r.pump, ICONS.pump, this._t("pump"), pumpOn(m.pump)));
     const light = this._s(r.light);
     if (light && ["light", "switch", "input_boolean"].includes(domainOf(r.light))) list.push(btn("toggle", r.light, lightIcon(light), this._t("light"), isOn(light)));
-    if (round) return list.join("");
+    const robot = m.robot && this._config.show_robot !== false ? btn("robot", r.robot, ICONS.robot, this._t("robot"), m.robot.on) : "";
+    if (round) return list.join("") + robot;
     if (m.hp) list.push(btn("heat_pump", r.heat_pump, ICONS.heat_pump, this._t("heat_pump"), valid(m.hp) && m.hp.state !== "off"));
     const cover = this._s(r.cover);
     if (cover) {
@@ -4310,8 +4315,7 @@ class PoolCard extends HTMLElement {
     }
     if (m.electro && ["switch", "input_boolean"].includes(domainOf(r.electrolyser)))
       list.push(btn("toggle", r.electrolyser, ICONS.electrolyser, this._t("electrolyser"), m.electro.state === "on"));
-    if (m.robot && this._config.show_robot !== false) list.push(btn("robot", r.robot, ICONS.robot, this._t("robot"), m.robot.on));
-    return list.join("");
+    return list.join("") + robot;
   }
 
   _isCollapsed(key) {
@@ -4721,6 +4725,7 @@ class PoolMiniCard extends PoolCard {
       const on = pumpOn(m.pump);
       lines.push(`<div class="line ${on ? "active" : "idle"}">${svgIcon(ICONS.pump)}<span>${esc(this._subtitle(m))}</span></div>`);
     }
+    lines.push(this._robotLine(m));
     const tip = m.tips[0];
     if (tip) lines.push(`<div class="line tip-line ${tip.cls}">${svgIcon(tip.cls === "crit" ? ICONS.alert : ICONS.info)}<span>${esc(this._t(tip.key))}</span></div>`);
     const controls = this._controls(m, true);

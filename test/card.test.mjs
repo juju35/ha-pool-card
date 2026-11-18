@@ -585,3 +585,10 @@ test("the robot's section: ring, mode, time left, filter, and its buttons call t
   ]);
   assert.doesNotMatch(newCard({ ...poolConfig, robot: "vacuum.robot_piscine", show_robot: false }).shadowRoot.innerHTML, /class="robot-row/);
 });
+
+test("the mini card shows the robot cleaning and its round button", () => {
+  const html = newCard({ ...poolConfig, robot: "vacuum.robot_piscine" }, makeHass(), pc.PoolMiniCard).shadowRoot.innerHTML;
+  assert.match(html, /Robot · Cleaning · 1 hr 12 min left/);
+  assert.match(html, /class="btn round on" data-action="robot" data-entity="vacuum.robot_piscine"/);
+  assert.doesNotMatch(newCard({ ...poolConfig, robot: "vacuum.robot_piscine", show_robot: false }, makeHass(), pc.PoolMiniCard).shadowRoot.innerHTML, /data-action="robot"/);
+});
