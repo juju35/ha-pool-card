@@ -17,7 +17,9 @@
   <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/intellicenter.png" alt="Pentair IntelliCenter" width="64">&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/omnilogic.png" alt="Hayward OmniLogic" width="64">&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/iaqualink.png" alt="Jandy iAquaLink" width="64">&nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/mydolphin_plus.png" alt="Maytronics Dolphin" width="64">
+  <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/mydolphin_plus.png" alt="Maytronics Dolphin" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/huum.png" alt="Huum" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/harvia.png" alt="Harvia" width="64">
 </p>
 
 Lovelace cards for Home Assistant to keep an eye on a **swimming pool** or a **spa**: water quality at a glance with colored gauges and their ideal ranges (pH, ORP, free chlorine, salt, TDS, water temperature), advice when a value drifts (pH too high, chlorine too low…), an animated scene of the pool, the filtration state and its time of the day, and buttons for the pump, the lighting, the heat pump and the cover.
@@ -33,7 +35,7 @@ The cards work on top of the integrations you already use — [iopool](https://g
 
 ## Features
 
-- Two cards: a full **Pool Card** (`custom:pool-card`) and a compact **Pool Mini Card** (`custom:pool-mini-card`), for a pool or a spa (`kind`, guessed from the name)
+- Two cards: a full **Pool Card** (`custom:pool-card`) and a compact **Pool Mini Card** (`custom:pool-mini-card`), for a pool, a spa or a sauna (`kind`, guessed from the name)
 - Illustrated header (90 px on both cards): the pool seen from above on its lawn, the title and subtitle on the grass at its left, a strip of coping stones along the bottom; it switches to night with a dark Home Assistant theme, day with a light one (`illustration_theme` forces day or night), and `illustration: false` brings back the classic header with the scene next to the big value
 - Animated scene of the pool (or of the round spa) on its deck: the water ripples and a current crosses it while the pump filters, bubbles rise in a spa, the heat pump spins its fan and its flame flickers while it heats, the underwater light glows in its color, the roller cover unrolls and rolls back; the water turns teal on a critical value and green when the disinfection is too low (see [Animations](#animations))
 - Header icon (pool or spa) in a round badge colored with the state (red or amber when the water needs care, blue while the filtration, the heating, the cover or the light is on, grey at rest), and a status pill on the title line: **Water OK**, **Check the water**, **Action needed**; its dot blinks while something runs
@@ -43,6 +45,7 @@ The cards work on top of the integrations you already use — [iopool](https://g
 - Filtration: pump state, speed buttons (select or fan presets), time filtered today against a daily target (the `filtration_hours` option, iopool's recommendation, or the classic rule *water temperature ÷ 2*), from a sensor or computed from the pump's history
 - Electrical consumption (`power`, `energy`): the real-time power of the pool (which also confirms the filtration is running) and the cumulative energy, shown in the filtration section, discovered from the device or set one by one
 - **Pool robot**: the robot crawls along the floor of the pool in the scene while it cleans, a dotted trail behind it; a *Robot* button starts it and sends it back; its section shows its state or cleaning mode, the time left of its cycle (a ring filling up when the cycle's length is known), Start / Pause / Return (those the robot supports), its cleaning modes as buttons, its filter basket and battery. A `vacuum` entity (MyDolphin Plus, Maytronics One, iAqualink Robots…) or a plug powering the robot in its automation mode, found on the pool's device or as the pool robot of its own, or set with `robot`
+- **Sauna**: a heater (`climate`, or a `switch` / smart plug with `target_temperature`) with its temperature, humidity, door, time to temperature and session, found on a device named like a sauna or made by a sauna maker (Huum, Harvia, Tylö…) or set with `kind: sauna`. A wooden cabin in the header: the fire burns in the heater while it is on, the stones glow and steam rises while it heats; *Heating*, *Ready* or *Door open* in the pill, *Ready in 18 min* or the session's time left under the title, a progress bar to the target, target − / + and heater buttons, an alert when the door is open while it heats
 - Control buttons for the pump, the light, the heat pump, the cover, the electrolyser and the robot; heat pump target with − / + buttons; stopping the pump while the heat pump heats (pump button, or the *off* option of its speed select) asks for a confirmation (popup at the top of the card, **Cancel** focused)
 - Collapsible sections (advice, filtration, equipment; equipment folded by default), folded back by a click anywhere else on the page
 - Detail button on the mini card (top right): it switches the mini card to the full card's content and back; a click anywhere outside the card brings the compact view back
@@ -64,6 +67,8 @@ The card reads standard Home Assistant entities: any integration exposing them w
 | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/intellicenter.png" alt="" width="16"> [Pentair IntelliCenter](https://github.com/jlvaillant/intellicenter) (custom) | IntelliCenter | Water and air temperature, heaters, pump state (binary sensor; set the *Pool* body switch as `pump` to command it), lights, pH, ORP, salt |
 | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/omnilogic.png" alt="" width="16"> [Hayward OmniLogic](https://www.home-assistant.io/integrations/omnilogic/) (core) | OmniLogic, OmniHub | Water and air temperature, pH, ORP, salt level, filter pump (switch), chlorinator output (electrolyser) |
 | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/iaqualink.png" alt="" width="16"> [Jandy iAquaLink](https://www.home-assistant.io/integrations/iaqualink/) (core) | iAquaLink | Pool / spa heaters (climate), water and air temperature, pump and aux switches, lights |
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/huum.png" alt="" width="16"> [Huum](https://www.home-assistant.io/integrations/huum/) (core) | Huum Drop, Steamer and Hive saunas | The sauna's heater (`climate`: on / off, target, its current temperature), its door, humidity and light |
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/harvia.png" alt="" width="16"> [Harvia Sauna](https://github.com/WiesiDeluxe/ha-harvia-sauna) (custom) | Harvia Xenio WiFi, Fenix (MyHarvia) | The heater (`climate` or `switch`), temperature and humidity, door, the session's time left |
 | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/mydolphin_plus.png" alt="" width="16"> [MyDolphin Plus](https://github.com/sh00t2kill/dolphin-robot), [Maytronics One](https://github.com/Jycreyn/maytronics-one-ha), [iAqualink Robots](https://github.com/galletn/iaqualink) (custom) | Maytronics Dolphin, Zodiac / Polaris robots | The pool robot (`vacuum`): its state, start, pause and return, the time left of its cycle, its cleaning mode, its filter basket |
 | Any other | Shelly / Sonoff switches, `history_stats`, template sensors, helpers | Set each entity in the options: pump, speed, heat pump, electrolyser, light, cover, sensors |
 
@@ -182,13 +187,27 @@ show_controls: true
 zoom: true
 ```
 
+A sauna: its device is enough (Huum, Harvia…), or its entities one by one — here a heater on a smart plug:
+
+```yaml
+type: custom:pool-card
+kind: sauna
+title: Sauna
+heater: switch.sauna_heater
+temperature: sensor.sauna_temperature
+humidity: sensor.sauna_humidity
+door: binary_sensor.sauna_door
+session: timer.sauna_session
+target_temperature: 85
+```
+
 ### Options reference
 
 | Option | Card | Default | Description |
 |---|---|---|---|
 | `device` | both | Device with the most water sensors | Device of the pool (its name as shown in Home Assistant, or its device id, set by the visual editor): its sensors and equipment are discovered |
 | `title` | both | Device name | Card title |
-| `kind` | both | `auto` | `pool`, `spa` or `auto` (a spa when the name says *spa*, *jacuzzi*, *hot tub*…): the scene, the icon and the default temperature range |
+| `kind` | both | `auto` | `pool`, `spa`, `sauna` or `auto` (a spa when the name says *spa*, *jacuzzi*, *hot tub*…; a sauna when the device's name says *sauna* in any language, or its maker is Huum, Harvia or Tylö): the scene, the icon, the default temperature range; a sauna has its own layout (see [Sauna](#sauna)) |
 | `water_temperature` | both | Discovered | Water temperature sensor (else the heat pump's current temperature) |
 | `air_temperature` | both | Discovered | Air temperature sensor |
 | `ph`, `orp`, `chlorine`, `salt`, `tds` | both | Discovered | Water quality sensors (`chlorine` in mg/L or ppm, or in mV for probes that report it so; `salt` in g/L or ppm) |
@@ -202,6 +221,12 @@ zoom: true
 | `light` | both | Discovered | Pool light (`light` or `switch`): button, glow in the scene in the light's color |
 | `cover` | both | Discovered | Pool cover: a `cover` (open / close button, drawn at its position, animated while it moves) or a `switch` / `input_boolean` (on = covering the pool, off = rolled back; see `invert_cover` for a relay wired the other way round) |
 | `robot` | both | Discovered | Pool robot: a `vacuum` (start, pause, return; its device's time left, cycle time, cleaning mode select, filter and battery), or a `switch` / `input_boolean` powering it (on / off). Discovered on the pool's device, else the one `vacuum` from a pool robot integration or named like one (*Dolphin*, *Polaris*, *pool*…); `false` for none |
+| `heater` | both | Discovered | **Sauna** heater: a `climate` (on / off, target with − / +, its current temperature when there is no `temperature` sensor) or a `switch` / `input_boolean` (a smart plug: on / off, the target in `target_temperature`) |
+| `temperature`, `humidity` | both | Discovered | **Sauna** temperature and humidity sensors |
+| `door` | both | Discovered | **Sauna** door (`binary_sensor`): an alert when it is open while the sauna heats |
+| `ready_time` | both | Discovered | **Sauna** time to temperature (a `sensor` in min, h or s): *Ready in 18 min* while it heats |
+| `session` | both | Discovered | **Sauna** session: a `timer` or a `sensor` of its time left (min, h or s), shown once the sauna is ready |
+| `target_temperature` | both | — | **Sauna** target in the unit of its sensor, for a heater on a `switch` (a `climate` gives its own) |
 | `invert_cover` | both | `false` | Invert the `switch` / `input_boolean` cover: `on` becomes rolled back and `off` covering the pool (for a relay wired the other way round). No effect on a real `cover` entity |
 | `power` | both | Discovered | Instantaneous electrical power of the pool (a `sensor` in W or kW): its real-time consumption, shown in the filtration section (also confirms the pump is running) |
 | `energy` | both | Discovered | Cumulative energy of the pool (a `sensor` in Wh, kWh or MWh): its total consumption, shown in the filtration section |
@@ -274,6 +299,12 @@ While the pool robot cleans, it crawls along the floor of the pool, a dotted tra
 |---|---|
 | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/robot.gif" alt="pool robot animation" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/robot-dark.gif" alt="pool robot animation dark" width="400"> |
 
+While the sauna heats, the fire burns in its heater, the stones glow and steam rises from them:
+
+| Light | Dark |
+|---|---|
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/sauna.gif" alt="sauna heating animation" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/sauna-dark.gif" alt="sauna heating animation dark" width="400"> |
+
 In a spa with its pump on, bubbles rise everywhere:
 
 | Dark | Light |
@@ -339,6 +370,21 @@ Spa built with ESPHome, every entity found from its device (temperature, pH, fre
 |---|---|---|
 | Dark | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/card-spa.png" alt="spa card" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/mini-card-spa.png" alt="spa mini card" width="400"> |
 | Light | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/card-spa-light.png" alt="spa card light" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/mini-card-spa-light.png" alt="spa mini card light" width="400"> |
+
+### Sauna
+
+A Huum sauna found from its device: heating to 85 °C, 64 °C now and ready in 18 min, its humidity, target − / + and heater buttons; its mini card once ready, 42 min left of the session:
+
+| Light | Dark |
+|---|---|
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/card-sauna.png" alt="sauna card" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/card-sauna-dark.png" alt="sauna card dark" width="400"> |
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/mini-card-sauna.png" alt="sauna mini card" width="380"> | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/mini-card-sauna-dark.png" alt="sauna mini card dark" width="380"> |
+
+The door left open while it heats: *Door open* in red, and the advice to close it:
+
+| Dark | Light |
+|---|---|
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/card-sauna-door.png" alt="sauna door open" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/screenshots/card-sauna-door-light.png" alt="sauna door open light" width="400"> |
 
 ## How it works
 

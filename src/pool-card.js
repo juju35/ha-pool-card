@@ -15,6 +15,8 @@ const VERSION = "__VERSION__";
 const ICONS = {
   pool: "M2,15C3.67,14.25 5.33,13.5 7,13.17V5A3,3 0 0,1 10,2C11.31,2 12.42,2.83 12.83,4H10A1,1 0 0,0 9,5V6H14V5A3,3 0 0,1 17,2C18.31,2 19.42,2.83 19.83,4H17A1,1 0 0,0 16,5V14.94C18,14.62 20,13 22,13V15C19.78,15 17.56,17 15.33,17C13.11,17 10.89,15 8.67,15C6.44,15 4.22,16 2,17V15M14,8H9V10H14V8M14,12H9V13C10.67,13.16 12.33,14.31 14,14.79V12M2,19C4.22,18 6.44,17 8.67,17C10.89,17 13.11,19 15.33,19C17.56,19 19.78,17 22,17V19C19.78,19 17.56,21 15.33,21C13.11,21 10.89,19 8.67,19C6.44,19 4.22,20 2,21V19Z",
   spa: "M7,4A2,2 0 0,1 9,6A2,2 0 0,1 7,8A2,2 0 0,1 5,6A2,2 0 0,1 7,4M11.15,12H22V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V12H5V11.25C5,10 6,9 7.25,9H7.28C7.62,9 7.95,9.09 8.24,9.23C8.5,9.35 8.74,9.5 8.93,9.73L10.33,11.28C10.56,11.54 10.84,11.78 11.15,12M7,20V14H5V20H7M11,20V14H9V20H11M15,20V14H13V20H15M19,20V14H17V20H19M18.65,5.86C19.68,6.86 20.16,8.21 19.95,9.57L19.89,10H18L18.09,9.41C18.24,8.62 18,7.83 17.42,7.21L17.35,7.15C16.32,6.14 15.85,4.79 16.05,3.43L16.11,3H18L17.91,3.59C17.76,4.38 18,5.17 18.58,5.79L18.65,5.86M14.65,5.86C15.68,6.86 16.16,8.21 15.95,9.57L15.89,10H14L14.09,9.41C14.24,8.62 14,7.83 13.42,7.21L13.35,7.15C12.32,6.14 11.85,4.79 12.05,3.43L12.11,3H14L13.91,3.59C13.76,4.38 14,5.17 14.58,5.79L14.65,5.86Z",
+  humidity: "M12,3.25C12,3.25 6,10 6,14C6,17.32 8.69,20 12,20A6,6 0 0,0 18,14C18,10 12,3.25 12,3.25M14.47,9.97L15.53,11.03L9.53,17.03L8.47,15.97M9.75,10A1.25,1.25 0 0,1 11,11.25A1.25,1.25 0 0,1 9.75,12.5A1.25,1.25 0 0,1 8.5,11.25A1.25,1.25 0 0,1 9.75,10M14.25,14.5A1.25,1.25 0 0,1 15.5,15.75A1.25,1.25 0 0,1 14.25,17A1.25,1.25 0 0,1 13,15.75A1.25,1.25 0 0,1 14.25,14.5Z",
+  door: "M12,3C10.89,3 10,3.89 10,5H3V19H2V21H22V19H21V5C21,3.89 20.11,3 19,3H12M12,5H19V19H12V5M5,11H7V13H5V11Z",
   thermometer: "M15 13V5A3 3 0 0 0 9 5V13A5 5 0 1 0 15 13M12 4A1 1 0 0 1 13 5V8H11V5A1 1 0 0 1 12 4Z",
   water_temp: "M10 13V5C10 3.34 8.66 2 7 2S4 3.34 4 5V13C1.79 14.66 1.34 17.79 3 20S7.79 22.66 10 21 12.66 16.21 11 14C10.72 13.62 10.38 13.28 10 13M7 4C7.55 4 8 4.45 8 5V8H6V5C6 4.45 6.45 4 7 4M18 7C18 7 14 11.34 14 14.07C14 19.31 22 19.31 22 14.07C22 11.34 18 7 18 7Z",
   air: "M10 2L7.6 5.4C8.4 5.2 9.2 5 10 5S11.6 5.2 12.4 5.4L10 2M21 13.8V7C21 5.9 20.1 5 19 5S17 5.9 17 7V13.8C16.4 14.4 16 15.2 16 16C16 17.7 17.3 19 19 19S22 17.7 22 16C22 15.1 21.6 14.3 21 13.8M20 8H18V7C18 6.4 18.4 6 19 6S20 6.4 20 7V8M5.5 6.7L1.3 7L3.1 10.8C3.2 10 3.5 9.2 3.9 8.5C4.4 7.8 4.9 7.2 5.5 6.7M10 7C7.2 7 5 9.2 5 12S7.2 17 10 17 15 14.8 15 12 12.8 7 10 7M10 15C8.3 15 7 13.7 7 12S8.3 9 10 9 13 10.3 13 12 11.7 15 10 15M3.2 13.2L1.4 17L5.5 17.4C5 16.9 4.4 16.2 4 15.5C3.5 14.8 3.3 14 3.2 13.2M7.6 18.6L10 22L12.4 18.6C11.6 18.8 10.8 19 10 19C9.1 19 8.3 18.8 7.6 18.6Z",
@@ -180,6 +182,21 @@ const STRINGS = {
     max: "max",
     language: "Language",
     lang_auto: "Automatic (Home Assistant language)",
+    sauna: "Sauna",
+    kind_sauna: "Sauna",
+    heater: "Heater",
+    temperature: "Temperature",
+    humidity: "Humidity",
+    door: "Door",
+    session: "Session time left",
+    ready_time: "Time to temperature",
+    target_temperature: "Target (heater on a switch)",
+    sauna_ready: "Ready",
+    ready_in: "Ready in {time}",
+    heating_to: "Heating to {temp}",
+    session_left: "Session · {time} left",
+    door_open: "Door open",
+    door_open_heating: "The door is open while the sauna heats: close it to keep the heat in.",
   },
   fr: {
     pool: "Piscine",
@@ -306,6 +323,21 @@ const STRINGS = {
     max: "max",
     language: "Langue",
     lang_auto: "Automatique (langue de Home Assistant)",
+    sauna: "Sauna",
+    kind_sauna: "Sauna",
+    heater: "Poêle",
+    temperature: "Température",
+    humidity: "Humidité",
+    door: "Porte",
+    session: "Temps de séance restant",
+    ready_time: "Temps de chauffe restant",
+    target_temperature: "Consigne (poêle sur une prise)",
+    sauna_ready: "Prêt",
+    ready_in: "Prêt dans {time}",
+    heating_to: "Chauffe jusqu'à {temp}",
+    session_left: "Séance · {time} restantes",
+    door_open: "Porte ouverte",
+    door_open_heating: "La porte est ouverte pendant la chauffe : fermez-la pour garder la chaleur.",
   },
   de: {
     pool: "Pool",
@@ -432,6 +464,21 @@ const STRINGS = {
     max: "max",
     language: "Sprache",
     lang_auto: "Automatisch (Sprache von Home Assistant)",
+    sauna: "Sauna",
+    kind_sauna: "Sauna",
+    heater: "Saunaofen",
+    temperature: "Temperatur",
+    humidity: "Luftfeuchtigkeit",
+    door: "Tür",
+    session: "Verbleibende Saunazeit",
+    ready_time: "Zeit bis zur Temperatur",
+    target_temperature: "Sollwert (Ofen an einem Schalter)",
+    sauna_ready: "Bereit",
+    ready_in: "Bereit in {time}",
+    heating_to: "Heizt auf {temp}",
+    session_left: "Saunagang · noch {time}",
+    door_open: "Tür offen",
+    door_open_heating: "Die Tür ist offen, während die Sauna heizt: schließen Sie sie, um die Wärme zu halten.",
   },
   es: {
     pool: "Piscina",
@@ -558,6 +605,21 @@ const STRINGS = {
     max: "máx",
     language: "Idioma",
     lang_auto: "Automático (idioma de Home Assistant)",
+    sauna: "Sauna",
+    kind_sauna: "Sauna",
+    heater: "Estufa",
+    temperature: "Temperatura",
+    humidity: "Humedad",
+    door: "Puerta",
+    session: "Tiempo de sesión restante",
+    ready_time: "Tiempo hasta la temperatura",
+    target_temperature: "Consigna (estufa en un enchufe)",
+    sauna_ready: "Lista",
+    ready_in: "Lista en {time}",
+    heating_to: "Calentando a {temp}",
+    session_left: "Sesión · quedan {time}",
+    door_open: "Puerta abierta",
+    door_open_heating: "La puerta está abierta mientras la sauna calienta: ciérrela para conservar el calor.",
   },
   sr: {
     pool: "Базен",
@@ -684,6 +746,21 @@ const STRINGS = {
     max: "макс",
     language: "Језик",
     lang_auto: "Аутоматски (језик Home Assistant-а)",
+    sauna: "Сауна",
+    kind_sauna: "Сауна",
+    heater: "Грејач",
+    temperature: "Температура",
+    humidity: "Влажност",
+    door: "Врата",
+    session: "Преостало време сеансе",
+    ready_time: "Време до температуре",
+    target_temperature: "Задата вредност (грејач на прекидачу)",
+    sauna_ready: "Спремна",
+    ready_in: "Спремна за {time}",
+    heating_to: "Загрева до {temp}",
+    session_left: "Сеанса · још {time}",
+    door_open: "Врата отворена",
+    door_open_heating: "Врата су отворена док се сауна загрева: затворите их да задржите топлоту.",
   },
   "sr-Latn": {
     pool: "Bazen",
@@ -810,6 +887,21 @@ const STRINGS = {
     max: "maks",
     language: "Jezik",
     lang_auto: "Automatski (jezik Home Assistant-a)",
+    sauna: "Sauna",
+    kind_sauna: "Sauna",
+    heater: "Grejač",
+    temperature: "Temperatura",
+    humidity: "Vlažnost",
+    door: "Vrata",
+    session: "Preostalo vreme seanse",
+    ready_time: "Vreme do temperature",
+    target_temperature: "Zadata vrednost (grejač na prekidaču)",
+    sauna_ready: "Spremna",
+    ready_in: "Spremna za {time}",
+    heating_to: "Zagreva do {temp}",
+    session_left: "Seansa · još {time}",
+    door_open: "Vrata otvorena",
+    door_open_heating: "Vrata su otvorena dok se sauna zagreva: zatvorite ih da zadržite toplotu.",
   },
   it: {
     pool: "Piscina",
@@ -936,6 +1028,21 @@ const STRINGS = {
     max: "max",
     language: "Lingua",
     lang_auto: "Automatica (lingua di Home Assistant)",
+    sauna: "Sauna",
+    kind_sauna: "Sauna",
+    heater: "Stufa",
+    temperature: "Temperatura",
+    humidity: "Umidità",
+    door: "Porta",
+    session: "Tempo di sessione rimanente",
+    ready_time: "Tempo per la temperatura",
+    target_temperature: "Temperatura impostata (stufa su una presa)",
+    sauna_ready: "Pronta",
+    ready_in: "Pronta tra {time}",
+    heating_to: "Riscalda a {temp}",
+    session_left: "Sessione · {time} rimanenti",
+    door_open: "Porta aperta",
+    door_open_heating: "La porta è aperta mentre la sauna si scalda: chiudila per trattenere il calore.",
   },
   nl: {
     pool: "Zwembad",
@@ -1062,6 +1169,21 @@ const STRINGS = {
     max: "max",
     language: "Taal",
     lang_auto: "Automatisch (taal van Home Assistant)",
+    sauna: "Sauna",
+    kind_sauna: "Sauna",
+    heater: "Kachel",
+    temperature: "Temperatuur",
+    humidity: "Luchtvochtigheid",
+    door: "Deur",
+    session: "Resterende sessietijd",
+    ready_time: "Tijd tot temperatuur",
+    target_temperature: "Doeltemperatuur (kachel op een schakelaar)",
+    sauna_ready: "Klaar",
+    ready_in: "Klaar over {time}",
+    heating_to: "Verwarmt tot {temp}",
+    session_left: "Sessie · nog {time}",
+    door_open: "Deur open",
+    door_open_heating: "De deur staat open terwijl de sauna opwarmt: sluit hem om de warmte binnen te houden.",
   },
   pt: {
     pool: "Piscina",
@@ -1188,6 +1310,21 @@ const STRINGS = {
     max: "máx",
     language: "Idioma",
     lang_auto: "Automático (idioma do Home Assistant)",
+    sauna: "Sauna",
+    kind_sauna: "Sauna",
+    heater: "Aquecedor",
+    temperature: "Temperatura",
+    humidity: "Humidade",
+    door: "Porta",
+    session: "Tempo de sessão restante",
+    ready_time: "Tempo até à temperatura",
+    target_temperature: "Temperatura definida (aquecedor numa tomada)",
+    sauna_ready: "Pronta",
+    ready_in: "Pronta em {time}",
+    heating_to: "A aquecer até {temp}",
+    session_left: "Sessão · faltam {time}",
+    door_open: "Porta aberta",
+    door_open_heating: "A porta está aberta enquanto a sauna aquece: feche-a para manter o calor.",
   },
   pl: {
     pool: "Basen",
@@ -1314,6 +1451,21 @@ const STRINGS = {
     max: "maks",
     language: "Język",
     lang_auto: "Automatycznie (język Home Assistant)",
+    sauna: "Sauna",
+    kind_sauna: "Sauna",
+    heater: "Piec",
+    temperature: "Temperatura",
+    humidity: "Wilgotność",
+    door: "Drzwi",
+    session: "Pozostały czas sesji",
+    ready_time: "Czas do osiągnięcia temperatury",
+    target_temperature: "Temperatura zadana (piec na gniazdku)",
+    sauna_ready: "Gotowa",
+    ready_in: "Gotowa za {time}",
+    heating_to: "Nagrzewa do {temp}",
+    session_left: "Sesja · zostało {time}",
+    door_open: "Drzwi otwarte",
+    door_open_heating: "Drzwi są otwarte podczas nagrzewania sauny: zamknij je, aby zatrzymać ciepło.",
   },
   ro: {
     pool: "Piscină",
@@ -1440,6 +1592,21 @@ const STRINGS = {
     max: "max",
     language: "Limbă",
     lang_auto: "Automat (limba Home Assistant)",
+    sauna: "Saună",
+    kind_sauna: "Saună",
+    heater: "Sobă",
+    temperature: "Temperatură",
+    humidity: "Umiditate",
+    door: "Ușă",
+    session: "Timp rămas din sesiune",
+    ready_time: "Timp până la temperatură",
+    target_temperature: "Temperatură setată (sobă pe o priză)",
+    sauna_ready: "Gata",
+    ready_in: "Gata în {time}",
+    heating_to: "Se încălzește la {temp}",
+    session_left: "Sesiune · mai sunt {time}",
+    door_open: "Ușă deschisă",
+    door_open_heating: "Ușa este deschisă în timp ce sauna se încălzește: închideți-o ca să păstrați căldura.",
   },
   da: {
     pool: "Pool",
@@ -1566,6 +1733,21 @@ const STRINGS = {
     max: "maks",
     language: "Sprog",
     lang_auto: "Automatisk (Home Assistant-sprog)",
+    sauna: "Sauna",
+    kind_sauna: "Sauna",
+    heater: "Saunaovn",
+    temperature: "Temperatur",
+    humidity: "Luftfugtighed",
+    door: "Dør",
+    session: "Resterende sessionstid",
+    ready_time: "Tid til temperatur",
+    target_temperature: "Måltemperatur (ovn på en kontakt)",
+    sauna_ready: "Klar",
+    ready_in: "Klar om {time}",
+    heating_to: "Varmer op til {temp}",
+    session_left: "Session · {time} tilbage",
+    door_open: "Dør åben",
+    door_open_heating: "Døren står åben, mens saunaen varmer op: luk den for at holde på varmen.",
   },
   sv: {
     pool: "Pool",
@@ -1692,6 +1874,21 @@ const STRINGS = {
     max: "max",
     language: "Språk",
     lang_auto: "Automatiskt (Home Assistants språk)",
+    sauna: "Bastu",
+    kind_sauna: "Bastu",
+    heater: "Bastuaggregat",
+    temperature: "Temperatur",
+    humidity: "Luftfuktighet",
+    door: "Dörr",
+    session: "Återstående badtid",
+    ready_time: "Tid till temperatur",
+    target_temperature: "Börvärde (aggregat på en brytare)",
+    sauna_ready: "Klar",
+    ready_in: "Klar om {time}",
+    heating_to: "Värmer till {temp}",
+    session_left: "Bad · {time} kvar",
+    door_open: "Dörr öppen",
+    door_open_heating: "Dörren är öppen medan bastun värms: stäng den för att hålla kvar värmen.",
   },
   bg: {
     pool: "Басейн",
@@ -1818,6 +2015,21 @@ const STRINGS = {
     max: "макс",
     language: "Език",
     lang_auto: "Автоматично (езикът на Home Assistant)",
+    sauna: "Сауна",
+    kind_sauna: "Сауна",
+    heater: "Нагревател",
+    temperature: "Температура",
+    humidity: "Влажност",
+    door: "Врата",
+    session: "Оставащо време на сеанса",
+    ready_time: "Време до температурата",
+    target_temperature: "Зададена температура (нагревател на контакт)",
+    sauna_ready: "Готова",
+    ready_in: "Готова след {time}",
+    heating_to: "Загрява до {temp}",
+    session_left: "Сеанс · остават {time}",
+    door_open: "Отворена врата",
+    door_open_heating: "Вратата е отворена, докато сауната загрява: затворете я, за да задържите топлината.",
   },
   ru: {
     pool: "Бассейн",
@@ -1944,6 +2156,21 @@ const STRINGS = {
     max: "макс.",
     language: "Язык",
     lang_auto: "Автоматически (язык Home Assistant)",
+    sauna: "Сауна",
+    kind_sauna: "Сауна",
+    heater: "Печь",
+    temperature: "Температура",
+    humidity: "Влажность",
+    door: "Дверь",
+    session: "Оставшееся время сеанса",
+    ready_time: "Время до нагрева",
+    target_temperature: "Заданная температура (печь на розетке)",
+    sauna_ready: "Готова",
+    ready_in: "Готова через {time}",
+    heating_to: "Нагрев до {temp}",
+    session_left: "Сеанс · осталось {time}",
+    door_open: "Дверь открыта",
+    door_open_heating: "Дверь открыта во время нагрева сауны: закройте её, чтобы сохранить тепло.",
   },
   uk: {
     pool: "Басейн",
@@ -2070,6 +2297,21 @@ const STRINGS = {
     max: "макс.",
     language: "Мова",
     lang_auto: "Автоматично (мова Home Assistant)",
+    sauna: "Сауна",
+    kind_sauna: "Сауна",
+    heater: "Піч",
+    temperature: "Температура",
+    humidity: "Вологість",
+    door: "Двері",
+    session: "Залишок часу сеансу",
+    ready_time: "Час до нагрівання",
+    target_temperature: "Задана температура (піч на розетці)",
+    sauna_ready: "Готова",
+    ready_in: "Готова через {time}",
+    heating_to: "Нагрів до {temp}",
+    session_left: "Сеанс · залишилось {time}",
+    door_open: "Двері відчинені",
+    door_open_heating: "Двері відчинені під час нагрівання сауни: зачиніть їх, щоб зберегти тепло.",
   },
   hu: {
     pool: "Medence",
@@ -2196,6 +2438,21 @@ const STRINGS = {
     max: "max.",
     language: "Nyelv",
     lang_auto: "Automatikus (a Home Assistant nyelve)",
+    sauna: "Szauna",
+    kind_sauna: "Szauna",
+    heater: "Kályha",
+    temperature: "Hőmérséklet",
+    humidity: "Páratartalom",
+    door: "Ajtó",
+    session: "Hátralévő szaunázási idő",
+    ready_time: "Idő a hőmérséklet eléréséig",
+    target_temperature: "Célhőmérséklet (kályha kapcsolón)",
+    sauna_ready: "Kész",
+    ready_in: "Kész {time} múlva",
+    heating_to: "Fűtés: {temp}",
+    session_left: "Szaunázás · még {time}",
+    door_open: "Nyitott ajtó",
+    door_open_heating: "Az ajtó nyitva van, miközben a szauna fűt: csukja be, hogy bent maradjon a meleg.",
   },
   sk: {
     pool: "Bazén",
@@ -2322,6 +2579,21 @@ const STRINGS = {
     max: "max",
     language: "Jazyk",
     lang_auto: "Automaticky (jazyk Home Assistant)",
+    sauna: "Sauna",
+    kind_sauna: "Sauna",
+    heater: "Pec",
+    temperature: "Teplota",
+    humidity: "Vlhkosť",
+    door: "Dvere",
+    session: "Zostávajúci čas saunovania",
+    ready_time: "Čas do dosiahnutia teploty",
+    target_temperature: "Cieľová teplota (pec na zásuvke)",
+    sauna_ready: "Pripravená",
+    ready_in: "Pripravená o {time}",
+    heating_to: "Ohrieva na {temp}",
+    session_left: "Saunovanie · ešte {time}",
+    door_open: "Otvorené dvere",
+    door_open_heating: "Dvere sú otvorené, kým sa sauna ohrieva: zatvorte ich, aby sa teplo udržalo.",
   },
   cs: {
     pool: "Bazén",
@@ -2448,6 +2720,21 @@ const STRINGS = {
     max: "max",
     language: "Jazyk",
     lang_auto: "Automaticky (jazyk Home Assistant)",
+    sauna: "Sauna",
+    kind_sauna: "Sauna",
+    heater: "Kamna",
+    temperature: "Teplota",
+    humidity: "Vlhkost",
+    door: "Dveře",
+    session: "Zbývající čas saunování",
+    ready_time: "Čas do dosažení teploty",
+    target_temperature: "Cílová teplota (kamna na zásuvce)",
+    sauna_ready: "Připravena",
+    ready_in: "Připravena za {time}",
+    heating_to: "Ohřívá na {temp}",
+    session_left: "Saunování · ještě {time}",
+    door_open: "Otevřené dveře",
+    door_open_heating: "Dveře jsou otevřené, zatímco se sauna ohřívá: zavřete je, aby se teplo udrželo.",
   },
   sl: {
     pool: "Bazen",
@@ -2574,6 +2861,21 @@ const STRINGS = {
     max: "maks",
     language: "Jezik",
     lang_auto: "Samodejno (jezik Home Assistanta)",
+    sauna: "Savna",
+    kind_sauna: "Savna",
+    heater: "Peč",
+    temperature: "Temperatura",
+    humidity: "Vlažnost",
+    door: "Vrata",
+    session: "Preostali čas seanse",
+    ready_time: "Čas do temperature",
+    target_temperature: "Ciljna temperatura (peč na vtičnici)",
+    sauna_ready: "Pripravljena",
+    ready_in: "Pripravljena čez {time}",
+    heating_to: "Segreva na {temp}",
+    session_left: "Seansa · še {time}",
+    door_open: "Odprta vrata",
+    door_open_heating: "Vrata so odprta, medtem ko se savna segreva: zaprite jih, da ostane toplota v njej.",
   },
   lv: {
     pool: "Baseins",
@@ -2700,6 +3002,21 @@ const STRINGS = {
     max: "maks.",
     language: "Valoda",
     lang_auto: "Automātiski (Home Assistant valoda)",
+    sauna: "Pirts",
+    kind_sauna: "Pirts",
+    heater: "Krāsns",
+    temperature: "Temperatūra",
+    humidity: "Mitrums",
+    door: "Durvis",
+    session: "Atlikušais pērienu laiks",
+    ready_time: "Laiks līdz temperatūrai",
+    target_temperature: "Mērķa temperatūra (krāsns kontaktligzdā)",
+    sauna_ready: "Gatava",
+    ready_in: "Gatava pēc {time}",
+    heating_to: "Sildās līdz {temp}",
+    session_left: "Pēriens · atlikušas {time}",
+    door_open: "Durvis atvērtas",
+    door_open_heating: "Durvis ir atvērtas, kamēr pirts sildās: aizveriet tās, lai saglabātu siltumu.",
   },
   el: {
     pool: "Πισίνα",
@@ -2826,6 +3143,21 @@ const STRINGS = {
     max: "μέγ.",
     language: "Γλώσσα",
     lang_auto: "Αυτόματα (γλώσσα του Home Assistant)",
+    sauna: "Σάουνα",
+    kind_sauna: "Σάουνα",
+    heater: "Θερμάστρα",
+    temperature: "Θερμοκρασία",
+    humidity: "Υγρασία",
+    door: "Πόρτα",
+    session: "Υπόλοιπος χρόνος συνεδρίας",
+    ready_time: "Χρόνος έως τη θερμοκρασία",
+    target_temperature: "Θερμοκρασία στόχος (θερμάστρα σε πρίζα)",
+    sauna_ready: "Έτοιμη",
+    ready_in: "Έτοιμη σε {time}",
+    heating_to: "Θέρμανση στους {temp}",
+    session_left: "Συνεδρία · απομένουν {time}",
+    door_open: "Πόρτα ανοιχτή",
+    door_open_heating: "Η πόρτα είναι ανοιχτή ενώ η σάουνα ζεσταίνεται: κλείστε την για να κρατήσετε τη ζέστη.",
   },
 };
 
@@ -3085,6 +3417,8 @@ const autoDevice = (hass) => {
   let best = null;
   let score = 1;
   for (const id of Object.keys(hass.devices)) {
+    const dev = hass.devices[id];
+    if (SAUNA_RE.test(norm([deviceName(dev), dev?.manufacturer].filter(Boolean).join(" ")))) continue;
     const roles = rolesOf(hass, id);
     const n = SENSOR_ROLES.filter((r) => roles[r] && r !== "air_temperature" && r !== "water_temperature").length + (roles.water_temperature ? 0.5 : 0);
     if (n > score) {
@@ -3157,8 +3491,93 @@ const robotParts = (hass, id) => {
 };
 
 const kindOf = (config, name) => {
-  if (config.kind === "spa" || config.kind === "pool") return config.kind;
+  if (["spa", "pool", "sauna"].includes(config.kind)) return config.kind;
   return /\bspa\b|jacuzzi|hot.?tub|whirlpool|jacuzi|balneo|whirlpool/.test(norm(name)) ? "spa" : "pool";
+};
+
+// ---------------------------------------------------------------------------
+// Sauna: its heater, temperature and humidity, door, time to temperature and session
+// ---------------------------------------------------------------------------
+
+// A sauna is told by its name (in any language) or its maker, or set with `kind: sauna`.
+const SAUNA_RE = /sauna|сауна|σαουνα|bastu|pirts|savna|szauna|kiuas|harvia|huum|tylo/;
+const SAUNA_ROLES = ["heater", "temperature", "humidity", "door", "session", "ready_time"];
+const SAUNA_DOMAINS = {
+  heater: ["climate", "switch", "input_boolean"],
+  temperature: ["sensor"],
+  humidity: ["sensor"],
+  door: ["binary_sensor"],
+  session: ["sensor", "timer"],
+  ready_time: ["sensor"],
+};
+const HUMIDITY_RE = /humid|feucht|humed|umid|vocht|wilgot|влаж|vlh|vlaz|parat|mitrum|υγρ|fukt|fugt/;
+const READY_RE = /ready|heat.?up|time.?to|warm.?up|pret|chauffe|aufheiz|bereit|listo|pronto|klaar/;
+const SESSION_RE = /session|seance|remaining|left|restant|verbleib|bath|bad|sesion|sessione|sessie/;
+const DOOR_RE = /door|porte|tur|puerta|porta|deur|drzwi|dvere|ajto|vrata|durvis|πορτα|двер|врат/;
+const NOT_HEATER_RE = /light|lumi|licht|led|lamp|fan|vent|music|speaker/;
+
+// The sauna's entities on its device, by kind and name.
+const saunaRolesOf = (hass, deviceId) => {
+  const out = {};
+  let sw = null;
+  const ids = Object.values(hass.entities || {})
+    .filter((e) => e.device_id === deviceId && !e.hidden && !e.disabled_by && e.entity_category !== "config" && hass.states?.[e.entity_id])
+    .map((e) => e.entity_id)
+    .sort();
+  for (const id of ids) {
+    const e = hass.entities[id];
+    const a = hass.states[id].attributes || {};
+    const d = domainOf(id);
+    const unit = String(a.unit_of_measurement || "");
+    const text = norm([id, e.translation_key, e.original_name, e.name, a.friendly_name].filter(Boolean).join(" "));
+    if (d === "climate") out.heater ??= id;
+    else if ((d === "switch" || d === "input_boolean") && !NOT_HEATER_RE.test(text)) sw ??= id;
+    else if (d === "sensor") {
+      if (a.device_class === "temperature" || /°[cf]/i.test(unit)) {
+        if (!NOT_MEASURE_RE.test(text)) out.temperature ??= id;
+      } else if (a.device_class === "humidity" || (unit === "%" && HUMIDITY_RE.test(text))) out.humidity ??= id;
+      else if (a.device_class === "duration" || /^(min|h|s)$/.test(unit)) {
+        if (READY_RE.test(text)) out.ready_time ??= id;
+        else if (SESSION_RE.test(text)) out.session ??= id;
+      }
+    } else if (d === "binary_sensor" && (["door", "opening"].includes(a.device_class) || DOOR_RE.test(text))) out.door ??= id;
+    else if (d === "timer") out.session ??= id;
+  }
+  if (!out.heater && sw) out.heater = sw;
+  return out;
+};
+
+// The sauna of the card, or null when the card is a pool or a spa: `kind: sauna`, or a device (or heater) named like a
+// sauna or made by a sauna maker. Its entities: those of the device, each replaced by the one set in the options.
+const saunaSetupOf = (hass, config) => {
+  if (config.kind && config.kind !== "auto" && config.kind !== "sauna") return null;
+  const explicit = Object.fromEntries(SAUNA_ROLES.filter((r) => typeof config[r] === "string" && config[r]).map((r) => [r, config[r]]));
+  let deviceId = null;
+  if (config.device) {
+    deviceId = findDeviceId(hass, config.device);
+    if (deviceId === undefined) return config.kind === "sauna" ? { error: "unknown_device" } : null;
+  }
+  const device = deviceId ? hass.devices?.[deviceId] : null;
+  const heaterName = explicit.heater ? [explicit.heater, hass.states?.[explicit.heater]?.attributes?.friendly_name] : [];
+  if (config.kind !== "sauna" && !SAUNA_RE.test(norm([config.title, deviceName(device), device?.manufacturer, device?.model, ...heaterName].filter(Boolean).join(" ")))) return null;
+  const roles = { ...(deviceId ? saunaRolesOf(hass, deviceId) : {}), ...explicit };
+  if (!roles.heater && !roles.temperature) return { error: "no_entities" };
+  return { roles, deviceId, device };
+};
+
+// Hours left of a session: a timer (its end, or its remaining time while paused) or a duration sensor.
+const sessionHours = (s, now = Date.now()) => {
+  if (!valid(s)) return null;
+  if (domainOf(s.entity_id) !== "timer") {
+    const h = toHours(s);
+    return h !== null && h > 0 ? h : null;
+  }
+  if (s.state === "active" && s.attributes?.finishes_at) return Math.max(0, (Date.parse(s.attributes.finishes_at) - now) / 3.6e6);
+  if (s.state === "paused" && typeof s.attributes?.remaining === "string") {
+    const [hh = 0, mm = 0, ss = 0] = s.attributes.remaining.split(":").map(Number);
+    return hh + mm / 60 + ss / 3600;
+  }
+  return null;
 };
 
 // ---------------------------------------------------------------------------
@@ -3418,6 +3837,46 @@ const lawnSvg = (uid, night) => {
   return `<svg class="lawn" aria-hidden="true"><defs><pattern id="pc-lawn${uid}" width="24" height="24" patternUnits="userSpaceOnUse"><rect width="24" height="24" fill="${base}"/><rect width="12" height="24" fill="${stripe}"/><g stroke-width=".7" stroke-linecap="round">${blades}</g></pattern></defs><rect width="100%" height="100%" fill="url(#pc-lawn${uid})"/><g fill="${flower}" opacity=".8">${flowers}</g></svg>`;
 };
 
+// The sauna, 150 × 80: a bench on the left, a thermometer, the heater with its stones and a bucket on the right. While
+// the heater is on its firebox burns and a warm glow fills the cabin; while it heats, the stones glow and steam rises.
+const STEAM = [
+  [96, 0],
+  [106, 0.75],
+  [116, 1.5],
+  [124, 2.25],
+];
+const STONES = [
+  [87, 38, "#868e96"],
+  [94, 37, "#6c757d"],
+  [101, 38, "#adb5bd"],
+  [108, 37, "#868e96"],
+  [115, 38, "#6c757d"],
+  [121, 37, "#adb5bd"],
+  [91, 34, "#adb5bd"],
+  [98, 33, "#868e96"],
+  [105, 34, "#6c757d"],
+  [112, 33, "#adb5bd"],
+  [118, 34, "#868e96"],
+];
+const saunaSvg = ({ on, heating, level = 0, uid = "" }) => `<svg viewBox="0 0 150 80" aria-hidden="true">
+    <defs>
+      <radialGradient id="pc-sglow${uid}" cx="50%" cy="55%" r="50%"><stop offset="0" stop-color="#ff922b" stop-opacity=".6"/><stop offset="1" stop-color="#ff922b" stop-opacity="0"/></radialGradient>
+      <linearGradient id="pc-sheat${uid}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5c636e"/><stop offset="1" stop-color="#212529"/></linearGradient>
+      <linearGradient id="pc-sbench${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c58b4b"/><stop offset="1" stop-color="#9c6630"/></linearGradient>
+    </defs>
+    ${on ? `<ellipse class="glow" cx="104" cy="52" rx="48" ry="40" fill="url(#pc-sglow${uid})"/>` : ""}
+    <rect x="2" y="44" width="50" height="5" rx="2" fill="url(#pc-sbench${uid})"/><rect x="2" y="58" width="50" height="4.5" rx="2" fill="url(#pc-sbench${uid})" opacity=".85"/>
+    <path d="M7 49v31M47 49v31" stroke="#7f5539" stroke-width="3.5"/>
+    <rect class="thermo" x="60" y="10" width="10" height="26" rx="5"/><rect x="63.5" y="${(33 - 18 * level).toFixed(1)}" width="3" height="${(18 * level + 1).toFixed(1)}" rx="1.5" fill="#e03131"/><circle cx="65" cy="33" r="3.6" fill="#e03131"/>
+    ${heating ? `<g class="steam">${STEAM.map(([x, d]) => `<path d="M${x} 30c-3-5 3-8 0-13s3-7 0-11" style="animation-delay:${d}s"/>`).join("")}</g>` : ""}
+    <rect x="82" y="40" width="44" height="40" rx="5" fill="url(#pc-sheat${uid})"/><rect x="82" y="40" width="44" height="5" rx="2" fill="#868e96"/>
+    ${STONES.map(([x, y, c]) => `<ellipse cx="${x}" cy="${y}" rx="4.4" ry="3.5" fill="${c}"/>`).join("")}
+    ${heating ? `<g class="embers">${STONES.slice(0, 6).map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="3.4" ry="2.4" fill="#ff922b"/>`).join("")}</g>` : ""}
+    <rect x="92" y="56" width="24" height="14" rx="3" fill="#1a1410"/>
+    ${on ? `<g class="flame"><path d="M97 70c0-5 3-6 3-9 2 2 3 4 3 6 1-1 1-3 1-4 2 2 3 4 3 7z" fill="#ff922b"/><path d="M104 70c0-4 2-5 2-7 2 2 3 4 2 7z" fill="#ffd43b"/></g>` : ""}
+    <path d="M130 64h14l-2.5 16h-9z" fill="#a47148"/><path d="M131 69h12M131.5 75h11" stroke="#7f5539" stroke-width=".8"/><path d="M137 64v-9h7" stroke="#5d4037" stroke-width="1.6" fill="none"/>
+  </svg>`;
+
 // Night picture: forced by illustration_theme, else Home Assistant's dark mode alone (a light theme keeps the day
 // picture after sunset).
 const isNight = (hass, config) => {
@@ -3601,6 +4060,22 @@ const BASE_STYLE = `
   .banner:has(> .zoom) .htext { right: 147px; }
   /* Coping stones edging the pool, the water's edge as a thin blue line on top. */
   .ground { position: absolute; left: 0; right: 0; bottom: 0; height: 10px; }
+  /* Sauna: a cabin of wooden planks over a bench strip; the heater glows, burns and steams on the right. */
+  .banner.sauna { background: repeating-linear-gradient(180deg, #ecc08a 0 9px, #dda56a 9px 10px); --pc-bt: #3d2108; --pc-bs: #6b3d14; }
+  .banner.sauna.night { background: repeating-linear-gradient(180deg, #4a3018 0 9px, #3c2612 9px 10px); --pc-bt: #fff; --pc-bs: rgba(255,255,255,.8); }
+  .banner.sauna .htext { right: 160px; }
+  .banner.sauna:has(> .zoom) .htext { right: 182px; }
+  .banner .scene.sauna-scene { right: 6px; bottom: 10px; width: 150px; height: 80px; }
+  .banner:has(> .zoom) .scene.sauna-scene { right: 28px; }
+  .scene.sauna-scene svg { filter: none; }
+  .sauna-scene .thermo { fill: #fff; stroke: #ced4da; stroke-width: .8; }
+  .sauna-scene .steam path { fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; opacity: 0; animation: pc-steam 3s ease-out infinite; }
+  .sauna-scene .embers { animation: pc-glow 1.5s ease-in-out infinite alternate; }
+  @keyframes pc-steam { 0% { transform: translateY(6px); opacity: 0; } 30% { opacity: .6; } 100% { transform: translateY(-14px); opacity: 0; } }
+  .g-bench { background: repeating-linear-gradient(90deg, #a8763f 0 30px, #8a5a2b 30px 32px); box-shadow: inset 0 2px 0 #c49058; }
+  .night .g-bench { background: repeating-linear-gradient(90deg, #523a20 0 30px, #3d2a17 30px 32px); box-shadow: inset 0 2px 0 #6b4c2a; }
+  .sbar { height: 6px; border-radius: 3px; margin: 6px 0 4px; background: var(--secondary-background-color, rgba(127,127,127,.15)); overflow: hidden; }
+  .sbar i { display: block; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #ffa94d, #f76707); }
   .g-coping { background: repeating-linear-gradient(90deg, #e6dcc8 0 30px, #cfc3ab 30px 32px); box-shadow: inset 0 2px 0 #4fb3e8, inset 0 3px 0 #f4ede0; }
   .night .g-coping { background: repeating-linear-gradient(90deg, #4a4438 0 30px, #3a352c 30px 32px); box-shadow: inset 0 2px 0 #1f5a8a; }
   /* Narrow card: no room for the pool beside the title, the lawn alone stays. */
@@ -3654,6 +4129,7 @@ const FULL_STYLE = `
   .content { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 12px; }
   .controls { display: flex; flex-wrap: wrap; gap: 6px; }
   .controls .btn { flex: 1 1 auto; }
+  .controls .btn.round { flex: none; }
   .section-title { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; text-transform: uppercase;
                    letter-spacing: .04em; color: var(--secondary-text-color); margin-bottom: 6px; }
   .section-title .icon { width: 16px; height: 16px; }
@@ -3858,6 +4334,13 @@ class PoolCard extends HTMLElement {
   _deps() {
     const h = this._hass;
     if (!h || !this._config) return null;
+    const sauna = saunaSetupOf(h, this._config);
+    if (sauna) {
+      if (sauna.error) return null;
+      // A timer's time left moves on its own: redrawn every minute (see the tick in connectedCallback).
+      const timer = domainOf(sauna.roles.session) === "timer" ? Math.floor(Date.now() / 60000) : null;
+      return [h.entities, h.devices, h.language, h.locale, h.themes?.darkMode, timer, ...Object.values(sauna.roles).map((id) => h.states[id])];
+    }
     const setup = setupOf(h, this._config);
     if (setup.error) return null;
     const ids = Object.values(setup.roles);
@@ -4005,6 +4488,8 @@ class PoolCard extends HTMLElement {
 
   // Everything a render shows, computed once per render.
   _model() {
+    const sauna = saunaSetupOf(this._hass, this._config);
+    if (sauna) return sauna.error ? sauna : this._saunaModel(sauna);
     const setup = setupOf(this._hass, this._config);
     if (setup.error) return setup;
     const { roles } = setup;
@@ -4058,6 +4543,58 @@ class PoolCard extends HTMLElement {
     const disinfection = ["orp", "chlorine"].some((r) => metrics[r]?.cls === "crit" && metrics[r].side === "low");
     const water = disinfection ? "water-green" : levels.includes("crit") ? "water-warn" : "water-ok";
     return { ...setup, name: name || this._t(kind), kind, metrics, quality, tips, status, water, pump, hp, electro, robot };
+  }
+
+  // The sauna: its heater (a climate, or a switch with `target_temperature`), temperature (the heater's current one
+  // when there is no sensor), humidity, door, time to temperature and session. Ready once within 1 °C (2 °F) of the
+  // target; the door open while it heats is an alert.
+  _saunaModel(setup) {
+    const c = this._config;
+    const r = setup.roles;
+    const heater = this._s(r.heater);
+    const climate = domainOf(r.heater) === "climate";
+    const tempS = this._s(r.temperature);
+    let temp = num(tempS);
+    let unit = tempS?.attributes?.unit_of_measurement || "";
+    if (temp === null && climate && Number.isFinite(heater?.attributes?.current_temperature)) temp = heater.attributes.current_temperature;
+    if (!unit) unit = this._hass.config?.unit_system?.temperature || "°C";
+    const t = climate ? heater?.attributes?.temperature : parseFloat(c.target_temperature);
+    const target = Number.isFinite(t) ? t : null;
+    const online = valid(heater) || (!heater && temp !== null);
+    const on = valid(heater) && (climate ? heater.state !== "off" : heater.state === "on");
+    const ready = on && target !== null && temp !== null && temp >= target - (/F/.test(unit) ? 2 : 1);
+    const heatingNow = on && !ready;
+    const door = this._s(r.door);
+    const doorOpen = valid(door) && door.state === "on";
+    const readyIn = heatingNow ? toHours(this._s(r.ready_time)) : null;
+    const sessionLeft = sessionHours(this._s(r.session));
+    const tips = doorOpen && on ? [{ cls: "crit", key: "door_open_heating" }] : [];
+    const cls = !online ? "idle" : doorOpen && on ? "crit" : heatingNow ? "warn" : ready ? "ok" : "idle";
+    const label = !online ? "unavailable" : doorOpen && on ? "door_open" : heatingNow ? "heating" : ready ? "sauna_ready" : "off";
+    const name = c.title || deviceName(setup.device) || this._t("sauna");
+    return {
+      ...setup,
+      kind: "sauna",
+      name,
+      climate,
+      temp,
+      unit,
+      target,
+      humidity: num(this._s(r.humidity)),
+      online,
+      on,
+      ready,
+      heating: heatingNow,
+      doorOpen,
+      readyIn: readyIn !== null && readyIn > 0 ? readyIn : null,
+      sessionLeft,
+      tips,
+      cls,
+      status: cls,
+      label: this._t(label),
+      // How far the cabin is from the target, for the thermometer and the progress bar.
+      level: target && temp !== null ? clamp(temp / target, 0, 1) : 0,
+    };
   }
 
   // The pool robot: its state (a vacuum's, or on / off for a plug), whether it cleans, the time left of its cycle, its
@@ -4165,6 +4702,7 @@ class PoolCard extends HTMLElement {
   // The header icon's colour tells the state: red or amber when the water needs care, the accent while something
   // runs or shines (filtration, heating, cover moving, light on), grey at rest.
   _iconCls(m) {
+    if (m.kind === "sauna") return m.cls;
     if (m.status === "crit" || m.status === "warn") return m.status;
     const s = this._scene(m);
     return s.running || s.light ? "active" : "idle";
@@ -4177,8 +4715,8 @@ class PoolCard extends HTMLElement {
   // The illustrated banner (the pool on its lawn, the title on the grass), or the classic header with
   // `illustration: false`.
   _header(m, sub) {
-    const label = this._statusText(m.status);
-    const icon = `<div class="type-icon ${this._iconCls(m)}">${svgIcon(m.kind === "spa" ? ICONS.spa : ICONS.pool)}</div>`;
+    const label = m.kind === "sauna" ? m.label : this._statusText(m.status);
+    const icon = `<div class="type-icon ${this._iconCls(m)}">${m.kind === "sauna" ? `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="${FIRE}"/></svg>` : svgIcon(m.kind === "spa" ? ICONS.spa : ICONS.pool)}</div>`;
     // The status pill, in the header icon's colour.
     const chip = `<span class="chip ${this._iconCls(m)}" title="${esc(label)}" aria-label="${esc(label)}"><span class="dot"></span><span class="chip-text">${esc(label)}</span></span>`;
     const titles = (zoom) => `
@@ -4191,6 +4729,14 @@ class PoolCard extends HTMLElement {
         </div>`;
     if (!this._illustrated()) return `<div class="header">${icon}${titles(this._zoomButton())}</div>`;
     const night = isNight(this._hass, this._config);
+    if (m.kind === "sauna")
+      return `
+      <div class="banner sauna${night ? " night" : ""}">
+        ${this._saunaScene(m, night)}
+        <div class="htext">${icon}${titles("")}</div>
+        ${this._zoomButton()}
+        <div class="ground g-bench"></div>
+      </div>`;
     return `
       <div class="banner${night ? " night" : ""}">
         ${lawnSvg(this._uid, night)}${this._sceneHtml(m, night)}
@@ -4296,11 +4842,7 @@ class PoolCard extends HTMLElement {
   _controls(m, round = false) {
     if (this._config.show_controls === false) return "";
     const list = [];
-    const btn = (action, entity, icon, label, on) => {
-      const s = this._s(entity);
-      const off = !valid(s);
-      return `<button class="btn${round ? " round" : ""}${on ? " on" : ""}" data-action="${action}" data-entity="${esc(entity)}" title="${esc(label)}" aria-label="${esc(label)}" aria-pressed="${on ? "true" : "false"}"${off ? " disabled" : ""}>${svgIcon(icon)}${round ? "" : `<span>${esc(label)}</span>`}</button>`;
-    };
+    const btn = (action, entity, icon, label, on) => this._btn(action, entity, icon, label, on, round);
     const r = m.roles;
     if (m.pump && domainOf(r.pump) !== "binary_sensor") list.push(btn("pump", r.pump, ICONS.pump, this._t("pump"), pumpOn(m.pump)));
     const light = this._s(r.light);
@@ -4316,6 +4858,80 @@ class PoolCard extends HTMLElement {
     if (m.electro && ["switch", "input_boolean"].includes(domainOf(r.electrolyser)))
       list.push(btn("toggle", r.electrolyser, ICONS.electrolyser, this._t("electrolyser"), m.electro.state === "on"));
     return list.join("") + robot;
+  }
+
+  _btn(action, entity, icon, label, on, round) {
+    const off = !valid(this._s(entity));
+    return `<button class="btn${round ? " round" : ""}${on ? " on" : ""}" data-action="${action}" data-entity="${esc(entity)}" title="${esc(label)}" aria-label="${esc(label)}" aria-pressed="${on ? "true" : "false"}"${off ? " disabled" : ""}>${svgIcon(icon)}${round ? "" : `<span>${esc(label)}</span>`}</button>`;
+  }
+
+  // ----- Sauna -------------------------------------------------------------
+
+  _saunaScene(m, night) {
+    const banner = night !== undefined;
+    const dark = (banner ? night : this._hass.themes?.darkMode) ? " dark" : "";
+    const svg = saunaSvg({ on: m.on, heating: m.heating, level: m.level, uid: this._uid });
+    return `<div class="scene sauna-scene clickable${dark}${m.heating ? " running" : ""}" role="button" tabindex="0" aria-label="${esc(m.name)}" data-entity="${esc(m.roles.heater || m.roles.temperature || "")}">${svg}</div>`;
+  }
+
+  _temp(v, unit) {
+    return `${fmtNum(v, 0, this._locale())} ${unit}`;
+  }
+
+  // Under the title: the time to temperature (or the target) while it heats, the session's time left once ready.
+  _saunaSub(m) {
+    if (!m.online) return this._t("unavailable");
+    if (m.heating) {
+      if (m.readyIn !== null) return this._t("ready_in", { time: fmtHours(m.readyIn, this._locale()) });
+      return m.target !== null ? this._t("heating_to", { temp: this._temp(m.target, m.unit) }) : this._t("heating");
+    }
+    if (m.sessionLeft !== null) return this._t("session_left", { time: fmtHours(m.sessionLeft, this._locale()) });
+    return m.target !== null ? `${this._t("target")} ${this._temp(m.target, m.unit)}` : this._t("sauna");
+  }
+
+  _saunaLines(m) {
+    const r = m.roles;
+    const lines = [];
+    const line = (cls, icon, entity, html) => {
+      const click = entity ? ` clickable" role="button" tabindex="0" data-entity="${esc(entity)}` : "";
+      return `<div class="line${cls ? ` ${cls}` : ""}${click}">${svgIcon(icon)}<span>${html}</span></div>`;
+    };
+    if (m.humidity !== null) lines.push(line("", ICONS.humidity, r.humidity, `${esc(this._t("humidity"))} <b>${esc(fmtNum(m.humidity, 0, this._locale()))} %</b>`));
+    if (m.target !== null) lines.push(line("", ICONS.thermometer, r.heater, `${esc(this._t("target"))} <b>${esc(this._temp(m.target, m.unit))}</b>`));
+    if (m.heating && m.readyIn !== null) lines.push(line("warn", ICONS.timer, r.ready_time, esc(this._t("ready_in", { time: fmtHours(m.readyIn, this._locale()) }))));
+    if (m.sessionLeft !== null) lines.push(line("", ICONS.timer, r.session, esc(this._t("session_left", { time: fmtHours(m.sessionLeft, this._locale()) }))));
+    if (m.doorOpen) lines.push(line("crit tip-line", ICONS.door, r.door, esc(this._t("door_open"))));
+    return lines;
+  }
+
+  _saunaControls(m, round = false) {
+    if (this._config.show_controls === false || !m.roles.heater) return "";
+    const r = m.roles;
+    const list = [];
+    if (m.climate && m.target !== null) {
+      list.push(this._btn("temp_down", r.heater, ICONS.minus, this._t("lower_target"), false, true));
+      list.push(this._btn("temp_up", r.heater, ICONS.plus, this._t("raise_target"), false, true));
+    }
+    list.push(this._btn(m.climate ? "heat_pump" : "toggle", r.heater, ICONS.power, this._t("heater"), m.on, round));
+    return list.join("");
+  }
+
+  _saunaCard(m) {
+    const c = this._config;
+    const big =
+      m.temp !== null
+        ? `<div class="big clickable" role="button" tabindex="0" data-entity="${esc(m.roles.temperature || m.roles.heater)}" aria-label="${esc(`${this._t("temperature")} ${this._temp(m.temp, m.unit)}`)}"><span class="val">${esc(fmtNum(m.temp, 0, this._locale()))}<small>${esc(m.unit)}</small></span><span class="lbl">${esc(this._t("sauna"))}</span></div>`
+        : "";
+    const bar = m.on && m.target !== null ? `<div class="sbar" role="progressbar" aria-valuenow="${Math.round(m.level * 100)}" aria-valuemin="0" aria-valuemax="100" aria-label="${esc(this._t("temperature"))}"><i style="width:${(m.level * 100).toFixed(0)}%"></i></div>` : "";
+    const parts = [`<div class="hero">${this._illustrated() ? "" : this._saunaScene(m)}<div class="info">${big}${bar}${this._saunaLines(m).join("")}</div></div>`];
+    const controls = this._saunaControls(m);
+    if (controls) parts.push(`<div class="controls">${controls}</div>`);
+    if (m.tips.length && c.show_advice !== false) parts.push(this._advice(m));
+    return `<style>${BASE_STYLE}${FULL_STYLE}${accentStyle(this._hass)}${saunaAccent(this._hass)}</style>
+      <ha-card>
+        ${this._header(m, this._saunaSub(m))}
+        <div class="content">${parts.join("")}</div>
+      </ha-card>`;
   }
 
   _isCollapsed(key) {
@@ -4498,6 +5114,7 @@ class PoolCard extends HTMLElement {
     const m = this._model();
     if (m.error) return this._errorCard(m.error);
     this._m = m;
+    if (m.kind === "sauna") return this._saunaCard(m);
     const c = this._config;
     const parts = [this._hero(m)];
     const controls = this._controls(m);
@@ -4648,11 +5265,44 @@ const METRIC_ICONS = {
   tds: ICONS.tds,
 };
 const lightIcon = (s) => (isOn(s) ? ICONS.light_on : ICONS.light);
+// The sauna's accent: the heater's warm orange instead of the water's blue.
+const saunaAccent = (hass) => `:host { --pc-accent: ${hass?.themes?.darkMode ? "#ff922b" : "#e8590c"}; }`;
 const accentStyle = (hass) => `:host { --pc-accent: ${hass?.themes?.darkMode ? "#4fc3f7" : "#0277bd"}; }`;
 
 // The mini card is the full card drawn compact: its detail button (top right, `zoom: false` removes it) switches it
 // to the full card's content and back, and a click anywhere else on the page brings the compact view back.
 class PoolMiniCard extends PoolCard {
+  // The sauna's mini card: its temperature and humidity, the door alert, and round buttons (target, heater).
+  _saunaMini(m) {
+    const loc = this._locale();
+    const pills = [];
+    if (m.temp !== null)
+      pills.push(
+        `<span class="pill clickable ${m.cls}" role="button" tabindex="0" data-entity="${esc(m.roles.temperature || m.roles.heater)}" title="${esc(this._t("temperature"))}"><span class="dot"></span><span class="v">${esc(this._temp(m.temp, m.unit))}</span></span>`,
+      );
+    if (m.humidity !== null)
+      pills.push(
+        `<span class="pill clickable" role="button" tabindex="0" data-entity="${esc(m.roles.humidity)}" title="${esc(this._t("humidity"))}">${svgIcon(ICONS.humidity)}<span class="v">${esc(fmtNum(m.humidity, 0, loc))} %</span></span>`,
+      );
+    const banner = this._illustrated();
+    const lines = [];
+    if (!banner) lines.push(`<div class="line ${m.heating ? "warn" : m.ready ? "active" : "idle"}">${svgIcon(ICONS.timer)}<span>${esc(this._saunaSub(m))}</span></div>`);
+    if (m.doorOpen) lines.push(`<div class="line tip-line crit">${svgIcon(ICONS.door)}<span>${esc(this._t("door_open"))}</span></div>`);
+    const controls = this._saunaControls(m, true);
+    return `<style>${BASE_STYLE}${MINI_STYLE}${accentStyle(this._hass)}${saunaAccent(this._hass)}</style>
+      <ha-card>
+        ${this._header(m, banner ? this._saunaSub(m) : "")}
+        <div class="content">
+          ${banner ? "" : this._saunaScene(m)}
+          <div class="info">
+            ${pills.length ? `<div class="pills">${pills.join("")}</div>` : ""}
+            ${lines.join("")}
+          </div>
+          ${controls ? `<div class="controls">${controls}</div>` : ""}
+        </div>
+      </ha-card>`;
+  }
+
   constructor() {
     super();
     this._onUnzoom = (ev) => {
@@ -4709,6 +5359,7 @@ class PoolMiniCard extends PoolCard {
     const m = this._model();
     if (m.error) return this._errorCard(m.error);
     this._m = m;
+    if (m.kind === "sauna") return this._saunaMini(m);
     const pills = [...m.quality]
       .slice(0, 4)
       .map((r) => {
@@ -4793,7 +5444,7 @@ class PoolEditorBase extends HTMLElement {
     return [
       { name: "device", selector: { device: {} } },
       { name: "title", selector: { text: {} } },
-      { name: "kind", selector: { select: { mode: "dropdown", options: ["auto", "pool", "spa"].map((v) => ({ value: v, label: tr(`kind_${v}`) })) } } },
+      { name: "kind", selector: { select: { mode: "dropdown", options: ["auto", "pool", "spa", "sauna"].map((v) => ({ value: v, label: tr(`kind_${v}`) })) } } },
       {
         type: "expandable",
         name: "",
@@ -4801,6 +5452,17 @@ class PoolEditorBase extends HTMLElement {
         title: tr("entities"),
         icon: "mdi:format-list-bulleted",
         schema: ROLES.map((name) => ({ name, selector: { entity: { domain: ENTITY_DOMAINS[name] } } })),
+      },
+      {
+        type: "expandable",
+        name: "",
+        flatten: true,
+        title: tr("sauna"),
+        icon: "mdi:fire",
+        schema: [
+          ...SAUNA_ROLES.map((name) => ({ name, selector: { entity: { domain: SAUNA_DOMAINS[name] } } })),
+          { name: "target_temperature", selector: { number: { min: 40, max: 120, step: 1, mode: "box" } } },
+        ],
       },
       ...this.constructor.extraFields(tr),
       { type: "grid", name: "", schema: this.constructor.toggles.map(([name]) => ({ name, selector: { boolean: {} } })) },

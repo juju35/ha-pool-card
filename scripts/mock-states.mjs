@@ -70,6 +70,24 @@ entity("sensor.robot_piscine_duree_cycle", "robot", "mydolphin_plus", "120", { u
 entity("select.robot_piscine_mode", "robot", "mydolphin_plus", "regular", { options: ["regular", "fast_mode", "floor_only", "water_line"], friendly_name: "Pool robot Cleaning mode" }, { original_name: "Cleaning mode" });
 entity("binary_sensor.robot_piscine_filtre", "robot", "mydolphin_plus", "off", { device_class: "problem", friendly_name: "Pool robot Filter status" }, { original_name: "Filter status" });
 
+// Sauna (Huum style, a device of its own): heating to 85 °C, 64 °C now, ready in 18 min, its humidity, door and session.
+// Never picked as the pool of a card (a sauna's device is skipped by the discovery): its captures set it.
+devices.sauna = { id: "sauna", name: "Sauna", model: "Drop", manufacturer: "Huum", name_by_user: null, identifiers: [["huum", "sauna"]] };
+entity("climate.sauna", "sauna", "huum", "heat", {
+  hvac_modes: ["off", "heat"],
+  hvac_action: "heating",
+  current_temperature: 64,
+  temperature: 85,
+  target_temp_step: 1,
+  min_temp: 40,
+  max_temp: 110,
+  friendly_name: "Sauna",
+});
+entity("sensor.sauna_humidite", "sauna", "huum", "12", { device_class: "humidity", unit_of_measurement: "%", friendly_name: "Sauna Humidity" });
+entity("binary_sensor.sauna_porte", "sauna", "huum", "off", { device_class: "door", friendly_name: "Sauna Door" });
+entity("sensor.sauna_pret_dans", "sauna", "huum", "18", { device_class: "duration", unit_of_measurement: "min", friendly_name: "Sauna Time to temperature" }, { original_name: "Time to temperature" });
+entity("sensor.sauna_seance", "sauna", "huum", "0", { device_class: "duration", unit_of_measurement: "min", friendly_name: "Sauna Session time left" }, { original_name: "Session time left" });
+
 // The pool card of the screenshots: the iopool device, and its equipment set one by one.
 export const poolConfig = {
   device: "Pool",
@@ -83,6 +101,7 @@ export const poolConfig = {
   cover: "cover.volet_piscine",
 };
 export const spaConfig = { device: "Garden spa" };
+export const saunaConfig = { device: "Sauna" };
 export const robotConfig = { ...poolConfig, robot: "vacuum.robot_piscine", collapsed: ["advice", "filtration", "equipment"] };
 
 // The day of the screenshots, in the time zone of the machine (the page runs in the same one): 15:30.
@@ -123,3 +142,13 @@ export const problems = {
   "sensor.sel_piscine": { state: "2.4" },
   "cover.volet_piscine": { state: "open", attributes: { current_position: 45, friendly_name: "Pool cover" } },
 };
+
+// The sauna at temperature, 42 min left of the session; then with its door left open while it heats.
+const saunaClimate = states["climate.sauna"].attributes;
+export const saunaReady = {
+  "climate.sauna": { state: "heat", attributes: { ...saunaClimate, hvac_action: "idle", current_temperature: 85 } },
+  "sensor.sauna_pret_dans": { state: "0" },
+  "sensor.sauna_seance": { state: "42" },
+  "sensor.sauna_humidite": { state: "18" },
+};
+export const saunaDoor = { "binary_sensor.sauna_porte": { state: "on" } };

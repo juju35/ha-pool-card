@@ -69,7 +69,7 @@ export const load = () => {
   vm.createContext(sandbox);
   return vm.runInContext(
     `${source}
-    ({ STRINGS, roleOf, setupOf, robotParts, poolRobot, tdsRange, autoDevice, rangeOf, levelOf, scaleOf, runHours, pumpOn, speedsOf, kindOf, fmtHours, toHours, esc, lang, sceneSvg,
+    ({ STRINGS, roleOf, setupOf, robotParts, poolRobot, tdsRange, autoDevice, rangeOf, levelOf, scaleOf, runHours, pumpOn, speedsOf, kindOf, fmtHours, toHours, esc, lang, sceneSvg, saunaSetupOf, saunaRolesOf, sessionHours, saunaSvg,
        PoolCard: customElements.get("pool-card"), PoolMiniCard: customElements.get("pool-mini-card"),
        PoolCardEditor: customElements.get("pool-card-editor"), PoolMiniCardEditor: customElements.get("pool-mini-card-editor"), fireDocument, window })`,
     sandbox,

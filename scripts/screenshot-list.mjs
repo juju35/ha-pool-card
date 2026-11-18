@@ -1,7 +1,7 @@
 // The README screenshots (PNG) and animations (GIF) rendered by scripts/screenshots.mjs.
 // Every capture has a twin in the other theme ("-dark" for a light capture, "-light" for a dark one)
 // that shows exactly the same state: only the theme differs (checked by test/screenshots.test.mjs).
-import { coverClosing, coverOpening, filtering, heatingState, lightOn, poolConfig, problems, robotConfig, spaConfig, spaJets } from "./mock-states.mjs";
+import { coverClosing, coverOpening, filtering, heatingState, lightOn, poolConfig, problems, robotConfig, saunaConfig, saunaDoor, saunaReady, spaConfig, spaJets } from "./mock-states.mjs";
 
 const pair = (base, other = "dark") => [
   { ...base, theme: other === "dark" ? "light" : "dark" },
@@ -21,6 +21,11 @@ export const shots = [
   ...pair({ file: "card-robot", type: "pool-card", width: 460, config: robotConfig }),
   // Stopping the pump while the heat pump heats asks first (popup at the top of the card).
   ...pair({ file: "card-confirm", type: "pool-card", width: 460, config: poolConfig, clicks: ['[data-action="pump"]'] }),
+  // The sauna: heating (time to temperature, target buttons), its mini card ready with the session's time left, and its
+  // door left open while it heats (an alert).
+  ...pair({ file: "card-sauna", type: "pool-card", width: 460, config: saunaConfig }),
+  ...pair({ file: "mini-card-sauna", type: "pool-mini-card", width: 380, config: saunaConfig, overrides: saunaReady }),
+  ...pair({ file: "card-sauna-door", type: "pool-card", width: 460, config: saunaConfig, overrides: saunaDoor }, "light"),
   // Narrow cards: the full card at 6 of 12 columns of a phone's Sections view and the mini card at 170 px.
   ...pair({ file: "card-narrow", type: "pool-card", width: 238, config: poolConfig }),
   ...pair({ file: "mini-card-narrow", type: "pool-mini-card", width: 170, config: poolConfig }),
@@ -33,6 +38,7 @@ export const shots = [
 //   cover-closing — the roller cover unrolls over the pool
 //   cover-opening — the roller cover rolls back
 //   spa-jets      — the spa's pump on: bubbles rise everywhere
+//   sauna         — the sauna heating: its stones glow, steam rises and the fire burns in the heater
 //   robot         — the pool robot cleaning: it crawls along the floor of the pool, a dotted trail behind it
 export const gifs = [
   ...pair({ file: "filtering", type: "pool-card", width: 460, config: poolConfig, overrides: filtering, scene: true }),
@@ -41,5 +47,6 @@ export const gifs = [
   ...pair({ file: "cover-closing", type: "pool-card", width: 460, config: poolConfig, overrides: coverClosing, scene: true }),
   ...pair({ file: "cover-opening", type: "pool-card", width: 460, config: poolConfig, overrides: coverOpening, scene: true }, "light"),
   ...pair({ file: "robot", type: "pool-card", width: 460, config: robotConfig, scene: true }),
+  ...pair({ file: "sauna", type: "pool-card", width: 460, config: saunaConfig, scene: true }),
   ...pair({ file: "spa-jets", type: "pool-card", width: 460, config: spaConfig, overrides: spaJets, scene: true }, "light"),
 ];

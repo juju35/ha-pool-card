@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.0 - 2026-11-18
+
+### Features
+- **Sauna**: a third kind beside pool and spa (`kind: sauna`, or a device named like a sauna in any language or made by Huum, Harvia or Tylö). Its heater (`climate`, or a `switch` / smart plug with `target_temperature`), temperature, humidity, door, time to temperature and session are found on its device or set one by one (`heater`, `temperature`, `humidity`, `door`, `ready_time`, `session`). A wooden cabin in the header: the fire burns in the heater while it is on, the stones glow and steam rises while it heats. *Heating*, *Ready* or *Door open* in the pill; *Ready in 18 min* or the session's time left under the title; a progress bar to the target, target − / + and heater buttons; an alert when the door is open while it heats. Its mini card shows the temperature and humidity with round buttons.
+
 ## 1.5.0 - 2026-11-18
 
 ### Features
