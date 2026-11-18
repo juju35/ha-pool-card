@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { devices, entities, poolConfig, problems, pumpHistory, spaConfig, states } from "../scripts/mock-states.mjs";
+import { devices, entities, poolConfig, problems, pumpHistory, saunaConfig, saunaDoor, saunaReady, spaConfig, states } from "../scripts/mock-states.mjs";
 import { load } from "./load.mjs";
 
 const pc = load();
@@ -591,4 +591,76 @@ test("the mini card shows the robot cleaning and its round button", () => {
   assert.match(html, /Robot · Cleaning · 1 hr 12 min left/);
   assert.match(html, /class="btn round on" data-action="robot" data-entity="vacuum.robot_piscine"/);
   assert.doesNotMatch(newCard({ ...poolConfig, robot: "vacuum.robot_piscine", show_robot: false }, makeHass(), pc.PoolMiniCard).shadowRoot.innerHTML, /data-action="robot"/);
+});
+
+test("a sauna is found by its device's name or maker, its entities by kind and name", () => {
+  const hass = makeHass();
+  const sauna = pc.saunaSetupOf(hass, saunaConfig);
+  assert.deepEqual(plain(sauna.roles), {
+    heater: "climate.sauna",
+    humidity: "sensor.sauna_humidite",
+    door: "binary_sensor.sauna_porte",
+    ready_time: "sensor.sauna_pret_dans",
+    session: "sensor.sauna_seance",
+  });
+  // A pool or a spa is not a sauna, and a sauna is never the pool found when no device is set.
+  assert.equal(pc.saunaSetupOf(hass, poolConfig), null);
+  assert.equal(pc.saunaSetupOf(hass, spaConfig), null);
+  assert.equal(pc.saunaSetupOf(hass, { ...saunaConfig, kind: "pool" }), null);
+  assert.notEqual(pc.autoDevice(hass), "sauna");
+  assert.equal(pc.kindOf({ kind: "sauna" }, "Pool"), "sauna");
+  // `kind: sauna` with a heater on a smart plug and its own sensor.
+  const plug = pc.saunaSetupOf(hass, { kind: "sauna", heater: "switch.pompe_piscine", temperature: "sensor.temperature_exterieure" });
+  assert.deepEqual(plain(plug.roles), { heater: "switch.pompe_piscine", temperature: "sensor.temperature_exterieure" });
+});
+
+test("a heating sauna: time to temperature, target buttons, steam and glowing stones in the scene", () => {
+  const card = newCard(saunaConfig);
+  const h = html(card);
+  assert.match(h, /class="banner sauna/);
+  assert.match(h, /Heating/);
+  assert.match(h, /Ready in 18 min/);
+  assert.match(h, /class="val">64<small>°C/);
+  assert.match(h, /Humidity <b>12 %<\/b>/);
+  assert.match(h, /class="steam"/);
+  assert.match(h, /class="embers"/);
+  assert.match(h, /data-action="temp_up" data-entity="climate.sauna"/);
+  assert.match(h, /data-action="heat_pump" data-entity="climate.sauna"[^>]*aria-pressed="true"/);
+  assert.doesNotMatch(h, /Door open|class="advice"/);
+  click(card, { action: "temp_up", entity: "climate.sauna" });
+  click(card, { action: "heat_pump", entity: "climate.sauna" });
+  assert.deepEqual(plain(card.hass.calls), [
+    ["climate", "set_temperature", { entity_id: "climate.sauna", temperature: 86 }],
+    ["climate", "set_hvac_mode", { entity_id: "climate.sauna", hvac_mode: "off" }],
+  ]);
+});
+
+test("a sauna at temperature is ready, its session's time left under the title; the door open while it heats is an alert", () => {
+  const mini = html(newCard(saunaConfig, makeHass(saunaReady), pc.PoolMiniCard));
+  assert.match(mini, /Ready/);
+  assert.match(mini, /Session · 42 min left/);
+  assert.doesNotMatch(mini, /class="steam"/);
+  assert.match(mini, /class="btn round on" data-action="heat_pump"/);
+  const door = html(newCard(saunaConfig, makeHass(saunaDoor)));
+  assert.match(door, /chip crit/);
+  assert.match(door, /The door is open while the sauna heats/);
+  // Off: no fire, no glow.
+  const off = html(newCard(saunaConfig, makeHass({ "climate.sauna": { state: "off", attributes: { ...states["climate.sauna"].attributes, hvac_action: "off" } } })));
+  assert.match(off, /chip idle/);
+  assert.doesNotMatch(off, /class="flame"|class="glow"/);
+});
+
+test("a sauna heater on a switch: target from the options, a toggle button", () => {
+  const card = newCard({ kind: "sauna", title: "Sauna", heater: "switch.pompe_piscine", temperature: "sensor.temperature_exterieure", target_temperature: 80 });
+  const h = html(card);
+  assert.match(h, /Heating to 80 °C/);
+  assert.match(h, /data-action="toggle" data-entity="switch.pompe_piscine"/);
+  assert.doesNotMatch(h, /data-action="temp_up"/);
+});
+
+test("a session timer counts down to its end", () => {
+  const now = Date.parse("2026-07-14T15:00:00Z");
+  assert.equal(pc.sessionHours({ entity_id: "timer.sauna", state: "active", attributes: { finishes_at: "2026-07-14T15:30:00Z" } }, now), 0.5);
+  assert.equal(pc.sessionHours({ entity_id: "timer.sauna", state: "paused", attributes: { remaining: "0:15:00" } }, now), 0.25);
+  assert.equal(pc.sessionHours({ entity_id: "timer.sauna", state: "idle", attributes: {} }, now), null);
 });
