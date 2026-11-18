@@ -16,7 +16,8 @@
   <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/screenlogic.png" alt="Pentair ScreenLogic" width="64">&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/intellicenter.png" alt="Pentair IntelliCenter" width="64">&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/omnilogic.png" alt="Hayward OmniLogic" width="64">&nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/iaqualink.png" alt="Jandy iAquaLink" width="64">
+  <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/iaqualink.png" alt="Jandy iAquaLink" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/mydolphin_plus.png" alt="Maytronics Dolphin" width="64">
 </p>
 
 Lovelace cards for Home Assistant to keep an eye on a **swimming pool** or a **spa**: water quality at a glance with colored gauges and their ideal ranges (pH, ORP, free chlorine, salt, TDS, water temperature), advice when a value drifts (pH too high, chlorine too low…), an animated scene of the pool, the filtration state and its time of the day, and buttons for the pump, the lighting, the heat pump and the cover.
@@ -63,7 +64,7 @@ The card reads standard Home Assistant entities: any integration exposing them w
 | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/intellicenter.png" alt="" width="16"> [Pentair IntelliCenter](https://github.com/jlvaillant/intellicenter) (custom) | IntelliCenter | Water and air temperature, heaters, pump state (binary sensor; set the *Pool* body switch as `pump` to command it), lights, pH, ORP, salt |
 | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/omnilogic.png" alt="" width="16"> [Hayward OmniLogic](https://www.home-assistant.io/integrations/omnilogic/) (core) | OmniLogic, OmniHub | Water and air temperature, pH, ORP, salt level, filter pump (switch), chlorinator output (electrolyser) |
 | <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/iaqualink.png" alt="" width="16"> [Jandy iAquaLink](https://www.home-assistant.io/integrations/iaqualink/) (core) | iAquaLink | Pool / spa heaters (climate), water and air temperature, pump and aux switches, lights |
-| [MyDolphin Plus](https://github.com/sh00t2kill/dolphin-robot), [Maytronics One](https://github.com/Jycreyn/maytronics-one-ha), [iAqualink Robots](https://github.com/galletn/iaqualink) (custom) | Maytronics Dolphin, Zodiac / Polaris robots | The pool robot (`vacuum`): its state, start, pause and return, the time left of its cycle, its cleaning mode, its filter basket |
+| <img src="https://raw.githubusercontent.com/juju35/ha-pool-card/main/images/mydolphin_plus.png" alt="" width="16"> [MyDolphin Plus](https://github.com/sh00t2kill/dolphin-robot), [Maytronics One](https://github.com/Jycreyn/maytronics-one-ha), [iAqualink Robots](https://github.com/galletn/iaqualink) (custom) | Maytronics Dolphin, Zodiac / Polaris robots | The pool robot (`vacuum`): its state, start, pause and return, the time left of its cycle, its cleaning mode, its filter basket |
 | Any other | Shelly / Sonoff switches, `history_stats`, template sensors, helpers | Set each entity in the options: pump, speed, heat pump, electrolyser, light, cover, sensors |
 
 How the card recognizes each entity is detailed in [How it works](#how-it-works).
