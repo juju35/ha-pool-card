@@ -515,10 +515,11 @@ test("illustrated header: the pool on its lawn, the coping strip, night by the s
   assert.equal(h.match(/class="scene /g).length, 1);
   assert.match(h, /<div class="hero"><div class="info">/);
   const sunDown = makeHass({ "sun.sun": { entity_id: "sun.sun", state: "below_horizon", attributes: {} } });
-  assert.match(html(newCard(poolConfig, sunDown)), /<div class="banner night">/);
-  assert.match(html(newCard({ ...poolConfig, illustration_theme: "day" }, sunDown)), /<div class="banner">/);
+  // auto follows the theme alone: a light theme after sunset keeps the day picture.
+  assert.match(html(newCard(poolConfig, sunDown)), /<div class="banner">/);
+  assert.match(html(newCard({ ...poolConfig, illustration_theme: "night" }, sunDown)), /<div class="banner night">/);
   assert.match(html(newCard({ ...poolConfig, illustration_theme: "night" })), /<div class="banner night">/);
-  // The dark theme gives the night picture even while the sun is up; a light theme with the sun up keeps the day.
+  // The dark theme gives the night picture, even while the sun is up; a light theme keeps the day.
   const sunUp = { "sun.sun": { entity_id: "sun.sun", state: "above_horizon", attributes: {} } };
   assert.match(html(newCard(poolConfig, makeHass(sunUp, { themes: { darkMode: true } }))), /<div class="banner night">/);
   assert.match(html(newCard(poolConfig, makeHass(sunUp, { themes: { darkMode: false } }))), /<div class="banner">/);
