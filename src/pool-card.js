@@ -3470,11 +3470,30 @@ const setupOf = (hass, config) => {
   return { roles, deviceId, device: deviceId ? hass.devices?.[deviceId] : null };
 };
 
+// The entity ids of a states object, listed once per states object (shared by every card and call).
+const _stateIds = new WeakMap();
+const stateIds = (states) => {
+  if (!states) return [];
+  let ids = _stateIds.get(states);
+  if (!ids) _stateIds.set(states, (ids = Object.keys(states)));
+  return ids;
+};
+
 // The pool robot of its own device: a vacuum entity from a pool robot integration or named like one.
-const poolRobot = (hass) =>
-  Object.keys(hass.states || {})
-    .filter((id) => id.startsWith("vacuum.") && !hass.entities?.[id]?.hidden)
-    .find((id) => POOL_ROBOT_RE.test(norm([hass.entities?.[id]?.platform, id, hass.states[id]?.attributes?.friendly_name].filter(Boolean).join(" "))));
+// Looked up again only when the entity registry or the number of entities changes (a vacuum added outside the
+// registry changes the count), not on every state change.
+const _robot = new WeakMap();
+const poolRobot = (hass) => {
+  const ids = stateIds(hass.states);
+  const reg = hass.entities || _robot;
+  const hit = _robot.get(reg);
+  if (hit && hit.n === ids.length && (!hit.id || hass.states[hit.id])) return hit.id;
+  const id = ids
+    .filter((x) => x.startsWith("vacuum.") && !hass.entities?.[x]?.hidden)
+    .find((x) => POOL_ROBOT_RE.test(norm([hass.entities?.[x]?.platform, x, hass.states[x]?.attributes?.friendly_name].filter(Boolean).join(" "))));
+  _robot.set(reg, { n: ids.length, id });
+  return id;
+};
 
 // What the robot's device tells besides its state: the time left of the cycle (and the cycle's length), its cleaning
 // mode (a select), its filter basket (full or not) and its battery, by name in any language.
