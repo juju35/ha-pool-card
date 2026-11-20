@@ -73,5 +73,7 @@ export const load = () => {
        PoolCard: customElements.get("pool-card"), PoolMiniCard: customElements.get("pool-mini-card"),
        PoolCardEditor: customElements.get("pool-card-editor"), PoolMiniCardEditor: customElements.get("pool-mini-card-editor"), fireDocument, window })`,
     sandbox,
+    // The file name lets `node --test --experimental-test-coverage` report the card source itself, not only the tests.
+    { filename: new URL("../src/pool-card.js", import.meta.url).pathname },
   );
 };
