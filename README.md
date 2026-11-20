@@ -240,7 +240,7 @@ target_temperature: 85
 | `show_filtration` | both | `true` | Filtration section |
 | `show_equipment` | both | `true` | Equipment section |
 | `show_robot` | both | `true` | The robot: its section, its button and its drawing in the scene |
-| `collapsed` | both | `[equipment]` | Sections folded by default, among `advice`, `filtration` and `equipment` (`[]` to unfold everything). Click a section title (or Tab to it and press Enter or Space) to fold or unfold it |
+| `collapsed` | both | `[equipment]` | Sections folded by default, among `advice`, `filtration`, `robot` and `equipment` (`[]` to unfold everything). Click a section title (or Tab to it and press Enter or Space) to fold or unfold it |
 | `zoom` | mini | `true` | Detail button at the top right of the mini card: it shows the full card's content (with the same options, so `show_advice`, `show_filtration`, `show_equipment` and `collapsed` can be set on the mini card too, in YAML or in its visual editor) and switches back; a click outside the card also brings the compact view back. `false` removes the button |
 | `language` | both | Auto | Force language: `fr`, `en`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings) |
 

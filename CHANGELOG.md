@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.6.1 - 2026-11-20
+
+### Performance
+- The pool robot's parts (time left, cycle, mode, filter, battery) and a sauna's entities are read from an index of the entity registry by device, built once per registry, instead of a scan of the whole registry on every state change.
+- The pool robot of its own is looked up again only when the entity registry or the number of entities changes, not on every state change; the entity ids are listed once per state update for every card.
+
+### Maintenance
+- README: `collapsed` also folds the `robot` section.
+- Tests: the coverage report now measures the card source itself.
+
 ## 1.6.0 - 2026-11-18
 
 ### Features

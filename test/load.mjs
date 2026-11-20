@@ -69,9 +69,11 @@ export const load = () => {
   vm.createContext(sandbox);
   return vm.runInContext(
     `${source}
-    ({ STRINGS, roleOf, setupOf, robotParts, poolRobot, tdsRange, autoDevice, rangeOf, levelOf, scaleOf, runHours, pumpOn, speedsOf, kindOf, fmtHours, toHours, esc, lang, sceneSvg, saunaSetupOf, saunaRolesOf, sessionHours, saunaSvg,
+    ({ STRINGS, roleOf, setupOf, robotParts, poolRobot, stateIds, tdsRange, autoDevice, rangeOf, levelOf, scaleOf, runHours, pumpOn, speedsOf, kindOf, fmtHours, toHours, esc, lang, sceneSvg, saunaSetupOf, saunaRolesOf, sessionHours, saunaSvg,
        PoolCard: customElements.get("pool-card"), PoolMiniCard: customElements.get("pool-mini-card"),
        PoolCardEditor: customElements.get("pool-card-editor"), PoolMiniCardEditor: customElements.get("pool-mini-card-editor"), fireDocument, window })`,
     sandbox,
+    // The file name lets `node --test --experimental-test-coverage` report the card source itself, not only the tests.
+    { filename: new URL("../src/pool-card.js", import.meta.url).pathname },
   );
 };

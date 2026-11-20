@@ -3389,6 +3389,20 @@ const devicesOf = (hass) => {
 
 const deviceName = (d) => d?.name_by_user || d?.name || "";
 
+// Every registry entry by device (hidden, disabled and configuration ones included), built once per registry object:
+// the robot's and the sauna's own parts are read from their device's entries, not from a scan of the whole registry
+// on every state change.
+const _allByDevice = new WeakMap();
+const entriesOf = (hass, deviceId) => {
+  let map = _allByDevice.get(hass.entities);
+  if (!map) {
+    map = new Map();
+    for (const e of Object.values(hass.entities || {})) if (e?.device_id) (map.get(e.device_id) || map.set(e.device_id, []).get(e.device_id)).push(e);
+    if (hass.entities) _allByDevice.set(hass.entities, map);
+  }
+  return map.get(deviceId) || [];
+};
+
 // Roles found on a device: the best entity of each role (see rankOf), cached per registry and states objects.
 const _roles = new WeakMap();
 const rolesOf = (hass, deviceId) => {
@@ -3456,11 +3470,30 @@ const setupOf = (hass, config) => {
   return { roles, deviceId, device: deviceId ? hass.devices?.[deviceId] : null };
 };
 
+// The entity ids of a states object, listed once per states object (shared by every card and call).
+const _stateIds = new WeakMap();
+const stateIds = (states) => {
+  if (!states) return [];
+  let ids = _stateIds.get(states);
+  if (!ids) _stateIds.set(states, (ids = Object.keys(states)));
+  return ids;
+};
+
 // The pool robot of its own device: a vacuum entity from a pool robot integration or named like one.
-const poolRobot = (hass) =>
-  Object.keys(hass.states || {})
-    .filter((id) => id.startsWith("vacuum.") && !hass.entities?.[id]?.hidden)
-    .find((id) => POOL_ROBOT_RE.test(norm([hass.entities?.[id]?.platform, id, hass.states[id]?.attributes?.friendly_name].filter(Boolean).join(" "))));
+// Looked up again only when the entity registry or the number of entities changes (a vacuum added outside the
+// registry changes the count), not on every state change.
+const _robot = new WeakMap();
+const poolRobot = (hass) => {
+  const ids = stateIds(hass.states);
+  const reg = hass.entities || _robot;
+  const hit = _robot.get(reg);
+  if (hit && hit.n === ids.length && (!hit.id || hass.states[hit.id])) return hit.id;
+  const id = ids
+    .filter((x) => x.startsWith("vacuum.") && !hass.entities?.[x]?.hidden)
+    .find((x) => POOL_ROBOT_RE.test(norm([hass.entities?.[x]?.platform, x, hass.states[x]?.attributes?.friendly_name].filter(Boolean).join(" "))));
+  _robot.set(reg, { n: ids.length, id });
+  return id;
+};
 
 // What the robot's device tells besides its state: the time left of the cycle (and the cycle's length), its cleaning
 // mode (a select), its filter basket (full or not) and its battery, by name in any language.
@@ -3474,8 +3507,8 @@ const robotParts = (hass, id) => {
   const device = hass.entities?.[id]?.device_id;
   if (!device) return {};
   const out = {};
-  for (const e of Object.values(hass.entities || {})) {
-    if (e.device_id !== device || e.entity_id === id || e.hidden || !hass.states[e.entity_id]) continue;
+  for (const e of entriesOf(hass, device)) {
+    if (e.entity_id === id || e.hidden || !hass.states[e.entity_id]) continue;
     const d = domainOf(e.entity_id);
     const st = hass.states[e.entity_id];
     const text = norm([e.entity_id, e.translation_key, e.original_name, e.name, st.attributes?.friendly_name].filter(Boolean).join(" "));
@@ -3520,8 +3553,8 @@ const NOT_HEATER_RE = /light|lumi|licht|led|lamp|fan|vent|music|speaker/;
 const saunaRolesOf = (hass, deviceId) => {
   const out = {};
   let sw = null;
-  const ids = Object.values(hass.entities || {})
-    .filter((e) => e.device_id === deviceId && !e.hidden && !e.disabled_by && e.entity_category !== "config" && hass.states?.[e.entity_id])
+  const ids = entriesOf(hass, deviceId)
+    .filter((e) => !e.hidden && !e.disabled_by && e.entity_category !== "config" && hass.states?.[e.entity_id])
     .map((e) => e.entity_id)
     .sort();
   for (const id of ids) {

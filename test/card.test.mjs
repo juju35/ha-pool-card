@@ -664,3 +664,32 @@ test("a session timer counts down to its end", () => {
   assert.equal(pc.sessionHours({ entity_id: "timer.sauna", state: "paused", attributes: { remaining: "0:15:00" } }, now), 0.25);
   assert.equal(pc.sessionHours({ entity_id: "timer.sauna", state: "idle", attributes: {} }, now), null);
 });
+
+test("the robot's parts follow a new entity registry (the per-device index is rebuilt with it)", () => {
+  const hass = makeHass();
+  const before = JSON.parse(JSON.stringify(pc.robotParts(hass, "vacuum.robot_piscine")));
+  assert.ok(before.mode);
+  // The mode select moved to another device: no longer one of the robot's parts.
+  const moved = { ...hass, entities: { ...hass.entities, [before.mode]: { ...hass.entities[before.mode], device_id: "other" } } };
+  assert.equal(pc.robotParts(moved, "vacuum.robot_piscine").mode, undefined);
+  assert.equal(pc.robotParts(hass, "vacuum.robot_piscine").mode, before.mode);
+});
+
+test("the pool robot of its own is looked up again only when the registry or the number of entities changes", () => {
+  const ents = {};
+  const base = { "sensor.water": { state: "27", attributes: {} } };
+  assert.equal(pc.poolRobot({ entities: ents, states: base }), undefined);
+  // A vacuum outside the registry: the count changes, it is found.
+  let reads = 0;
+  const robot = { state: "docked", get attributes() { reads++; return { friendly_name: "Pool robot" }; } };
+  const added = { ...base, "vacuum.r1": robot };
+  assert.equal(pc.poolRobot({ entities: ents, states: added }), "vacuum.r1");
+  const before = reads;
+  // A state change only (new states object, same entities): no new scan.
+  assert.equal(pc.poolRobot({ entities: ents, states: { ...added, "sensor.water": { state: "28", attributes: {} } } }), "vacuum.r1");
+  assert.equal(reads, before);
+  // The robot removed: found missing at once.
+  assert.equal(pc.poolRobot({ entities: ents, states: { ...base, "sensor.other": { state: "1", attributes: {} } } }), undefined);
+  const ids = pc.stateIds(base);
+  assert.equal(pc.stateIds(base), ids);
+});
