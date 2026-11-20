@@ -3389,6 +3389,20 @@ const devicesOf = (hass) => {
 
 const deviceName = (d) => d?.name_by_user || d?.name || "";
 
+// Every registry entry by device (hidden, disabled and configuration ones included), built once per registry object:
+// the robot's and the sauna's own parts are read from their device's entries, not from a scan of the whole registry
+// on every state change.
+const _allByDevice = new WeakMap();
+const entriesOf = (hass, deviceId) => {
+  let map = _allByDevice.get(hass.entities);
+  if (!map) {
+    map = new Map();
+    for (const e of Object.values(hass.entities || {})) if (e?.device_id) (map.get(e.device_id) || map.set(e.device_id, []).get(e.device_id)).push(e);
+    if (hass.entities) _allByDevice.set(hass.entities, map);
+  }
+  return map.get(deviceId) || [];
+};
+
 // Roles found on a device: the best entity of each role (see rankOf), cached per registry and states objects.
 const _roles = new WeakMap();
 const rolesOf = (hass, deviceId) => {
@@ -3474,8 +3488,8 @@ const robotParts = (hass, id) => {
   const device = hass.entities?.[id]?.device_id;
   if (!device) return {};
   const out = {};
-  for (const e of Object.values(hass.entities || {})) {
-    if (e.device_id !== device || e.entity_id === id || e.hidden || !hass.states[e.entity_id]) continue;
+  for (const e of entriesOf(hass, device)) {
+    if (e.entity_id === id || e.hidden || !hass.states[e.entity_id]) continue;
     const d = domainOf(e.entity_id);
     const st = hass.states[e.entity_id];
     const text = norm([e.entity_id, e.translation_key, e.original_name, e.name, st.attributes?.friendly_name].filter(Boolean).join(" "));
@@ -3520,8 +3534,8 @@ const NOT_HEATER_RE = /light|lumi|licht|led|lamp|fan|vent|music|speaker/;
 const saunaRolesOf = (hass, deviceId) => {
   const out = {};
   let sw = null;
-  const ids = Object.values(hass.entities || {})
-    .filter((e) => e.device_id === deviceId && !e.hidden && !e.disabled_by && e.entity_category !== "config" && hass.states?.[e.entity_id])
+  const ids = entriesOf(hass, deviceId)
+    .filter((e) => !e.hidden && !e.disabled_by && e.entity_category !== "config" && hass.states?.[e.entity_id])
     .map((e) => e.entity_id)
     .sort();
   for (const id of ids) {

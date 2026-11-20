@@ -664,3 +664,13 @@ test("a session timer counts down to its end", () => {
   assert.equal(pc.sessionHours({ entity_id: "timer.sauna", state: "paused", attributes: { remaining: "0:15:00" } }, now), 0.25);
   assert.equal(pc.sessionHours({ entity_id: "timer.sauna", state: "idle", attributes: {} }, now), null);
 });
+
+test("the robot's parts follow a new entity registry (the per-device index is rebuilt with it)", () => {
+  const hass = makeHass();
+  const before = JSON.parse(JSON.stringify(pc.robotParts(hass, "vacuum.robot_piscine")));
+  assert.ok(before.mode);
+  // The mode select moved to another device: no longer one of the robot's parts.
+  const moved = { ...hass, entities: { ...hass.entities, [before.mode]: { ...hass.entities[before.mode], device_id: "other" } } };
+  assert.equal(pc.robotParts(moved, "vacuum.robot_piscine").mode, undefined);
+  assert.equal(pc.robotParts(hass, "vacuum.robot_piscine").mode, before.mode);
+});
