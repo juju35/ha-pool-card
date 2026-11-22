@@ -5620,7 +5620,7 @@ for (const card of [
   },
 ]) {
   if (!window.customCards.some((c) => c.type === card.type))
-    window.customCards.push({ ...card, preview: true, documentationURL: "https://github.com/juju35/ha-pool-card" });
+    window.customCards.push({ ...card, preview: false, documentationURL: "https://github.com/juju35/ha-pool-card" });
 }
 
 console.info(`%c POOL-CARD %c v${VERSION} `, "color: white; background: #0277bd; font-weight: 700;", "color: #0277bd; background: white; font-weight: 700;");
