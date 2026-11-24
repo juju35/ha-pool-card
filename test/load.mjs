@@ -1,9 +1,8 @@
-// Evaluates src/pool-card.js (a classic script, bundled as is by scripts/build.mjs) in a sandbox with minimal DOM
+// Evaluates the bundled card source (test/source.mjs) (a classic script, bundled as is by scripts/build.mjs) in a sandbox with minimal DOM
 // stand-ins and returns the names the tests need. No dependency, no browser.
-import { readFileSync } from "node:fs";
 import vm from "node:vm";
+import { source } from "./source.mjs";
 
-const source = readFileSync(new URL("../src/pool-card.js", import.meta.url), "utf8");
 
 // Shadow root stand-in: keeps the HTML it is given and the listeners it gets.
 const fakeRoot = () => ({
@@ -74,6 +73,6 @@ export const load = () => {
        PoolCardEditor: customElements.get("pool-card-editor"), PoolMiniCardEditor: customElements.get("pool-mini-card-editor"), fireDocument, window })`,
     sandbox,
     // The file name lets `node --test --experimental-test-coverage` report the card source itself, not only the tests.
-    { filename: new URL("../src/pool-card.js", import.meta.url).pathname },
+    { filename: new URL("../src/index.js", import.meta.url).pathname },
   );
 };
