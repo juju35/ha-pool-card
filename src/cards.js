@@ -9,6 +9,7 @@ import { RANK, levelOf, rangeOf, scaleOf, tdsRange, trackOf, worst } from "./wat
 import { HISTORY_MS, coverInfo, heating, isOffOption, isOn, midnight, pumpOn, runHours, speedsOf } from "./equipment.js";
 import { FIRE, isNight, lawnSvg, saunaSvg, sceneSvg } from "./animated-water.js";
 import { BASE_STYLE, FULL_STYLE, MINI_STYLE } from "./styles.js";
+import { rcMorph } from "./in-place-redraw.js";
 
 export let pcUid = 0;
 
@@ -281,7 +282,8 @@ export class PoolCard extends HTMLElement {
     const focused = this._byPointer ? null : this.shadowRoot.activeElement;
     const key = focused?.dataset ? JSON.stringify({ ...focused.dataset }) : null;
     this._html = html;
-    this.shadowRoot.innerHTML = html;
+    // In place (see rcMorph): the nodes stay, so the card keeps its height, its animations and its focus.
+    rcMorph(this.shadowRoot, html);
     this._fitPill();
     // The element that had the keyboard focus gets it back once rewritten.
     // The popup's safe choice (Cancel) gets the focus: Enter or Space right after the click does not stop the pump.
