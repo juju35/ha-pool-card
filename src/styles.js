@@ -4,7 +4,7 @@
 
 export const BASE_STYLE = `
   :host { --pc-accent: #0277bd; --pc-ok: var(--success-color, #43a047); --pc-warn: var(--warning-color, #ffa600);
-          --pc-crit: var(--error-color, #db4437); --pc-idle: var(--disabled-text-color, #9e9e9e); --pc-cold: #2196f3;
+          --pc-crit: var(--error-color, #db4437); --pc-idle: var(--secondary-text-color, #9e9e9e); --pc-cold: #2196f3;
           --pc-ok-z: color-mix(in srgb, var(--pc-ok) 55%, transparent); --pc-warn-z: color-mix(in srgb, var(--pc-warn) 45%, transparent);
           --pc-crit-z: color-mix(in srgb, var(--pc-crit) 32%, transparent); --pc-cold-z: color-mix(in srgb, var(--pc-cold) 30%, transparent);
           /* Text in a state or accent color is mixed with the text color so that it reads at 4.5:1 at least. */
